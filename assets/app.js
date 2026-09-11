@@ -129,6 +129,13 @@ function toggleLang(){
   applyLang();
 }
 
+function toggleMenu(){
+  const m = document.getElementById('mMenu');
+  const b = document.getElementById('menuBtn');
+  if(m) m.classList.toggle('open');
+  if(b) b.classList.toggle('open');
+}
+
 /* ---------- nav & footer ---------- */
 function renderChrome(){
   const page = document.body.dataset.page || '';
@@ -144,7 +151,13 @@ function renderChrome(){
       <div class="nav-cta">
         <button class="lang-btn" onclick="toggleLang()">EN</button>
         <a class="wa-btn" href="${WA}" target="_blank" rel="noopener">${ICONS.whatsapp}<span data-i18n="nav_wa"></span></a>
+        <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="القائمة"><i></i><i></i><i></i></button>
       </div>
+    </div>
+    <div class="m-menu" id="mMenu">
+      <a href="index.html" class="${page==='home'?'on':''}" onclick="toggleMenu()"><span data-i18n="nav_home"></span><span>←</span></a>
+      <a href="projects.html" class="${(page==='work'||page==='project')?'on':''}" onclick="toggleMenu()"><span data-i18n="nav_work"></span><span>←</span></a>
+      <a href="packages.html" class="${page==='packs'?'on':''}" onclick="toggleMenu()"><span data-i18n="nav_packs"></span><span>←</span></a>
     </div>`;
   }
   const foot = document.getElementById('foot');
