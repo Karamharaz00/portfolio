@@ -19,65 +19,12 @@
   <p class="prj-desc rv rv-d1" style="margin-inline:auto" data-i18n="sec_packs_d"></p>
 </section>
 
-<!-- فورم الطلب — فوق -->
-<section class="sec wrap" id="orderForm" style="padding-top:10px">
-  <div class="form-card glass rv">
-    <div class="form-head">
-      <h2 data-i18n="form_t"></h2>
-      <p data-i18n="form_d"></p>
-    </div>
-    <form id="reqForm" novalidate>
-      <div class="frow">
-        <div class="fgroup">
-          <label for="rqName" data-i18n="fm_name"></label>
-          <input class="field2" id="rqName" type="text" required>
-        </div>
-        <div class="fgroup">
-          <label for="rqBrand" data-i18n="fm_brand"></label>
-          <input class="field2" id="rqBrand" type="text" required>
-        </div>
-      </div>
-      <div class="frow">
-        <div class="fgroup">
-          <label for="rqContact" data-i18n="fm_contact"></label>
-          <input class="field2" id="rqContact" type="text" required>
-        </div>
-        <div class="fgroup">
-          <label for="rqPack" data-i18n="fm_pack"></label>
-          <select class="field2" id="rqPack" required>
-            <option value="1" data-i18n="pack1"></option>
-            <option value="2" data-i18n="pack2"></option>
-            <option value="3" data-i18n="pack3"></option>
-          </select>
-        </div>
-      </div>
-      <div class="fgroup">
-        <label for="rqMsg" data-i18n="fm_msg"></label>
-        <textarea class="field2" id="rqMsg" rows="4" data-i18n-ph="fm_msg_ph" required></textarea>
-      </div>
-      <!-- فخ السبام: خانة مخفية للبوتات -->
-      <div class="hp" aria-hidden="true">
-        <label for="rqSite" data-i18n="fm_bot"></label>
-        <input type="text" id="rqSite" tabindex="-1" autocomplete="off">
-      </div>
-      <div class="fgroup" style="max-width:260px">
-        <label for="rqCap"><span data-i18n="fm_cap"></span> <b class="cap-q" id="capQ"></b></label>
-        <input class="field2" id="rqCap" type="text" inputmode="numeric" required>
-      </div>
-      <button type="submit" class="btn-main form-send"><span data-i18n="fm_send"></span></button>
-      <div class="form-note" id="formNote"></div>
-    </form>
-  </div>
-</section>
-
-<!-- الباقات الثلاثة -->
 <section class="sec wrap" style="padding-top:30px">
   <div class="pack-grid">
 
-    <div class="pack glass tier-bronze rv rv-d1">
-      <div class="tier-medal">🥉</div>
+    <div class="pack rv rv-d1">
       <div class="pack-name" data-i18n="pack1"></div>
-      <div class="pack-count">6 <small data-i18n="posts_m"></small></div>
+      <div class="pack-count">8 <small data-i18n="posts_m"></small></div>
       <div class="pack-price">400 <span data-i18n="sar"></span></div>
       <ul class="pack-feats">
         <li><span class="ck">✓</span><span data-i18n="f1_1"></span></li>
@@ -85,40 +32,22 @@
         <li><span class="ck">✓</span><span data-i18n="f1_3"></span></li>
         <li><span class="ck">✓</span><span data-i18n="f1_4"></span></li>
       </ul>
-      <div class="pack-fit"><b data-i18n="fit_l"></b> <span data-i18n="fit1"></span></div>
-      <a class="btn-ghost pack-order" href="#orderForm" data-pack="1"><span data-i18n="order"></span></a>
+      <a class="btn-ghost pack-order" target="_blank" rel="noopener"><span data-i18n="order"></span></a>
     </div>
 
-    <div class="pack glass tier-silver hot rv rv-d2">
+    <div class="pack hot rv rv-d2">
       <span class="pack-flag" data-i18n="hot"></span>
-      <div class="tier-medal">🥈</div>
       <div class="pack-name" data-i18n="pack2"></div>
-      <div class="pack-count">12 <small data-i18n="posts_m"></small></div>
-      <div class="pack-price">600 <span data-i18n="sar"></span></div>
+      <div class="pack-count">12 <small data-i18n="posts_m2"></small></div>
+      <div class="pack-price">500 <span data-i18n="sar"></span></div>
       <ul class="pack-feats">
         <li><span class="ck">✓</span><span data-i18n="f2_1"></span></li>
         <li><span class="ck">✓</span><span data-i18n="f2_2"></span></li>
         <li><span class="ck">✓</span><span data-i18n="f2_3"></span></li>
         <li><span class="ck">✓</span><span data-i18n="f2_4"></span></li>
+        <li><span class="ck">✓</span><span data-i18n="f2_5"></span></li>
       </ul>
-      <div class="pack-fit"><b data-i18n="fit_l"></b> <span data-i18n="fit2"></span></div>
-      <a class="btn-main pack-order" href="#orderForm" data-pack="2"><span data-i18n="order"></span></a>
-    </div>
-
-    <div class="pack glass tier-gold rv rv-d3">
-      <span class="pack-flag gold" data-i18n="vip"></span>
-      <div class="tier-medal">🥇</div>
-      <div class="pack-name" data-i18n="pack3"></div>
-      <div class="pack-count">30 <small data-i18n="posts_m"></small></div>
-      <div class="pack-price">1500 <span data-i18n="sar"></span></div>
-      <ul class="pack-feats">
-        <li><span class="ck">✓</span><span data-i18n="f3_1"></span></li>
-        <li><span class="ck">✓</span><span data-i18n="f3_2"></span></li>
-        <li><span class="ck">✓</span><span data-i18n="f3_3"></span></li>
-        <li><span class="ck">✓</span><span data-i18n="f3_4"></span></li>
-      </ul>
-      <div class="pack-fit"><b data-i18n="fit_l"></b> <span data-i18n="fit3"></span></div>
-      <a class="btn-ghost pack-order" href="#orderForm" data-pack="3"><span data-i18n="order"></span></a>
+      <a class="btn-main pack-order" target="_blank" rel="noopener"><span data-i18n="order"></span></a>
     </div>
 
   </div>
@@ -127,21 +56,11 @@
   <div class="pay-sec">
     <div class="pay-title rv"><span>💳</span><span data-i18n="pay_t"></span></div>
     <div class="pay-grid">
-      <div class="pay-card glass rv rv-d1"><div class="ic">📱</div><div class="nm" data-i18n="pay1"></div><div class="ds" data-i18n="pay1d"></div></div>
-      <div class="pay-card glass rv rv-d2"><div class="ic">🏦</div><div class="nm" data-i18n="pay2"></div><div class="ds" data-i18n="pay2d"></div></div>
-      <div class="pay-card glass rv rv-d3"><div class="ic">💸</div><div class="nm" data-i18n="pay3"></div><div class="ds" data-i18n="pay3d"></div></div>
-      <div class="pay-card glass rv rv-d4"><div class="ic">🌍</div><div class="nm" data-i18n="pay4"></div><div class="ds" data-i18n="pay4d"></div></div>
+      <div class="pay-card rv rv-d1"><div class="ic">📱</div><div class="nm" data-i18n="pay1"></div><div class="ds" data-i18n="pay1d"></div></div>
+      <div class="pay-card rv rv-d2"><div class="ic">🏦</div><div class="nm" data-i18n="pay2"></div><div class="ds" data-i18n="pay2d"></div></div>
+      <div class="pay-card rv rv-d3"><div class="ic">💸</div><div class="nm" data-i18n="pay3"></div><div class="ds" data-i18n="pay3d"></div></div>
+      <div class="pay-card rv rv-d4"><div class="ic">🌍</div><div class="nm" data-i18n="pay4"></div><div class="ds" data-i18n="pay4d"></div></div>
     </div>
-
-    <!-- الدفع الأونلاين -->
-    <div class="pay-online glass rv">
-      <div>
-        <div class="po-t" data-i18n="pay_online_t"></div>
-        <div class="po-d" data-i18n="pay_online_d"></div>
-      </div>
-      <a class="btn-main" id="ppBtn" target="_blank" rel="noopener"><span data-i18n="pay_online_b"></span></a>
-    </div>
-
     <div class="pay-note rv" data-i18n="pay_note"></div>
   </div>
 </section>
@@ -151,7 +70,7 @@
   <div class="cta rv">
     <h2 data-i18n="cta_t"></h2>
     <p data-i18n="cta_p"></p>
-    <a class="btn-main" id="ctaWa" target="_blank" rel="noopener"><span data-i18n="cta_wa"></span></a>
+    <a class="btn-main pack-order" target="_blank" rel="noopener"><span data-i18n="cta_wa"></span></a>
   </div>
 </section>
 
@@ -159,71 +78,7 @@
 
 <script src="assets/app.js"></script>
 <script>
-/* ---------- الدفع الأونلاين ---------- */
-const WAB = WA.split('?')[0] + '?text=';
-document.getElementById('ppBtn').href = PAYPAL || (WAB + encodeURIComponent('أهلًا كرم، عاوز أدفع أونلاين 💳'));
-document.getElementById('ctaWa').href = WA;
-
-/* ---------- زرار "اطلبها" بيملأ الفورم ويطلع لفوق ---------- */
-document.querySelectorAll('.pack-order').forEach(a=>{
-  a.addEventListener('click', e=>{
-    e.preventDefault();
-    document.getElementById('rqPack').value = a.dataset.pack;
-    document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});
-    setTimeout(()=>document.getElementById('rqName').focus(), 700);
-  });
-});
-
-/* ---------- الفورم + حماية السبام ---------- */
-const t0 = Date.now();
-let capA = 0, capB = 0;
-function newCaptcha(){
-  capA = 2 + Math.floor(Math.random()*7);
-  capB = 1 + Math.floor(Math.random()*8);
-  document.getElementById('capQ').textContent = capA + ' + ' + capB + ' = ؟';
-  document.getElementById('rqCap').value = '';
-}
-newCaptcha();
-
-document.getElementById('reqForm').addEventListener('submit', e=>{
-  e.preventDefault();
-  const note = document.getElementById('formNote');
-  note.className = 'form-note';
-
-  /* فخ البوتات: لو الخانة المخفية اتملت → نتظاهر بالنجاح من غير ما نبعت حاجة */
-  if(document.getElementById('rqSite').value){ note.textContent='✓'; note.classList.add('ok'); return; }
-  /* فخ السرعة: البوت بيبعت في أقل من ٣ ثواني */
-  if(Date.now() - t0 < 3000){ note.textContent = t('fm_err'); note.classList.add('err'); return; }
-
-  const name = document.getElementById('rqName').value.trim();
-  const brand = document.getElementById('rqBrand').value.trim();
-  const contact = document.getElementById('rqContact').value.trim();
-  const packSel = document.getElementById('rqPack');
-  const packName = packSel.options[packSel.selectedIndex].textContent;
-  const msg = document.getElementById('rqMsg').value.trim();
-  const cap = document.getElementById('rqCap').value.trim();
-
-  if(!name || !brand || !contact || !msg){
-    note.textContent = t('fm_err'); note.classList.add('err'); return;
-  }
-  if(parseInt(cap,10) !== capA + capB){
-    note.textContent = t('fm_cap_err'); note.classList.add('err'); newCaptcha(); return;
-  }
-
-  const prices = {1:'400', 2:'600', 3:'1500'};
-  const text =
-'طلب باقة جديد 🚀\n' +
-'———————\n' +
-'الاسم: ' + name + '\n' +
-'البراند: ' + brand + '\n' +
-'التواصل: ' + contact + '\n' +
-'الباقة: ' + packName + ' — ' + prices[packSel.value] + ' ريال\n' +
-'———————\n' +
-'تفاصيل المشروع:\n' + msg;
-
-  note.textContent = '✓'; note.classList.add('ok');
-  window.open(WAB + encodeURIComponent(text), '_blank');
-});
+  document.querySelectorAll('.pack-order').forEach(a=>a.href=WA);
 </script>
 </body>
 </html>
