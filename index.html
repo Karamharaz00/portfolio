@@ -261,12 +261,15 @@ html[dir="rtl"] .role-rot{justify-content:flex-end}
 }
 /* بيقف لوحده لما يخرج من الشاشة — ده اللي كان بيعمل اللاج */
 .marquee:not(.live) .marquee-track{animation-play-state:paused}
+.marquee:not(.ready){opacity:0}
+.marquee{transition:opacity .5s ease}
 .marquee-track{
   display:flex;gap:16px;width:max-content;
-  animation:mq 60s linear infinite;
   will-change:transform;backface-visibility:hidden;
 }
-.marquee.rev .marquee-track{animation-direction:reverse;animation-duration:72s}
+/* الحركة مابتبدأش غير لما كل الصور تخلص تحميل — ده اللي كان بيعمل التهزيز */
+.marquee.ready .marquee-track{animation:mq var(--dur,60s) linear infinite}
+.marquee.rev .marquee-track{animation-direction:reverse}
 .marquee:hover .marquee-track{animation-play-state:paused}
 @keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 .mq-item{
@@ -1731,6 +1734,7 @@ function bindCopy(){
 /* ---------- الشريط المتحرك ----------
    بنبنيه للصفحة الظاهرة بس، وبيتوقف لما يخرج من الشاشة */
 let mqIO=null;
+const MQ_SPEED = 18;            /* بكسل في الثانية — سرعة هادية وثابتة على أي شاشة */
 function buildMarquees(){
   const page = document.querySelector('.page.on') || document;
   document.querySelectorAll('.page:not(.on) .marquee-track').forEach(t=>{ t.innerHTML=''; });
@@ -1738,16 +1742,35 @@ function buildMarquees(){
   tracks.forEach((track,ti)=>{
     const n = ti%2 ? 3 : 2;
     const pick = PROJECTS.slice(0, 10);
+    /* loading="eager": الصور دي في شريط أفقي، لو حمّلت وهي ماشية بتعمل تهزيز */
     const half = pick.map(p=>{
       const src = `thumb/${p.id}/${Math.min(n,p.cnt)}.jpg`;
-      return `<div class="mq-item"><img src="${src}" loading="lazy" decoding="async" width="${p.w}" height="${p.h}" alt=""
+      return `<div class="mq-item"><img src="${src}" loading="eager" decoding="async" width="${p.w}" height="${p.h}" alt=""
         onerror="if(!this.dataset.f){this.dataset.f=1;this.src='projects/${p.id}/${Math.min(n,p.cnt)}.jpg'}"></div>`;
     }).join('');
     track.innerHTML = half+half;
   });
+
+  /* نستنى كل الصور تتحمّل وتتفك، وبعدين نحسب المدة من العرض الحقيقي */
+  const marquees = [...page.querySelectorAll('.marquee')];
+  marquees.forEach(m=>m.classList.remove('ready'));
+  const imgs = page.querySelectorAll('.marquee-track img');
+  const waits = [...imgs].map(im => im.complete && im.naturalWidth
+    ? (im.decode ? im.decode().catch(()=>{}) : Promise.resolve())
+    : new Promise(r=>{ im.onload=()=>r(); im.onerror=()=>r(); }));
+  Promise.all(waits).then(()=>{
+    marquees.forEach(m=>{
+      const track = m.querySelector('.marquee-track');
+      if(!track) return;
+      const half = track.scrollWidth / 2;
+      if(half > 0) m.style.setProperty('--dur', Math.round(half / MQ_SPEED) + 's');
+      m.classList.add('ready');
+    });
+  });
+
   if(mqIO) mqIO.disconnect();
   mqIO = new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('live', e.isIntersecting)),{threshold:0});
-  page.querySelectorAll('.marquee').forEach(m=>mqIO.observe(m));
+  marquees.forEach(m=>mqIO.observe(m));
 }
 
 /* ---------- صفحة المشروع ---------- */
@@ -1967,7 +1990,7 @@ FIELDS.forEach(id=>document.getElementById(id).addEventListener('input',e=>e.tar
 
   /* بتقف لما ننزل تحت أول شاشة — مش بتبان أصلًا */
   addEventListener('scroll', ()=>{
-    const on = scrollY < innerHeight*0.9;
+    const on = scrollY < innerHeight*0.45;
     if(on !== running){ running = on; cv.style.opacity = on ? '' : '0'; if(on) tick(0); }
   }, {passive:true});
   document.addEventListener('visibilitychange', ()=>{
