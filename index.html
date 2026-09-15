@@ -261,14 +261,33 @@ html[dir="rtl"] .role-rot{justify-content:flex-end}
   color:var(--mut2);display:flex;align-items:center;gap:14px;margin-bottom:20px;
 }
 .reel-lbl::after{content:"";flex:1;height:1px;background:var(--line)}
-.reel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.reel-item{
-  border-radius:18px;overflow:hidden;border:1px solid var(--line);
-  background:var(--bg2);aspect-ratio:4/5;
-  transition:border-color .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1);
+/* صفّين بيمشوا في اتجاهين متعاكسين — الحركة CSS خالص على transform
+   (الكارت بيتحرك على كارت الجرافيكس، مفيش حسابات في الجافاسكربت كل فريم) */
+.reel-rows{--mqh:104px;display:flex;flex-direction:column;gap:12px}
+.mq{
+  overflow:hidden;contain:content;
+  -webkit-mask-image:linear-gradient(to left,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(to left,transparent,#000 7%,#000 93%,transparent);
 }
-.reel-item img{width:100%;height:100%;object-fit:contain;display:block}
-.reel-item:hover{border-color:rgba(255,176,32,.45);transform:translateY(-4px)}
+.mq-track{
+  display:flex;gap:12px;width:max-content;
+  will-change:transform;backface-visibility:hidden;
+  animation:mq-left var(--dur,90s) linear infinite;
+}
+.mq.rev .mq-track{animation-name:mq-right}
+/* بيقف خالص لما يخرج من الشاشة أو لما تحط عليه الماوس */
+.mq:not(.live) .mq-track,
+.mq:hover .mq-track{animation-play-state:paused}
+@keyframes mq-left {from{transform:translate3d(0,0,0)}      to{transform:translate3d(-50%,0,0)}}
+@keyframes mq-right{from{transform:translate3d(-50%,0,0)}   to{transform:translate3d(0,0,0)}}
+.mq-item{
+  flex:0 0 auto;height:var(--mqh);aspect-ratio:var(--ar,4/5);
+  border-radius:12px;overflow:hidden;border:1px solid var(--line);
+  background:var(--bg2);transition:border-color .35s ease;
+}
+.mq-item:hover{border-color:rgba(255,176,32,.5)}
+.mq-item img{width:100%;height:100%;object-fit:contain;display:block}
+@media (prefers-reduced-motion: reduce){ .mq-track{animation:none} }
 
 /* ============ الأقسام ============ */
 .sec{padding-block:64px;position:relative;z-index:2;scroll-margin-top:92px}
@@ -735,7 +754,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;position:relative;z-index
 @media(max-width:1000px){
   .hero{grid-template-columns:1fr .78fr;gap:26px;padding-top:108px}
   .pj-grid{grid-template-columns:repeat(2,1fr)}
-  .reel-grid{grid-template-columns:repeat(4,1fr);gap:14px}
+  .reel-rows{--mqh:94px}
   .feat-grid{grid-template-columns:repeat(2,1fr)}
   .pack-grid{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
   .pack.gold{transform:none}
@@ -778,7 +797,8 @@ footer{border-top:1px solid var(--line);padding:44px 0;position:relative;z-index
   .ph-ring{width:60px;height:60px;top:-12px;inset-inline-end:0}
   .soc{width:35px;height:35px;border-radius:11px}
   .pj-grid{grid-template-columns:1fr;gap:22px}
-  .reel-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .reel-rows{--mqh:78px;gap:10px}
+  .mq-track{gap:10px}
   .reel{padding-block:0 20px}
   .reel + .sec{padding-top:22px}
   .feat-grid{grid-template-columns:1fr}
@@ -849,7 +869,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;position:relative;z-index
 
   <section class="reel wrap">
     <div class="reel-lbl" data-i18n="reel_lbl"></div>
-    <div class="reel-grid" id="reelGrid"></div>
+    <div class="reel-rows" id="reelRows"></div>
   </section>
 
   <section class="sec wrap">
@@ -1776,34 +1796,70 @@ function bindCopy(){
 
 }
 
-/* ---------- الشريط المتحرك ----------
-   بنبنيه للصفحة الظاهرة بس، وبيتوقف لما يخرج من الشاشة */
 /* ---------- لمحة من التصاميم ----------
-   عرض ثابت — مفيش أي حركة، والصور بتتحمّل بهدوء لما توصلها */
-const REEL = [
-  ['porati',     3],
-  ['sabiq',      2],
-  ['tirawi',     2],
-  ['fcacourses', 2],
-  ['tomor',      2],
-  ['skymed',     3],
-  ['careoncall', 3],
-  ['accounting', 2],
-];
+   صفّين: اللي فوق ماشي يمين واللي تحت ماشي شمال، بهدوء.
+   كل مشروع بيدخل بأول ٣ تصاميم منه، والصور من thumb/ (خفيفة).
+
+   ليه مفيش لاج:
+   - الحركة keyframes على transform بس — الكارت بيتحرك على كارت الشاشة
+   - مقاس كل كارت متحسوب من aspect-ratio، فمش مستنيين الصور تتحمّل
+     (يعني مفيش ارتجاج ولا قفزات وقت التحميل)
+   - المدة بتتحسب من عرض الشريط الحقيقي، فسرعة الصفّين واحدة
+   - بيقف خالص لما يخرج من الشاشة */
+const MQ_SPEED = 26;           /* بكسل في الثانية — قلّله يبقى أبطأ */
+let mqIO = null, mqRT = null;
+
 function buildReel(){
-  const g = document.getElementById('reelGrid');
-  if(!g) return;
-  g.innerHTML = REEL.map(([id,n])=>{
-    const p = PROJECTS.find(x=>x.id===id);
-    if(!p) return '';
-    const k = Math.min(n, p.cnt);
-    return `<a class="reel-item" href="#/project/${p.id}" aria-label="${p.n}">
-      <img src="thumb/${p.id}/${k}.jpg" loading="lazy" decoding="async"
-           width="${p.w}" height="${p.h}" alt="${p.n} — ${LANG==='ar'?p.cAr:p.cEn}"
-           onerror="if(!this.dataset.f){this.dataset.f=1;this.src='projects/${p.id}/${k}.jpg'}">
-    </a>`;
+  const wrap = document.getElementById('reelRows');
+  if(!wrap) return;
+
+  const shots = [];
+  PROJECTS.forEach(p=>{
+    const k = Math.min(3, p.cnt);
+    for(let n=1;n<=k;n++) shots.push({p,n});
+  });
+  const rows = [[],[]];
+  shots.forEach((sh,i)=>rows[i%2].push(sh));
+
+  const cell = ({p,n}, dup) => `<a class="mq-item" href="#/project/${p.id}"`
+    + ` style="--ar:${p.w}/${p.h}"`
+    + (dup ? ' aria-hidden="true" tabindex="-1"' : ` aria-label="${p.n}"`)
+    + `><img src="thumb/${p.id}/${n}.jpg" loading="lazy" decoding="async"`
+    + ` fetchpriority="low" alt="" data-fb="projects/${p.id}/${n}.jpg"></a>`;
+
+  wrap.innerHTML = rows.map((row,ri)=>{
+    const a = row.map(sh=>cell(sh,false)).join('');
+    const b = row.map(sh=>cell(sh,true)).join('');
+    return `<div class="mq${ri===0?' rev':''}"><div class="mq-track">${a}${b}</div></div>`;
   }).join('');
+
+  requestAnimationFrame(syncReel);
+
+  if(mqIO) mqIO.disconnect();
+  mqIO = new IntersectionObserver(es=>es.forEach(e=>{
+    e.target.classList.toggle('live', e.isIntersecting);
+    if(e.isIntersecting && !e.target.style.getPropertyValue('--dur')) syncReel();
+  }),{threshold:0});
+  wrap.querySelectorAll('.mq').forEach(m=>mqIO.observe(m));
 }
+
+/* المدة = نص عرض الشريط ÷ السرعة — الصفّان بنفس السرعة مهما اختلف عدد الصور */
+function syncReel(){
+  document.querySelectorAll('.reel .mq').forEach(m=>{
+    const t = m.querySelector('.mq-track');
+    if(!t) return;
+    const half = t.scrollWidth / 2;
+    if(half > 0) m.style.setProperty('--dur', Math.round(half / MQ_SPEED) + 's');
+  });
+}
+addEventListener('resize', ()=>{ clearTimeout(mqRT); mqRT = setTimeout(syncReel, 220); });
+
+/* الصور اللي بتقع بترجع للنسخة الكاملة — من غير onerror جوه الماركب */
+addEventListener('error', e=>{
+  const img = e.target;
+  if(!(img instanceof HTMLImageElement) || !img.dataset.fb || img.dataset.f) return;
+  img.dataset.f = 1; img.src = img.dataset.fb;
+}, true);
 
 /* ---------- صفحة المشروع ---------- */
 function renderProject(id){
