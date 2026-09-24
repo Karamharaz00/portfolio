@@ -167,7 +167,7 @@ html[dir="rtl"] .sc-title{text-align:right}
 .sc-title sup{font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink2);vertical-align:top;margin-inline-start:12px;position:relative;top:.6em;font-variant-numeric:tabular-nums}
 .sc-side .lead{max-width:38ch;color:var(--ink2)}
 .s-hero{--ph:min(48vh,50vw)}
-.s-hero .pst{top:37%}
+.s-hero .pst{top:37%;background:transparent}
 .s-hero .sc-title{font-family:var(--f);font-weight:500;font-size:clamp(38px,4.4vw,68px);line-height:1.02;letter-spacing:-.035em;direction:inherit;max-width:14ch;text-wrap:balance}
 html[lang="ar"] .s-hero .sc-title{letter-spacing:-.01em;line-height:1.15}
 .hb-status{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink2)}
@@ -531,6 +531,9 @@ html.lenis,html.lenis body{height:auto}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .rv,.intro{opacity:1;transform:none}
+  /* تبديل كروت الافتتاحية طلب صريح من كرم وعليه زرار إيقاف، فبيفضل شغال بس من غير الطفو */
+  .s-hero.swapping .pst{transition-duration:1.2s,1.2s,1.2s,.55s,.55s!important}
+  @media(max-width:860px){.s-hero .pst.p-c{animation:cardIn .9s var(--ease) both!important}}
 }
 </style>
 </head>
@@ -1596,7 +1599,7 @@ const isHome = ()=>$('#pg-home').classList.contains('on');
 const SEL = PROJECTS.slice(0,6);
 /* تصاميم الافتتاحية: أول تصميم من كل مشروع، بتتبدّل لوحدها */
 const HERO_SET = PROJECTS.slice(0,9);
-const REEL = {scenes:[], cur:-1, hero:0, paused:RM, timer:null};
+const REEL = {scenes:[], cur:-1, hero:0, paused:false, timer:null};
 const src = (p,n,full) => `${full?'projects':'thumb'}/${p.id}/${n}.jpg`;
 const shot = (p,n,cls,eager) =>
   `<${IMG} class="${cls||''}" src="${src(p,n,true)}" alt="" width="${p.w}" height="${p.h}" decoding="async"${eager?' fetchpriority="high"':' loading="lazy"'} data-fb="${src(p,1,true)}">`;
@@ -1702,7 +1705,6 @@ function pauseLabel(){
   b.setAttribute('aria-pressed', String(REEL.paused));
 }
 $('#reelPause').addEventListener('click',()=>{ REEL.paused = !REEL.paused; pauseLabel(); });
-if(RM) $('#reelPause').hidden = true;
 
 /* السكرول بيحرّك المشاهد: كل مشهد بيقف شوية، وبعدين اللي بعده بيطلع من تحت */
 const smooth = (a,b,x)=>{ const k = clamp((x-a)/(b-a)); return k*k*(3-2*k); };
