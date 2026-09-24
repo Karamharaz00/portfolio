@@ -205,8 +205,14 @@ html[lang="ar"] .ab-stat b{font-family:var(--f-ar)}
 .reel-end .h-l{max-width:16ch}
 
 /* دخول الصفحة: التصميم بيطلع والكلام وراه */
-.s-hero .pst,.s-hero .sc-credits > *{animation:rise 1.5s var(--ease) both}
-.s-hero .pst.p-l,.s-hero .pst.p-r{animation-delay:.25s}
+.s-hero .sc-credits > *{animation:rise 1.5s var(--ease) both}
+/* كروت الافتتاحية: بتطفو بهدوء، وكل ٥ ثواني بتبدّل أماكنها */
+.s-hero .pst{animation:rise 1.5s var(--ease) both,bob 7s ease-in-out 1.5s infinite alternate}
+.s-hero .pst:nth-child(1){animation-duration:1.5s,8.2s;animation-delay:.25s,1.9s}
+.s-hero .pst:nth-child(3){animation-duration:1.5s,6.4s;animation-delay:.25s,2.3s}
+@keyframes bob{from{translate:0 0}to{translate:0 -14px}}
+.s-hero.swapping .pst{transition:transform 1.2s var(--ease),height 1.2s var(--ease),filter 1.2s ease,opacity .55s ease,scale .55s ease}
+.s-hero .pst.gone{opacity:0;scale:.9}
 .s-hero .sc-credits > *:nth-child(2){animation-delay:.12s}
 .s-hero .sc-credits > *:nth-child(3){animation-delay:.24s}
 @keyframes rise{from{opacity:0;translate:0 50px}}
@@ -493,7 +499,9 @@ html.lenis,html.lenis body{height:auto}
   .scene{--ph:min(50svh,108vw)}
   .s-hero{--ph:min(40svh,90vw)}
   .scene .pst{top:calc(var(--navh) + 14px + var(--ph) / 2)}
-  .pst.p-l,.pst.p-r{display:none}
+  .pst.p-l,.pst.p-r{visibility:hidden}
+  .s-hero .pst.p-c{animation:cardIn .9s var(--ease) both,bob 7s ease-in-out .9s infinite alternate}
+  @keyframes cardIn{from{opacity:0;scale:.94}}
   .sc-credits{grid-template-columns:1fr;bottom:auto;top:calc(var(--navh) + var(--ph) + 34px);gap:0}
   .sc-title{font-size:clamp(40px,12vw,64px)}
   .s-hero .sc-title{font-size:clamp(32px,8.6vw,44px)}
@@ -1595,13 +1603,13 @@ const shot = (p,n,cls,eager) =>
 const pstStyle = p => `--ar:${p.w}/${p.h};--arn:${(p.w/p.h).toFixed(3)}`;
 
 function buildReel(){
-  const [a,b,c] = [HERO_SET[1],HERO_SET[0],HERO_SET[2]];
+  const [a,b,c] = [HERO_SET[0],HERO_SET[1],HERO_SET[2]];
   const hero = `<div class="scene s-hero" data-i="0" style="--pc:${b.color}">
       <div class="sc-amb" aria-hidden="true"><${IMG} src="${src(b,1)}" alt="" data-k="amb"></div>
       <div class="sc-posters" aria-hidden="true">
-        <div class="pst p-l" data-slot="-1" style="${pstStyle(a)}">${shot(a,1,'on',true)}</div>
-        <div class="pst p-c" data-slot="0" style="${pstStyle(b)}">${shot(b,1,'on',true)}</div>
-        <div class="pst p-r" data-slot="1" style="${pstStyle(c)}">${shot(c,1,'on',true)}</div>
+        <div class="pst p-l" style="${pstStyle(a)}">${shot(a,1,'on',true)}</div>
+        <div class="pst p-c" style="${pstStyle(b)}">${shot(b,1,'on',true)}</div>
+        <div class="pst p-r" style="${pstStyle(c)}">${shot(c,1,'on',true)}</div>
       </div>
       <div class="sc-shade" aria-hidden="true"></div>
       <div class="sc-credits wrap" id="main" tabindex="-1">
@@ -1653,25 +1661,36 @@ function buildReel(){
   pauseLabel();
 }
 
-/* الافتتاحية: كل ٥ ثواني التلات تصاميم بيتبدّلوا بهدوء */
+/* الافتتاحية: كل ٥ ثواني الكروت بتلف: اللي على اليمين بييجي النص، واللي في النص بيروح الشمال،
+   واللي على الشمال بيختفي ويرجع على اليمين بتصميم جديد */
 function heroStep(){
   if(REEL.paused || REEL.cur !== 0 || !isHome() || document.hidden) return;
+  const hero = $('.s-hero'); if(!hero || hero.classList.contains('swapping')) return;
+  const L = $('.p-l',hero), C = $('.p-c',hero), R = $('.p-r',hero);
   REEL.hero = (REEL.hero + 1) % HERO_SET.length;
-  $$('.s-hero .pst').forEach(el=>{
-    const p = HERO_SET[(REEL.hero + 1 + +el.dataset.slot + HERO_SET.length) % HERO_SET.length];
-    const im = document.createElement('img');
-    im.alt = ''; im.decoding = 'async'; im.src = src(p,1,true); im.style.opacity = 0;
-    im.onload = ()=>{
-      el.style.cssText = pstStyle(p);
-      el.appendChild(im);
-      requestAnimationFrame(()=>{ im.style.opacity = 1; });
-      setTimeout(()=>{ [...el.querySelectorAll('img')].slice(0,-1).forEach(x=>x.remove()); }, 1200);
-      if(el.dataset.slot==='0'){
-        const amb = $('.s-hero .sc-amb img'); amb.style.opacity = 0;
-        setTimeout(()=>{ amb.src = src(p,1); amb.onload = ()=>{ amb.style.opacity = ''; }; }, 500);
-      }
-    };
-  });
+  const next = HERO_SET[(REEL.hero + 2) % HERO_SET.length];
+  const mid  = HERO_SET[(REEL.hero + 1) % HERO_SET.length];
+  const im = new Image(); im.decoding = 'async'; im.alt = ''; im.src = src(next,1,true);
+  const go = ()=>{
+    hero.classList.add('swapping');
+    L.classList.add('gone');
+    C.classList.replace('p-c','p-l');
+    R.classList.replace('p-r','p-c');
+    const amb = $('.sc-amb img',hero); amb.style.opacity = 0;
+    setTimeout(()=>{ amb.src = src(mid,1); amb.onload = ()=>{ amb.style.opacity = ''; }; }, 450);
+    setTimeout(()=>{
+      L.style.transition = 'none';
+      L.classList.replace('p-l','p-r');
+      L.style.cssText = pstStyle(next) + ';transition:none';
+      L.replaceChildren(im);
+      void L.offsetWidth;
+      L.style.transition = '';
+      L.classList.remove('gone');
+    }, 620);
+    setTimeout(()=>hero.classList.remove('swapping'), 1900);
+  };
+  /* الصور لازم تكون جاهزة قبل الحركة، غير كده الكارت بيظهر فاضي لحظة */
+  Promise.all([im.decode(), $('img',R).decode()].map(x=>x.catch(()=>{}))).then(go);
 }
 REEL.timer = setInterval(heroStep, 5000);
 
