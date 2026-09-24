@@ -170,12 +170,15 @@ html[lang="ar"] .logo{font-family:var(--f-body);font-size:19px}
 .btn-line svg{fill:none;stroke:currentColor;stroke-width:2}
 html[dir="rtl"] .btn .flip{transform:scaleX(-1)}
 
-/* ══════════════ الهيرو — حائط التصاميم ثلاثي الأبعاد ══════════════
-   الحائط مايل في الفراغ وأعمدته بتسكرول لوحدها زي الفيد.
-   مع السكرول بيتعدل، والأعمدة بتبطّأ لحد ما تقف خالص = "السكرول وقف". */
-.hero{position:relative;height:calc(var(--vh) * 2.6)}
+/* ══════════════ الهيرو — صورتك في النص وتصاميمك بتلف حواليها ══════════════
+   ورا: حائط التصاميم مايل وباهت (ملمس).
+   قدام: صورتك كاملة من غير قص، وتصاميمك بتدور حواليها في مدار ثلاثي الأبعاد —
+   بتعدّي من ورا الصورة ومن قدامها. التصميم اللي بيعدّي قدام اسمه بيظهر تحت الصورة.
+   مع السكرول: المدار بيبطّأ ويقف، والتصميم اللي وقف قدام بيكبر = "السكرول وقف". */
+.hero{position:relative;height:calc(var(--vh) * 2.3)}
 .hero-pin{position:sticky;top:0;height:var(--vh);overflow:hidden;contain:paint}
-.scene{position:absolute;inset:0;perspective:1300px;perspective-origin:50% 38%}
+.scene{position:absolute;inset:0;perspective:1300px;perspective-origin:50% 38%;opacity:.2;
+  -webkit-mask-image:radial-gradient(75% 70% at 50% 45%,#000 30%,transparent 100%);mask-image:radial-gradient(75% 70% at 50% 45%,#000 30%,transparent 100%)}
 .wall{
   position:absolute;left:50%;top:50%;display:flex;gap:var(--wg,22px);
   transform-style:preserve-3d;will-change:transform;
@@ -183,25 +186,29 @@ html[dir="rtl"] .btn .flip{transform:scaleX(-1)}
 }
 .col{position:relative;width:var(--cw,240px);height:0;flex:0 0 auto}
 .col-track{position:absolute;top:0;inset-inline:0;display:flex;flex-direction:column;gap:var(--wg,22px);will-change:transform;backface-visibility:hidden}
-.post{
-  border-radius:clamp(8px,1vw,14px);overflow:hidden;aspect-ratio:var(--ar,4/5);
-  background:var(--stage3);
-  box-shadow:0 30px 60px -20px rgba(0,0,0,.7);
-}
+.post{border-radius:clamp(8px,1vw,14px);overflow:hidden;aspect-ratio:var(--ar,4/5);background:var(--stage3)}
 .post img{width:100%;height:100%;object-fit:cover}
 .hero-veil{
   position:absolute;inset:0;pointer-events:none;
   background:
-    linear-gradient(to top, var(--stage) 0%, rgba(12,14,18,.82) 26%, rgba(12,14,18,.2) 62%, rgba(12,14,18,.55) 100%);
+    radial-gradient(60% 60% at 72% 48%, color-mix(in srgb,var(--flare) 16%,transparent), transparent 70%),
+    linear-gradient(to right, rgba(12,14,18,.85) 0%, rgba(12,14,18,.5) 40%, transparent 62%),
+    linear-gradient(to top, var(--stage) 0%, transparent 30%),
+    linear-gradient(to bottom, rgba(12,14,18,.7) 0%, transparent 25%);
 }
-.hero-dim{position:absolute;inset:0;background:rgba(9,10,13,.72);opacity:0;pointer-events:none}
-.hero-copy{
-  position:absolute;inset-inline:0;bottom:0;padding-bottom:clamp(40px,9vh,96px);
-  will-change:transform,opacity;
+html[dir="rtl"] .hero-veil{background:
+    radial-gradient(60% 60% at 28% 48%, color-mix(in srgb,var(--flare) 16%,transparent), transparent 70%),
+    linear-gradient(to left, rgba(12,14,18,.85) 0%, rgba(12,14,18,.5) 40%, transparent 62%),
+    linear-gradient(to top, var(--stage) 0%, transparent 30%),
+    linear-gradient(to bottom, rgba(12,14,18,.7) 0%, transparent 25%)}
+.hero-grid{
+  position:absolute;inset:0;padding-top:var(--navh);
+  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);align-items:center;gap:clamp(20px,3vw,50px);
 }
-.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:22px 40px;flex-wrap:wrap;margin-top:clamp(18px,3vh,30px)}
+.hero-info{position:relative;z-index:2}
+.hero-copy{will-change:transform,opacity}
 .avail{
-  display:inline-flex;align-items:center;gap:10px;width:fit-content;margin-bottom:18px;
+  display:inline-flex;align-items:center;gap:10px;width:fit-content;margin-bottom:22px;
   font-size:13px;color:var(--ink2);padding:7px 14px 7px 12px;border-radius:40px;
   background:rgba(12,14,18,.55);border:1px solid var(--line2);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
@@ -209,16 +216,69 @@ html[dir="rtl"] .btn .flip{transform:scaleX(-1)}
 .avail i{width:8px;height:8px;border-radius:50%;background:#46d47e;box-shadow:0 0 0 0 #46d47e88;animation:ping 2.2s ease-out infinite}
 @keyframes ping{to{box-shadow:0 0 0 9px #46d47e00}}
 .name{
-  font-family:var(--f-disp);font-weight:850;font-size:clamp(64px,13.2vw,212px);
-  line-height:.8;letter-spacing:-.035em;text-transform:uppercase;font-stretch:112%;
+  font-family:var(--f-disp);font-weight:850;font-size:clamp(56px,8.6vw,140px);
+  line-height:.82;letter-spacing:-.035em;text-transform:uppercase;font-stretch:112%;
   display:flex;flex-direction:column;
 }
 .name .ln{display:block;overflow:hidden;padding-block:.04em .02em;white-space:nowrap}
 .name .ch{display:inline-block;transform:translateY(110%)}
-html[lang="ar"] .name{font-family:var(--f-body);text-transform:none;letter-spacing:0;line-height:1.05;font-size:clamp(64px,12vw,188px);font-weight:850}
+.name .ln:nth-child(3) .ch{-webkit-text-stroke:1.5px var(--ink);color:transparent}
+html[lang="ar"] .name .ln:nth-child(3) .ch{-webkit-text-stroke:0;color:rgba(238,234,227,.42)}
+html[lang="ar"] .name{font-family:var(--f-body);text-transform:none;letter-spacing:0;line-height:1.08;font-size:clamp(58px,8vw,128px);font-weight:850}
 html[lang="ar"] .name .ln{padding-block:.02em .12em}
-.hero-tag{font-size:clamp(16px,1.45vw,20px);color:var(--ink2);max-width:34ch;text-wrap:balance}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.role{display:flex;align-items:center;gap:14px;margin-top:22px;font-size:clamp(15px,1.3vw,18px);font-weight:500;color:var(--ink)}
+.role::before{content:"";width:36px;height:2px;border-radius:2px;background:var(--flare);flex-shrink:0}
+.hero-tag{font-size:clamp(15px,1.2vw,17px);color:var(--ink2);max-width:42ch;margin-top:12px;text-wrap:pretty}
+.hstats{display:flex;gap:clamp(20px,3vw,44px);margin-top:clamp(22px,3.4vh,34px)}
+.hstat b{display:block;font-family:var(--f-disp);font-weight:800;font-size:clamp(30px,2.8vw,44px);line-height:1;font-stretch:96%;direction:ltr;text-align:start}
+.hstat b sup{font-size:.5em;vertical-align:.8em;color:var(--flare);margin-inline-start:2px}
+.hstat > span{display:block;font-size:12.5px;color:var(--ink3);margin-top:8px}
+.hstat + .hstat{padding-inline-start:clamp(20px,3vw,44px);border-inline-start:1px solid var(--line2)}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(24px,4vh,38px)}
+.stop{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;pointer-events:none;opacity:0}
+.stop-t{font-size:clamp(46px,6.6vw,108px);text-transform:uppercase;font-stretch:118%;line-height:.9}
+html[lang="ar"] .stop-t{text-transform:none;line-height:1.2}
+.stop-d{font-size:clamp(16px,1.4vw,20px);color:var(--ink2);margin-top:20px;max-width:32ch}
+.stop-d b{color:var(--ink);font-weight:600}
+
+/* المدار */
+.orbit-stage{position:relative;height:min(76vh,740px);perspective:1500px;perspective-origin:50% 40%;z-index:1}
+.orbit-tilt{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.me{
+  position:absolute;left:50%;top:46%;width:var(--mw,340px);
+  transform:translate3d(-50%,-50%,0);transform-style:preserve-3d;
+}
+.me-glow{position:absolute;inset:-12% -8% -4%;border-radius:50%;transform:translateZ(-120px);
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--flare) 70%,transparent),color-mix(in srgb,#7a3cff 35%,transparent) 60%,transparent);filter:blur(34px);opacity:.75}
+.me-frame{
+  position:relative;aspect-ratio:1/1;border-radius:999px 999px 30px 30px;overflow:hidden;
+  box-shadow:0 60px 100px -40px rgba(0,0,0,.9),0 0 0 1px rgba(238,234,227,.18),inset 0 0 0 1px rgba(255,255,255,.06);
+  background:var(--stage2);
+}
+.me-frame img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.me-frame::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(12,14,18,.55),transparent 34%)}
+.orb-now{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:3;
+  display:flex;align-items:center;gap:10px;white-space:nowrap;
+  padding:10px 16px 10px 12px;border-radius:40px;font-size:13px;
+  background:rgba(20,23,29,.82);border:1px solid var(--line2);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 20px 40px -12px rgba(0,0,0,.7);
+}
+.orb-now i{width:10px;height:10px;border-radius:50%;background:var(--nc,var(--flare));box-shadow:0 0 12px var(--nc,var(--flare));flex-shrink:0;transition:background-color .5s ease,box-shadow .5s ease}
+.orb-now b{font-family:var(--f-disp);font-weight:750;font-stretch:96%;letter-spacing:.01em}
+.orb-now span{color:var(--ink2)}
+.orb-now .nt{display:inline-flex;gap:8px;transition:opacity .35s ease,transform .35s var(--ease)}
+.orb-now .nt.sw{opacity:0;transform:translateY(6px)}
+.orbit{position:absolute;left:50%;top:46%;width:0;height:0;transform-style:preserve-3d}
+.ob{
+  position:absolute;width:var(--ow,130px);left:calc(var(--ow,130px) / -2);top:calc(var(--ow,130px) * -.625);
+  aspect-ratio:4/5;border-radius:12px;overflow:hidden;background:var(--stage3);
+  box-shadow:0 24px 40px -14px rgba(0,0,0,.75),0 0 0 1px rgba(238,234,227,.08);
+  will-change:transform,opacity;transition:box-shadow .5s ease;
+}
+.ob img{width:100%;height:100%;object-fit:cover}
+.ob.hot{box-shadow:0 30px 60px -12px color-mix(in srgb,var(--pc) 70%,#000),0 0 0 2px var(--pc)}
 .hint{
   position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11.5px;color:var(--ink3);letter-spacing:.06em;
@@ -226,17 +286,15 @@ html[lang="ar"] .name .ln{padding-block:.02em .12em}
 .hint b{width:1px;height:38px;background:linear-gradient(var(--ink3),transparent);position:relative;overflow:hidden;display:block}
 .hint b::after{content:"";position:absolute;inset:0;background:var(--flare);transform:translateY(-100%);animation:drip 2s var(--ease) infinite}
 @keyframes drip{60%,100%{transform:translateY(100%)}}
-.stop{
-  position:absolute;inset:0;display:grid;place-items:center;text-align:center;pointer-events:none;opacity:0;
-  padding-inline:var(--gut);
-}
-.stop-t{font-size:clamp(46px,9vw,150px);text-transform:uppercase;font-stretch:120%}
-html[lang="ar"] .stop-t{text-transform:none}
-.stop-d{font-size:clamp(16px,1.6vw,21px);color:var(--ink2);margin-top:18px;max-width:40ch;margin-inline:auto}
 
 /* حركة الدخول — مرة واحدة بس، أول ما الصفحة تفتح */
-.intro .wall{animation:wallIn 2.2s var(--ease) both}
-@keyframes wallIn{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:none}}
+.intro .scene{animation:wallIn 2.4s var(--ease) both}
+@keyframes wallIn{from{opacity:0}to{opacity:.2}}
+.intro .me-frame{animation:meIn 1.6s var(--ease) both .15s}
+@keyframes meIn{from{clip-path:inset(100% 0 0 0 round 999px 999px 30px 30px);transform:scale(1.08)}to{clip-path:inset(0 0 0 0 round 999px 999px 30px 30px);transform:none}}
+.intro .me-glow{animation:fadeIn 1.4s var(--ease) both .9s}
+.intro .orb-now{animation:fadeUp 1.1s var(--ease) both 1.4s}
+@keyframes fadeIn{from{opacity:0}}
 .intro .name .ch{animation:chIn 1.25s var(--ease) both;animation-delay:calc(.35s + var(--i) * .045s)}
 @keyframes chIn{from{transform:translateY(110%);font-stretch:50%}to{transform:none}}
 .intro .name .ln:nth-child(2) .ch{animation-delay:calc(.5s + var(--i) * .045s)}
@@ -311,31 +369,8 @@ html[dir="rtl"] .show-bar i{transform-origin:right}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px 40px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,70px)}
 
 /* ============ من أنا ============ */
-.about{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(36px,6vw,96px);align-items:start}
-.pf-wrap{position:sticky;top:calc(var(--navh) + 30px);perspective:1100px}
-.pf{
-  position:relative;transform-style:preserve-3d;border-radius:28px;
-  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .6s var(--ease);
-}
-.pf.live{transition:transform .12s linear}
-.pf-plate{position:absolute;inset:-14px;border-radius:34px;transform:translateZ(-60px);
-  background:linear-gradient(140deg,var(--flare),#7a3cff 60%,#1f6fff);opacity:.55;filter:blur(30px)}
-.pf-img{border-radius:28px;overflow:hidden;position:relative;box-shadow:0 50px 90px -30px rgba(0,0,0,.85)}
-.pf-img img{width:100%;aspect-ratio:4/4.8;object-fit:cover;transform:scale(1.02)}
-.pf-glare{position:absolute;inset:0;pointer-events:none;border-radius:28px;
-  background:radial-gradient(60% 50% at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.22),transparent 60%);mix-blend-mode:soft-light}
-.pf-badge{
-  position:absolute;inset-inline-start:-18px;bottom:34px;transform:translateZ(70px);
-  padding:14px 18px;border-radius:18px;background:rgba(20,23,29,.82);border:1px solid var(--line2);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 20px 40px -10px rgba(0,0,0,.6);
-}
-.pf-badge b{display:block;font-size:14.5px;font-weight:600}
-.pf-badge span{font-size:12px;color:var(--ink2)}
-.pf-chip{
-  position:absolute;inset-inline-end:-16px;top:30px;transform:translateZ(90px);
-  padding:10px 16px;border-radius:40px;background:var(--flare);color:#fff;font-weight:600;font-size:13px;
-  box-shadow:0 18px 40px -12px var(--flare);
-}
+.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(36px,6vw,96px);align-items:start}
+.about .tl-h{margin-top:0}
 .ab-lede{font-size:clamp(20px,2.2vw,28px);line-height:1.5;font-weight:400;text-wrap:pretty;margin-bottom:22px}
 .ab-lede b{font-weight:600;color:var(--gold)}
 .ab-body{color:var(--ink2);font-size:16px;max-width:58ch;text-wrap:pretty}
@@ -667,7 +702,11 @@ html[lang="ar"] .wipe b{font-family:var(--f-body);text-transform:none}
 @media(max-width:1060px){
   .nav-links a{padding:8px 11px}
   .about{grid-template-columns:1fr}
-  .pf-wrap{position:relative;top:0;max-width:440px}
+  .hero-grid{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:6px;padding-top:calc(var(--navh) + 4px)}
+  .orbit-stage{order:-1;height:min(44vh,440px)}
+  .hero-info{text-align:start}
+  .hstats{margin-top:18px}
+  .hero-actions{margin-top:20px}
   .proc{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:56px}
   .proc-rail{display:none}
   .step::before{top:-26px}
@@ -685,9 +724,22 @@ html[lang="ar"] .wipe b{font-family:var(--f-body);text-transform:none}
   .nav-links{display:none}
   .nav-wa span{display:none}
   .nav-wa{padding:10px}
-  .hero{height:calc(var(--vh) * 2.1)}
-  .hero-copy{padding-bottom:84px}
-  .hero-actions .btn{flex:1 1 auto;padding:14px 22px;font-size:14px}
+  .hero{height:calc(var(--vh) * 2)}
+  .orbit-stage{height:min(38vh,340px)}
+  .name{font-size:clamp(44px,13vw,64px)}
+  html[lang="ar"] .name{font-size:clamp(46px,13vw,66px)}
+  .role{margin-top:12px}
+  .hero-tag{display:none}
+  #heroWa{display:none}
+  #nowCat{display:none}
+  .hstats{gap:16px}
+  .hstat + .hstat{padding-inline-start:16px}
+  .hstat b{font-size:28px}
+  .hstat > span{font-size:11.5px;margin-top:6px}
+  .hero-grid{padding-bottom:78px}
+  .hero-actions .btn{flex:1 1 auto;padding:13px 18px;font-size:14px}
+  .orb-now{font-size:12px;padding:8px 12px 8px 10px}
+  .stop-t{font-size:clamp(40px,12vw,60px)}
   .hint{display:none}
   .stats{grid-template-columns:1fr;border-top:0}
   .stat,.stat + .stat{border:0;border-top:1px solid var(--line);padding:20px 0 18px;display:flex;align-items:baseline;justify-content:space-between;gap:16px}
@@ -695,8 +747,6 @@ html[lang="ar"] .wipe b{font-family:var(--f-body);text-transform:none}
   .show-head{flex-direction:column;align-items:flex-start}
   .show-head .btn{display:none}
   .ab-meta{grid-template-columns:1fr;gap:18px}
-  .pf-badge{inset-inline-start:10px}
-  .pf-chip{inset-inline-end:10px}
   .proc{grid-template-columns:1fr}
   .vals{grid-template-columns:1fr}
   .wk-grid{grid-template-columns:1fr;gap:34px}
@@ -717,9 +767,11 @@ html[lang="ar"] .wipe b{font-family:var(--f-body);text-transform:none}
 .mnav a{padding:9px 14px;border-radius:30px;font-size:13px;color:var(--ink2);white-space:nowrap}
 .mnav a.on{background:var(--ink);color:var(--stage);font-weight:600}
 @media(max-width:760px){ .mnav{display:flex} }
+@media(max-width:760px) and (max-height:720px){ .hstats{display:none} .orbit-stage{height:36vh} }
 
 /* ============ تقليل الحركة ============ */
 html.rm .hero{height:var(--vh)}
+html.rm .stop{display:none}
 html.rm .show{height:auto!important}
 html.rm .show-pin{position:relative;height:auto;padding-block:calc(var(--navh) + 40px) 40px}
 html.rm .show-stage{overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}
@@ -741,45 +793,55 @@ html.rm .show-foot{display:none}
 
 <!-- ═══════ الرئيسية ═══════ -->
 <main class="page on" id="pg-home" tabindex="-1">
-  <!-- الهيرو: حائط التصاميم ثلاثي الأبعاد -->
+  <!-- الهيرو: صورتك وتصاميمك بتلف حواليها -->
   <header class="hero" id="main">
     <div class="hero-pin" id="heroPin">
       <div class="scene" aria-hidden="true"><div class="wall" id="wall"></div></div>
       <div class="hero-veil" aria-hidden="true"></div>
-      <div class="hero-dim" id="heroDim" aria-hidden="true"></div>
 
-      <div class="hero-copy" id="heroCopy">
-        <div class="wrap">
-          <span class="avail fade-in" style="--d:.2s"><i aria-hidden="true"></i><span data-i18n="hero_label"></span></span>
-          <h1 class="name" id="heroName"></h1>
-          <div class="hero-row">
-            <p class="hero-tag fade-in" style="--d:1.15s" data-i18n="hero_tag"></p>
-            <div class="hero-actions fade-in" style="--d:1.3s">
+      <div class="hero-grid wrap">
+        <div class="hero-info">
+          <div class="hero-copy" id="heroCopy">
+            <span class="avail fade-in" style="--d:.2s"><i aria-hidden="true"></i><span data-i18n="hero_label"></span></span>
+            <h1 class="name" id="heroName"></h1>
+            <p class="role fade-in" style="--d:1s" data-i18n="badge_t"></p>
+            <p class="hero-tag fade-in" style="--d:1.1s" data-i18n="hero_tag"></p>
+            <div class="hstats fade-in" style="--d:1.2s">
+              <div class="hstat"><b><span class="cnt" data-to="5">0</span><sup>+</sup></b><span data-i18n="st1"></span></div>
+              <div class="hstat"><b><span class="cnt" data-to="45">0</span><sup>+</sup></b><span data-i18n="st2"></span></div>
+              <div class="hstat"><b><span class="cnt" data-to="850">0</span><sup>+</sup></b><span data-i18n="st3"></span></div>
+            </div>
+            <div class="hero-actions fade-in" style="--d:1.35s">
               <a class="btn btn-solid mag" href="#/work"><span data-i18n="cta_work"></span></a>
               <a class="btn btn-line mag" id="heroWa" target="_blank" rel="noopener noreferrer"><span data-i18n="cta_wa"></span></a>
             </div>
           </div>
+          <div class="stop" id="heroStop" aria-hidden="true">
+            <div class="stop-t disp" data-i18n="stop_t"></div>
+            <p class="stop-d" data-i18n="stop_d"></p>
+          </div>
+        </div>
+
+        <div class="orbit-stage" id="orbStage" aria-hidden="true">
+          <div class="orbit-tilt" id="orbTilt">
+            <div class="me">
+              <div class="me-glow"></div>
+              <div class="me-ring"></div>
+              <div class="me-frame"><img src="karam.jpg" width="1200" height="1200" fetchpriority="high" decoding="async" alt=""></div>
+            </div>
+            <div class="orbit" id="orbit"></div>
+          </div>
+          <div class="orb-now" id="nowTag"><i></i><span class="nt"><b id="nowName" translate="no"></b><span id="nowCat"></span></span></div>
         </div>
       </div>
 
-      <div class="stop" id="heroStop" aria-hidden="true">
-        <div>
-          <div class="stop-t disp" data-i18n="stop_t"></div>
-          <p class="stop-d" data-i18n="stop_d"></p>
-        </div>
-      </div>
       <div class="hint fade-in" style="--d:1.8s" aria-hidden="true"><span data-i18n="hero_hint"></span><b></b></div>
     </div>
   </header>
 
-  <!-- المقدمة + الأرقام -->
+  <!-- المقدمة -->
   <section class="facts wrap">
     <p class="lede rv" data-i18n="lede"></p>
-    <div class="stats">
-      <div class="stat rv"><div class="num"><span class="cnt" data-to="5">0</span><sup>+</sup></div><div class="lbl" data-i18n="st1"></div></div>
-      <div class="stat rv d1"><div class="num"><span class="cnt" data-to="45">0</span><sup>+</sup></div><div class="lbl" data-i18n="st2"></div></div>
-      <div class="stat rv d2"><div class="num"><span class="cnt" data-to="850">0</span><sup>+</sup></div><div class="lbl" data-i18n="st3"></div></div>
-    </div>
     <div class="socials rv" id="heroSoc"></div>
   </section>
 
@@ -804,20 +866,13 @@ html.rm .show-foot{display:none}
   <!-- من أنا -->
   <section class="sec wrap" id="about">
     <div class="about">
-      <div class="pf-wrap rv3">
-        <div class="pf" id="pf">
-          <div class="pf-plate" aria-hidden="true"></div>
-          <div class="pf-img"><img src="karam.jpg" width="1200" height="1200" loading="lazy" decoding="async" alt="Karam Haraz"></div>
-          <div class="pf-glare" aria-hidden="true"></div>
-          <div class="pf-badge"><b data-i18n="badge_t"></b><span data-i18n="am_loc_v"></span></div>
-          <div class="pf-chip" data-i18n="hero_label"></div>
-        </div>
-      </div>
       <div>
         <h2 class="sec-t disp mask" style="margin-bottom:34px"><span data-i18n="ab_t"></span></h2>
         <p class="ab-lede rv" data-i18n="ab_lede"></p>
         <p class="ab-body rv d1" data-i18n="ab_body"></p>
         <div class="ab-meta rv" id="aboutMeta"></div>
+      </div>
+      <div>
         <div class="tl-h" data-i18n="ab_tl_n"></div>
         <ol class="tl" id="timeline"></ol>
       </div>
@@ -1818,6 +1873,37 @@ function measureWall(){
   });
 }
 
+/* ---------- المدار: تصاميمك بتلف حوالين صورتك ---------- */
+let ORB = {cards:[], sel:[], R:300, mw:340, angle:0, front:-1, t0:performance.now()};
+function buildOrbit(){
+  const st = $('#orbStage'), ob = $('#orbit'); if(!st || !ob) return;
+  ORB.sel = PROJECTS.slice(0,12);
+  ob.innerHTML = ORB.sel.map(p=>`<figure class="ob" style="--pc:${p.color}"><img src="thumb/${p.id}/1.jpg" alt="" decoding="async" data-fb="projects/${p.id}/1.jpg"></figure>`).join('');
+  ORB.cards = $$('.ob',ob);
+  ORB.front = -1;
+  measureOrbit();
+}
+function measureOrbit(){
+  const st = $('#orbStage'); if(!st) return;
+  const w = st.clientWidth, h = st.clientHeight;
+  ORB.mw = Math.round(Math.min(w*.5, h*.48, 350));
+  ORB.R  = Math.round(ORB.mw*(w < 560 ? .88 : .98));
+  st.style.setProperty('--mw', ORB.mw+'px');
+  st.style.setProperty('--ow', Math.round(ORB.mw*.36)+'px');
+}
+function setNow(i){
+  const p = ORB.sel[i]; if(!p) return;
+  const tag = $('#nowTag'), nt = tag.querySelector('.nt');
+  tag.style.setProperty('--nc', p.color);
+  nt.classList.add('sw');
+  clearTimeout(setNow.t);
+  setNow.t = setTimeout(()=>{
+    $('#nowName').textContent = p.n;
+    $('#nowCat').textContent = LANG==='ar' ? p.cAr : p.cEn;
+    nt.classList.remove('sw');
+  },200);
+}
+
 /* ---------- الأعمال المختارة ---------- */
 let SHOW = {cards:[], centers:[], range:0, hpx:0, cur:-1};
 function buildShow(){
@@ -1887,6 +1973,7 @@ function workCard(p,i){
 function buildDynamic(){
   renderName();
   buildWall();
+  buildOrbit();
   buildShow();
   buildRings();
 
@@ -2132,7 +2219,7 @@ $$('[data-ring]').forEach(s=>ringIO.observe(s));
 
 /* ---------- المقاسات ---------- */
 function layout(){
-  if($('#pg-home').classList.contains('on')){ measureWall(); measureShow(); }
+  if($('#pg-home').classList.contains('on')){ measureWall(); measureOrbit(); measureShow(); }
 }
 let rsT = null, lastW = innerWidth;
 addEventListener('resize',()=>{
@@ -2152,7 +2239,7 @@ addEventListener('pointermove',e=>{
   MX = e.clientX/innerWidth - .5; MY = e.clientY/innerHeight - .5; CX = e.clientX; CY = e.clientY;
 },{passive:true});
 
-const hintEl=$('.hint'), heroEl=$('#main'), wallEl=$('#wall'), copyEl=$('#heroCopy'), dimEl=$('#heroDim'), stopEl=$('#heroStop'), nameEl=$('#heroName');
+const hintEl=$('.hint'), heroEl=$('#main'), wallEl=$('#wall'), copyEl=$('#heroCopy'), stopEl=$('#heroStop'), nameEl=$('#heroName'), orbTilt=$('#orbTilt');
 const navEl=$('#siteNav'), curEl=$('#cur'), curRing=curEl.querySelector('.cur-ring'), curDot=curEl.querySelector('.cur-dot');
 let navSolid=null;
 
@@ -2168,28 +2255,64 @@ function frame(now){
   if(home){
     /* الهيرو */
     const hr = heroEl.getBoundingClientRect();
-    if(hr.bottom > 0 && !RM){
-      const p = clamp(-hr.top/(hr.height-vh));
-      const flat = smooth(.06,.8,p);
-      const rx = lerp(50,0,flat) - PMY*6, rz = lerp(-24,0,flat) + PMX*4;
-      const s  = lerp(.92,1.18,flat), z = lerp(-120,0,flat);
-      wallEl.style.transform = `translate(-50%,-50%) translateZ(${z.toFixed(1)}px) rotateX(${rx.toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg) scale(${s.toFixed(3)})`;
-      const speed = 1 - smooth(.28,.78,p);
+    if(hr.bottom > 0){
+      const p = RM ? 0 : clamp(-hr.top/(hr.height-vh));
+      /* الحائط اللي ورا */
+      if(!RM){
+        const flat = smooth(.06,.8,p);
+        const rx = lerp(50,20,flat) - PMY*4, rz = lerp(-24,-8,flat) + PMX*3;
+        wallEl.style.transform = `translate(-50%,-50%) rotateX(${rx.toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg) scale(${lerp(.92,1.05,flat).toFixed(3)})`;
+      }
+      const speed = RM ? 0 : 1 - smooth(.16,.52,p);
       if(speed > 0.001) WALL.cols.forEach(c=>{
         if(!c.T) return;
         c.off = ((c.off + c.dir*c.v*speed*dt*10) % c.T + c.T) % c.T;
         c.el.style.transform = `translate3d(0,${(-c.T - c.off).toFixed(1)}px,0)`;
       });
-      const a = smooth(0,.26,p);
+      /* المدار */
+      const n = ORB.cards.length;
+      if(n){
+        const step = Math.PI*2/n;
+        ORB.angle += (RM ? 0 : 0.26*speed*dt);
+        /* السكرول وقف: التصميم الأقرب بيتظبط قدام بالظبط */
+        const snap = smooth(.4,.58,p);
+        if(snap > 0){
+          const k = Math.round(-ORB.angle/step);
+          const target = -k*step;
+          ORB.angle += (target-ORB.angle) * Math.min(1, snap*.12);
+        }
+        const ik = RM ? 1 : smooth(0,1,(now-ORB.t0)/2000);
+        const R = ORB.R * (1 + (1-ik)*1.6), base = ORB.mw*.4, hotK = smooth(.55,.8,p);
+        let best=0, bc=-2;
+        for(let i=0;i<n;i++){
+          const th = ORB.angle + i*step, cs = Math.cos(th);
+          if(cs>bc){ bc=cs; best=i; }
+        }
+        for(let i=0;i<n;i++){
+          const th = ORB.angle + i*step, cs = Math.cos(th);
+          const x = Math.sin(th)*R, z = cs*R, y = base + cs*ORB.mw*.24;
+          const s = 1 + (i===best ? hotK*.55 : 0);
+          const c = ORB.cards[i];
+          c.style.transform = `translate3d(${x.toFixed(1)}px,${(y - (i===best?hotK*ORB.mw*.18:0)).toFixed(1)}px,${z.toFixed(1)}px) scale(${s.toFixed(3)})`;
+          c.style.opacity = ((.5 + .5*(cs+1)/2) * ik * (i===best ? 1 : 1 - hotK*.5)).toFixed(3);
+        }
+        if(best!==ORB.front){
+          if(ORB.front>=0) ORB.cards[ORB.front].classList.remove('hot');
+          ORB.front = best; setNow(best);
+        }
+        ORB.cards[best].classList.toggle('hot', hotK > .3);
+        orbTilt.style.transform = `rotateX(${(-PMY*8 - 4).toFixed(2)}deg) rotateY(${(PMX*14).toFixed(2)}deg)`;
+      }
+      /* بياناتك بتمشي وتظهر "السكرول وقف" مكانها */
+      const a = smooth(.04,.28,p);
       copyEl.style.opacity = (1-a).toFixed(3);
-      copyEl.style.transform = `translate3d(0,${(-a*90).toFixed(1)}px,0)`;
+      copyEl.style.transform = `translate3d(0,${(-a*70).toFixed(1)}px,0)`;
       copyEl.style.visibility = a>.99 ? 'hidden' : '';
       hintEl.style.opacity = (1-smooth(0,.08,p)).toFixed(3);
-      nameEl.style.fontStretch = lerp(112,55,a).toFixed(1)+'%';
-      dimEl.style.opacity = (smooth(.5,.85,p)*.92).toFixed(3);
-      const st = smooth(.6,.86,p);
+      nameEl.style.fontStretch = lerp(112,60,a).toFixed(1)+'%';
+      const st = smooth(.5,.72,p);
       stopEl.style.opacity = st.toFixed(3);
-      stopEl.style.transform = `scale(${(.92+.08*st).toFixed(3)})`;
+      stopEl.style.transform = `translate3d(0,${((1-st)*40).toFixed(1)}px,0)`;
     }
     /* الكوفرفلو */
     const sec = $('#show');
@@ -2306,7 +2429,8 @@ applyLang();
 route();
 bindCounters();
 document.documentElement.classList.add(RM ? 'ready' : 'intro');
-if(!RM) setTimeout(()=>document.documentElement.classList.add('ready'), 3200);
+/* بعد الدخول بنشيل أنيميشن البداية عشان الحركة مع السكرول تمسك */
+if(!RM) setTimeout(()=>{ document.documentElement.classList.add('ready'); document.documentElement.classList.remove('intro'); }, 3200);
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>layout());
 addEventListener('load', layout);
 requestAnimationFrame(frame);
