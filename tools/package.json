@@ -1,0 +1,11 @@
+{
+  "name": "karam-portfolio-tools",
+  "private": true,
+  "description": "Copies the Lenis smooth-scroll build into assets/. Run: cd tools && npm install && npm run build",
+  "scripts": {
+    "build": "cp node_modules/lenis/dist/lenis.min.js ../assets/lenis.min.js"
+  },
+  "devDependencies": {
+    "lenis": "1.3.26"
+  }
+}
