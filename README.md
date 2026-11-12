@@ -137,11 +137,11 @@ const PAY_DATA = {
 دوّر على `const PACKS` في `index.html`:
 
 ```js
-{n:1,lvl:1,tier:'bronze',count:6,price:400, ...}
+{n:1,lvl:1,tier:'bronze',count:6,price:110, ...}
 ```
 
 - `count` = عدد التصاميم في الشهر
-- `price` = السعر بالريال السعودي
+- `price` = السعر بالدولار (رقم صحيح من غير كسور)
 
 ونصوص الباقات نفسها في `STR.ar` و `STR.en` تحت المفاتيح `pack1`, `f1_1`, `fit1` … إلخ.
 
