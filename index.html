@@ -132,90 +132,144 @@ html[lang="ar"] .h-l{font-size:clamp(32px,3.6vw,52px);font-weight:600;line-heigh
 .arr svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
 html[dir="rtl"] .arr svg{transform:scaleX(-1)}
 
-/* ══════════════ العرض السينمائي ══════════════
-   الرئيسية شاشة واحدة ثابتة، وكل سكرول بيقلب لمشهد جديد:
-   التصميم نفسه كبير في النص، ولونه مالي الشاشة كلها من وراه،
-   والمشهد اللي بعده بيطلع من تحت يغطي اللي قبله. */
-.reel{position:relative}
-.reel-screen{position:sticky;top:0;height:var(--vh);overflow:hidden;background:var(--bg)}
-.scene{position:absolute;inset:0;overflow:hidden;background:var(--bg);--in:0;--out:0;--ph:min(60vh,62vw)}
-.scene[hidden]{display:block!important;visibility:hidden}
-
-/* لون التصميم مالي الشاشة */
-.sc-amb{position:absolute;inset:-8%;pointer-events:none}
-.sc-amb img{width:100%;height:100%;object-fit:cover;filter:blur(56px) saturate(1.25);opacity:.62;transform:scale(1.15);transition:opacity 1.2s ease}
-.sc-shade{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(15,15,18,.72) 0%,rgba(15,15,18,.1) 22%,rgba(15,15,18,.08) 58%,rgba(15,15,18,.86) 84%,var(--bg) 100%)}
-
-/* التصاميم: واحد كبير في النص واتنين وراه */
-.sc-posters{position:absolute;inset:0;display:block}
-.pst{position:absolute;left:50%;top:42%;height:var(--ph);aspect-ratio:var(--ar,4/5);border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--pc) 30%,var(--bg2));
-  box-shadow:0 60px 120px -30px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.06)}
-.pst img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.1s ease}
-.pst.p-c{z-index:2;transform:translate(-50%,-50%) translateY(calc(var(--in) * 16vh)) scale(calc(1 - var(--out) * .07))}
-.pst.p-l,.pst.p-r{--sp:calc(var(--ph) * var(--arn,.8) * .78);height:calc(var(--ph) * .8);z-index:1;filter:brightness(.62)}
-.pst.p-l{transform:translate(-50%,-50%) translateX(calc(var(--sp) * -1 * (1 - var(--in) * .7))) translateY(calc(var(--in) * 22vh)) scale(calc(1 - var(--out) * .1))}
-.pst.p-r{transform:translate(-50%,-50%) translateX(calc(var(--sp) * (1 - var(--in) * .7))) translateY(calc(var(--in) * 22vh)) scale(calc(1 - var(--out) * .1))}
-a.sc-posters .p-c{transition:box-shadow .4s ease}
-a.sc-posters:hover .p-c{box-shadow:0 60px 120px -30px rgba(0,0,0,.75),0 0 0 2px var(--ink)}
-
-/* الكلام تحت زي تترات الفيلم */
-.sc-credits{position:absolute;inset-inline:0;bottom:clamp(22px,4.5vh,48px);z-index:3;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px clamp(28px,5vw,80px);align-items:end;
-  transform:translateY(calc(var(--in) * 7vh))}
-.sc-title{font-family:var(--f-lat);font-weight:600;font-size:clamp(46px,7vw,112px);line-height:.92;letter-spacing:-.045em;direction:ltr;text-align:start;margin-top:12px}
-html[dir="rtl"] .sc-title{text-align:right}
-.sc-title sup{font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink2);vertical-align:top;margin-inline-start:12px;position:relative;top:.6em;font-variant-numeric:tabular-nums}
-.sc-side .lead{max-width:38ch;color:var(--ink2)}
-.s-hero{--ph:min(48vh,50vw)}
-.s-hero .pst{top:37%;background:transparent}
-.s-hero .sc-title{font-family:var(--f);font-weight:500;font-size:clamp(38px,4.4vw,68px);line-height:1.02;letter-spacing:-.035em;direction:inherit;max-width:14ch;text-wrap:balance}
-html[lang="ar"] .s-hero .sc-title{letter-spacing:-.01em;line-height:1.15}
-.hb-status{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink2)}
+/* ══════════════ الرئيسية الجديدة ══════════════
+   الفكرة: العميل يشوف أكبر كمية شغل من غير ما يدوّر.
+   هيرو فيه صورتك والتصاميم حواليك، وبعده صفّين تصاميم بيتحركوا لوحدهم،
+   وشريط البراندات، والخدمات، وشبكة المشاريع المختارة، والباقات. */
+.hero{position:relative;min-height:var(--vh);display:flex;align-items:center;padding-top:calc(var(--navh) + 36px);padding-bottom:48px;overflow:hidden}
+.hero-glow{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(55% 60% at 76% 42%,rgba(255,90,31,.17),transparent 70%),radial-gradient(40% 45% at 6% 96%,rgba(46,169,224,.09),transparent 70%)}
+.hero-glow::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(70% 70% at 70% 40%,#000,transparent 75%);mask-image:radial-gradient(70% 70% at 70% 40%,#000,transparent 75%);opacity:.55}
+.hero-in{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(36px,5vw,84px);align-items:center;width:100%}
+.hero-h{font-size:clamp(44px,5.4vw,86px);font-weight:500;line-height:1;letter-spacing:-.04em;margin-top:22px;text-wrap:balance}
+.hero-h em{font-style:normal;color:var(--accent)}
+html[lang="ar"] .hero-h{font-size:clamp(40px,4.8vw,74px);font-weight:600;line-height:1.28;letter-spacing:0}
+.hero .lead{margin-top:24px;max-width:50ch}
+.hb-status{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink2);padding:7px 14px 7px 12px;border-radius:999px;border:1px solid var(--line2);background:rgba(243,242,239,.03)}
 .hb-status i{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.5);animation:ping 2.4s ease-out infinite}
 @keyframes ping{to{box-shadow:0 0 0 9px rgba(61,220,132,0)}}
-.hb-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.pb-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:14px;color:var(--ink2)}
-.pb-meta i{width:1px;height:12px;background:var(--line2)}
-.pb-link{display:inline-flex;align-items:center;gap:14px;margin-top:24px;font-size:15px;font-weight:600;width:fit-content}
-.pb-link small{font-size:13.5px;font-weight:400;color:var(--ink3)}
-.pb-link:hover .arr{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateX(3px)}
-html[dir="rtl"] .pb-link:hover .arr{transform:translateX(-3px)}
+.hb-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero .ab-stats{margin-top:46px;padding-top:28px;border-top:1px solid var(--line)}
 
-/* مكان المشهد: شرطة لكل مشهد على الجنب */
-.reel-bar{position:absolute;inset-inline-end:max(var(--gut),env(safe-area-inset-right));top:50%;translate:0 -50%;z-index:4;display:flex;flex-direction:column;gap:8px}
-.reel-bar i{display:block;width:3px;height:22px;border-radius:3px;background:rgba(243,242,239,.22);transition:background-color .4s ease,height .4s var(--ease)}
-.reel-bar i.on{background:var(--accent);height:40px}
-.reel-pause{position:absolute;inset-inline-end:max(var(--gut),env(safe-area-inset-right));top:calc(var(--navh) + 18px);z-index:4;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
-  font-size:12.5px;color:var(--ink2);border:1px solid var(--line2);background:rgba(15,15,18,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:color .25s ease,border-color .25s ease,opacity .4s ease}
-.reel-pause:hover{color:var(--ink);border-color:var(--ink)}
-.reel-pause svg{width:12px;height:12px;fill:currentColor}
-.reel-pause.off{opacity:0;pointer-events:none}
+/* صورتك والتصاميم حواليها */
+.hero-vis{position:relative;width:100%;max-width:560px;aspect-ratio:1/1.1;justify-self:end}
+.hv-photo{position:absolute;inset:7% 13% 2% 13%;z-index:2;border-radius:30px;overflow:hidden;background:var(--bg2);
+  box-shadow:0 60px 120px -40px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.07)}
+.hv-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;transform:scale(1.04)}
+.hv-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(15,15,18,.55))}
+.hv-card{position:absolute;z-index:3;width:36%;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--bg3);
+  box-shadow:0 40px 80px -24px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);animation:bob 7s ease-in-out infinite alternate}
+.hv-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1s ease}
+.hv-card img.off{opacity:0}
+.hv-card.c1{inset-inline-start:-2%;top:16%;rotate:-7deg}
+.hv-card.c2{inset-inline-end:-3%;bottom:7%;rotate:6deg;animation-duration:8.4s;animation-delay:-2s}
+.hv-card.c3{inset-inline-end:2%;top:0;width:25%;z-index:1;rotate:8deg;animation-duration:6.4s;animation-delay:-4s;filter:brightness(.75)}
+@keyframes bob{from{translate:0 0}to{translate:0 -14px}}
+.hv-chip{position:absolute;z-index:4;display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:999px;font-size:13px;line-height:1.35;
+  background:rgba(22,22,27,.84);border:1px solid var(--line2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 20px 40px -14px rgba(0,0,0,.7)}
+.hv-chip b{display:block;font-size:14px;font-weight:600;color:var(--ink)}
+.hv-chip span{color:var(--ink3)}
+.hv-chip .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-family:var(--f-lat);font-weight:700;font-size:14px;flex-shrink:0}
+.hv-chip.k1{inset-inline-start:2%;bottom:3%}
+.hv-chip.k2{inset-inline-end:-4%;top:40%}
+.hv-chip.k2 .ic{background:rgba(61,220,132,.16);color:#3ddc84}
+.hv-chip.k2 .ic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.4}
+.hero-txt > *{animation:rise 1.2s var(--ease) both}
+.hero-txt > *:nth-child(2){animation-delay:.08s}.hero-txt > *:nth-child(3){animation-delay:.16s}
+.hero-txt > *:nth-child(4){animation-delay:.24s}.hero-txt > *:nth-child(5){animation-delay:.32s}
+.hero-vis{animation:rise 1.4s var(--ease) .1s both}
+@keyframes rise{from{opacity:0;translate:0 40px}}
 
-/* أرقام قصيرة في "من أنا" */
+/* أرقام قصيرة */
 .ab-stats{display:flex;flex-wrap:wrap;gap:18px 0;margin-top:34px}
 .ab-stat{padding-inline-end:clamp(18px,3vw,36px)}
 .ab-stat + .ab-stat{padding-inline-start:clamp(18px,3vw,36px);border-inline-start:1px solid var(--line2)}
-.ab-stat b{display:block;font-family:var(--f-lat);font-weight:500;font-size:clamp(28px,2.6vw,36px);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.ab-stat b{display:block;font-family:var(--f-lat);font-weight:500;font-size:clamp(28px,2.6vw,38px);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
 html[lang="ar"] .ab-stat b{font-family:var(--f-ar)}
 .ab-stat b sup{font-size:.5em;color:var(--accent);vertical-align:.75em;margin-inline-start:2px}
 .ab-stat > span{display:block;font-size:13px;color:var(--ink3);margin-top:8px}
 
-/* بعد العرض */
-.reel-end{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding-block:clamp(56px,8vw,110px) 0}
-.reel-end .h-l{max-width:16ch}
+/* جدار التصاميم: صفّين بيتحركوا عكس بعض */
+.wall{padding-top:clamp(20px,3vw,40px)}
+.wall-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px 32px;margin-bottom:clamp(26px,3vw,40px)}
+.wall-head p{color:var(--ink3);font-size:14.5px;margin-top:10px}
+.wall-acts{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mo-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;font-size:13px;color:var(--ink2);border:1px solid var(--line2);transition:color .25s ease,border-color .25s ease}
+.mo-btn:hover{color:var(--ink);border-color:var(--ink)}
+.mo-btn svg{width:12px;height:12px;fill:currentColor}
+.mq{overflow:hidden;direction:ltr;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.mq + .mq{margin-top:16px}
+.mq-track{display:flex;gap:16px;width:max-content;animation:mq var(--dur,90s) linear infinite}
+.mq.rev .mq-track{animation-direction:reverse}
+.mq:hover .mq-track,.mq:focus-within .mq-track,body.still .mq-track,body.still .tk-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(calc(-50% - 8px))}}
+.mq-item{position:relative;flex:none;width:clamp(160px,16vw,240px);aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:color-mix(in srgb,var(--pc) 24%,var(--bg2))}
+.mq-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.mq-item span{position:absolute;inset-inline:0;bottom:0;padding:34px 14px 12px;font-family:var(--f-lat);font-weight:600;font-size:14px;letter-spacing:-.01em;color:#fff;
+  background:linear-gradient(transparent,rgba(0,0,0,.82));opacity:0;translate:0 8px;transition:opacity .35s ease,translate .35s var(--ease)}
+.mq-item:hover img,.mq-item:focus-visible img{transform:scale(1.06)}
+.mq-item:hover span,.mq-item:focus-visible span{opacity:1;translate:0 0}
 
-/* دخول الصفحة: التصميم بيطلع والكلام وراه */
-.s-hero .sc-credits > *{animation:rise 1.5s var(--ease) both}
-/* كروت الافتتاحية: بتطفو بهدوء، وكل ٥ ثواني بتبدّل أماكنها */
-.s-hero .pst{animation:rise 1.5s var(--ease) both,bob 7s ease-in-out 1.5s infinite alternate}
-.s-hero .pst:nth-child(1){animation-duration:1.5s,8.2s;animation-delay:.25s,1.9s}
-.s-hero .pst:nth-child(3){animation-duration:1.5s,6.4s;animation-delay:.25s,2.3s}
-@keyframes bob{from{translate:0 0}to{translate:0 -14px}}
-.s-hero.swapping .pst{transition:transform 1.2s var(--ease),height 1.2s var(--ease),filter 1.2s ease,opacity .55s ease,scale .55s ease}
-.s-hero .pst.gone{opacity:0;scale:.9}
-.s-hero .sc-credits > *:nth-child(2){animation-delay:.12s}
-.s-hero .sc-credits > *:nth-child(3){animation-delay:.24s}
-@keyframes rise{from{opacity:0;translate:0 50px}}
+/* شريط البراندات */
+.brands{padding-top:clamp(70px,9vw,120px)}
+.brands-l{text-align:center;font-size:13.5px;color:var(--ink3);margin-bottom:22px;padding-inline:20px}
+.tk{direction:ltr;overflow:hidden;border-block:1px solid var(--line);padding-block:clamp(18px,2.4vw,28px);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.tk-track{display:flex;align-items:center;width:max-content;animation:tk 70s linear infinite}
+@keyframes tk{to{transform:translateX(-50%)}}
+.tk-track a{font-family:var(--f-lat);font-weight:600;font-size:clamp(28px,3.6vw,52px);line-height:1.1;letter-spacing:-.035em;white-space:nowrap;padding-inline:clamp(18px,2vw,30px);
+  color:transparent;-webkit-text-stroke:1px rgba(243,242,239,.38);transition:color .3s ease,-webkit-text-stroke-color .3s ease}
+.tk-track a:hover{color:var(--ink);-webkit-text-stroke-color:var(--ink)}
+.tk-track i{color:var(--accent);font-style:normal;font-size:clamp(16px,1.6vw,22px)}
+
+/* الخدمات */
+.srv{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.srv-c{display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:var(--bg2);border:1px solid var(--line);transition:border-color .3s ease,transform .45s var(--ease)}
+.srv-c:hover{border-color:var(--line2);transform:translateY(-4px)}
+.srv-img{aspect-ratio:4/4.4;overflow:hidden;background:var(--bg3)}
+.srv-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.srv-c:hover .srv-img img{transform:scale(1.05)}
+.srv-b{padding:18px 18px 22px}
+.srv-n{font-family:var(--f-lat);font-size:13px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.srv-t{font-size:18px;font-weight:500;letter-spacing:-.01em;margin:6px 0 6px;line-height:1.3}
+.srv-d{font-size:14px;color:var(--ink2);line-height:1.65;text-wrap:pretty}
+
+/* المشاريع المختارة: شبكة بتوري تلات تصاميم من كل مشروع */
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:clamp(220px,22vw,330px);gap:14px}
+.bn{position:relative;display:block;border-radius:22px;overflow:hidden;isolation:isolate;background:color-mix(in srgb,var(--pc) 22%,var(--bg2))}
+.bn:nth-child(1){grid-column:span 7;grid-row:span 2}
+.bn:nth-child(2),.bn:nth-child(3){grid-column:span 5}
+.bn:nth-child(n+4){grid-column:span 4}
+.clg{position:absolute;inset:0;display:grid;gap:3px;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+.bn:nth-child(1) .clg{grid-template-columns:1.35fr 1fr;grid-template-rows:1fr 1fr;grid-auto-flow:row}
+.bn:nth-child(1) .clg img:first-child{grid-row:span 2}
+.clg img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease),filter .5s ease;filter:brightness(.9)}
+.bn:hover .clg img{transform:scale(1.04);filter:brightness(1)}
+.bn-tag{position:absolute;top:16px;inset-inline-start:16px;z-index:2;font-size:12px;padding:5px 12px;border-radius:999px;color:var(--ink);
+  background:rgba(15,15,18,.72);border:1px solid var(--line2);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.bn-cap{position:absolute;inset-inline:0;bottom:0;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:14px;padding:70px 22px 20px;
+  background:linear-gradient(transparent,rgba(10,10,12,.92))}
+.bn-name{font-family:var(--f-lat);font-weight:600;font-size:clamp(22px,2vw,32px);line-height:1;letter-spacing:-.03em;direction:ltr;text-align:start}
+html[dir="rtl"] .bn-name{text-align:right}
+.bn:nth-child(1) .bn-name{font-size:clamp(30px,3.4vw,56px)}
+.bn-cat{font-size:13.5px;color:var(--ink2);margin-top:6px}
+.bn .arr{flex-shrink:0;background:rgba(15,15,18,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.bn:hover .arr{background:var(--accent);border-color:var(--accent);color:#fff}
+.sel-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;margin-top:clamp(34px,4vw,56px)}
+.sel-foot p{color:var(--ink2);font-size:16px}
+
+/* الباقات في الرئيسية */
+.hp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+.pack.mini{padding:28px 26px}
+.pack.mini .pack-price{margin-bottom:20px}
+.pack.mini .pack-order{margin-top:auto}
+
+/* صورة صغيرة في الـCTA */
+.cta-av{position:relative;width:96px;height:96px;margin:0 auto 30px}
+.cta-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 20%;box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent)}
+.cta-av i{position:absolute;bottom:4px;inset-inline-end:4px;width:16px;height:16px;border-radius:50%;background:#3ddc84;border:3px solid var(--bg)}
 
 /* ============ الأقسام العادية ============ */
 .sec{padding-block:clamp(90px,12vw,160px);scroll-margin-top:var(--navh)}
@@ -480,6 +534,8 @@ html.lenis,html.lenis body{height:auto}
 /* ============ الشاشات الأصغر ============ */
 @media(max-width:1100px){
   .about{grid-template-columns:1fr}
+  .srv{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hp-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .ab-photo{position:relative;top:0;max-width:420px}
   .proc{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:44px}
   .pack-grid{grid-template-columns:1fr;max-width:540px;margin-inline:auto}
@@ -495,25 +551,27 @@ html.lenis,html.lenis body{height:auto}
   .nav-wa{padding:10px}
   .mnav{display:flex}
   .mscrim{display:block}
-  /* الموبايل: التصميم فوق والكلام تحته، والجانبيين بيختفوا */
-  .scene{--ph:min(50svh,108vw)}
-  .s-hero{--ph:min(40svh,90vw)}
-  .scene .pst{top:calc(var(--navh) + 14px + var(--ph) / 2)}
-  .pst.p-l,.pst.p-r{visibility:hidden}
-  .s-hero .pst.p-c{animation:cardIn .9s var(--ease) both,bob 7s ease-in-out .9s infinite alternate}
-  @keyframes cardIn{from{opacity:0;scale:.94}}
-  .sc-credits{grid-template-columns:1fr;bottom:auto;top:calc(var(--navh) + var(--ph) + 34px);gap:0}
-  .sc-title{font-size:clamp(40px,12vw,64px)}
-  .s-hero .sc-title{font-size:clamp(32px,8.6vw,44px)}
-  .s-hero .sc-side .lead{display:none}
-  .s-hero .hb-actions{margin-top:20px}
-  .s-hero .hb-actions .btn{flex:1 1 auto}
-  .sc-side .lead{font-size:16px;margin-top:14px}
-  .pb-link{margin-top:16px}
-  .sc-shade{background:linear-gradient(180deg,rgba(15,15,18,.7) 0%,rgba(15,15,18,.1) 14%,rgba(15,15,18,.2) 40%,rgba(15,15,18,.92) 62%,var(--bg) 100%)}
-  .reel-bar{display:none}
-  .reel-pause{width:38px;height:38px;padding:0;justify-content:center;top:calc(var(--navh) + 10px)}
-  .reel-pause span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  /* الموبايل: الكلام فوق والصورة تحته */
+  .hero{min-height:0;padding-top:calc(var(--navh) + 28px)}
+  .hero-in{grid-template-columns:1fr;gap:44px}
+  .hero-vis{justify-self:center;max-width:430px}
+  .hb-actions .btn{flex:1 1 auto}
+  .hv-chip.k2{inset-inline-end:0}
+  .hv-chip{font-size:12px;padding:8px 14px 8px 8px}
+  .hv-chip .ic{width:30px;height:30px}
+  .srv{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scrollbar-width:none;gap:12px}
+  .srv::-webkit-scrollbar{display:none}
+  .srv-c{flex:0 0 68vw;scroll-snap-align:start}
+  .bento{grid-template-columns:1fr;grid-auto-rows:auto}
+  .bn,.bn:nth-child(n){grid-column:auto;grid-row:auto;aspect-ratio:1/1}
+  .bn:nth-child(1){aspect-ratio:4/4.4}
+  .hp-grid{grid-template-columns:1fr}
+  .mq-item{width:150px}
+  .hero .ab-stats{flex-wrap:nowrap}
+  .hero .ab-stat{padding-inline-end:14px}
+  .hero .ab-stat + .ab-stat{padding-inline-start:14px}
+  .hero .ab-stat b{font-size:26px}
+  .hero .ab-stat > span{font-size:12px}
   .ab-meta{grid-template-columns:1fr;gap:18px}
   .proc{grid-template-columns:1fr}
   .vals{grid-template-columns:1fr}
@@ -531,9 +589,12 @@ html.lenis,html.lenis body{height:auto}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .rv,.intro{opacity:1;transform:none}
-  /* تبديل كروت الافتتاحية طلب صريح من كرم وعليه زرار إيقاف، فبيفضل شغال بس من غير الطفو */
-  .s-hero.swapping .pst{transition-duration:1.2s,1.2s,1.2s,.55s,.55s!important}
-  @media(max-width:860px){.s-hero .pst.p-c{animation:cardIn .9s var(--ease) both!important}}
+  /* الصفوف بتقف، وتتسحب باليد بدل ما تتحرك لوحدها */
+  .mq,.tk{overflow-x:auto;scrollbar-width:none}
+  .mq-track,.tk-track{animation:none!important}
+  .mo-btn{display:none}
+  /* تبديل كروت الهيرو طلب صريح من كرم، فبيفضل شغال بالتلاشي الهادي */
+  .hv-card img{transition-duration:1s!important}
 }
 </style>
 </head>
@@ -547,18 +608,73 @@ html.lenis,html.lenis body{height:auto}
 <!-- ═══════ الرئيسية ═══════ -->
 <main class="page on" id="pg-home" tabindex="-1">
 
-  <!-- العرض: شاشة ثابتة، وكل سكرول مشهد جديد (بيتبني من الجافاسكريبت) -->
-  <section class="reel" id="reel">
-    <div class="reel-screen">
-      <div id="scenes"></div>
-      <div class="reel-bar" id="reelBar" aria-hidden="true"></div>
-      <button class="reel-pause" id="reelPause" type="button" aria-pressed="false"></button>
+  <!-- الهيرو: صورتك والتصاميم حواليها -->
+  <section class="hero" id="main" tabindex="-1">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <div class="hero-txt">
+        <p class="hb-status"><i aria-hidden="true"></i><span data-i18n="hero_label"></span></p>
+        <h1 class="hero-h" data-i18n="hb_title"></h1>
+        <p class="lead" data-i18n="hb_sub"></p>
+        <div class="hb-actions">
+          <a class="btn btn-solid" href="#/work" id="heroWork"><span data-i18n="cta_work"></span></a>
+          <a class="btn btn-line" id="heroWa" target="_blank" rel="noopener noreferrer"><span data-i18n="cta_wa"></span></a>
+        </div>
+        <div class="ab-stats">
+          <div class="ab-stat"><b><span class="cnt" data-to="5">0</span><sup>+</sup></b><span data-i18n="st1"></span></div>
+          <div class="ab-stat"><b><span class="cnt" data-to="45">0</span><sup>+</sup></b><span data-i18n="st2"></span></div>
+          <div class="ab-stat"><b><span class="cnt" data-to="850">0</span><sup>+</sup></b><span data-i18n="st3"></span></div>
+        </div>
+      </div>
+      <div class="hero-vis" id="heroVis"></div>
     </div>
   </section>
-  <section class="wrap reel-end" id="reelEnd"></section>
+
+  <!-- جدار التصاميم -->
+  <section class="wall" id="wall">
+    <div class="wrap wall-head">
+      <div>
+        <h2 class="h-l rv" data-i18n="wall_t"></h2>
+        <p class="rv d1" id="wallSub"></p>
+      </div>
+      <div class="wall-acts rv d1">
+        <button class="mo-btn" id="moBtn" type="button" aria-pressed="false"></button>
+        <a class="btn btn-line" href="#/work" id="wallAll"></a>
+      </div>
+    </div>
+    <div id="wallRows"></div>
+  </section>
+
+  <!-- البراندات -->
+  <section class="brands" aria-labelledby="brandsL">
+    <p class="brands-l" id="brandsL" data-i18n="brands_t"></p>
+    <div class="tk"><div class="tk-track" id="tkTrack"></div></div>
+  </section>
+
+  <!-- الخدمات -->
+  <section class="sec wrap" id="services">
+    <div class="sec-head">
+      <h2 class="h-l rv" data-i18n="srv_t"></h2>
+      <p class="lead rv d1" data-i18n="srv_d"></p>
+    </div>
+    <div class="srv" id="srvGrid"></div>
+  </section>
+
+  <!-- المشاريع المختارة -->
+  <section class="sec wrap" id="selected" style="padding-top:0">
+    <div class="sec-head">
+      <h2 class="h-l rv" data-i18n="sel_t"></h2>
+      <p class="lead rv d1" data-i18n="sel_d"></p>
+    </div>
+    <div class="bento" id="bento"></div>
+    <div class="sel-foot rv">
+      <p data-i18n="all_t"></p>
+      <a class="btn btn-solid" href="#/work" id="selAll"></a>
+    </div>
+  </section>
 
   <!-- من أنا -->
-  <section class="sec wrap" id="about">
+  <section class="sec wrap" id="about" style="padding-top:clamp(40px,6vw,80px)">
     <div class="about">
       <figure class="ab-photo rv">
         <img src="karam.jpg" width="1200" height="1200" loading="lazy" decoding="async" alt="Karam Haraz">
@@ -568,11 +684,6 @@ html.lenis,html.lenis body{height:auto}
         <h2 class="h-l rv" data-i18n="ab_t"></h2>
         <p class="ab-lede rv d1" data-i18n="ab_lede"></p>
         <p class="ab-body rv d2" data-i18n="ab_body"></p>
-        <div class="ab-stats rv">
-          <div class="ab-stat"><b><span class="cnt" data-to="5">0</span><sup>+</sup></b><span data-i18n="st1"></span></div>
-          <div class="ab-stat"><b><span class="cnt" data-to="45">0</span><sup>+</sup></b><span data-i18n="st2"></span></div>
-          <div class="ab-stat"><b><span class="cnt" data-to="850">0</span><sup>+</sup></b><span data-i18n="st3"></span></div>
-        </div>
         <div class="ab-meta rv" id="aboutMeta"></div>
         <div class="socials rv" id="heroSoc"></div>
         <div class="tl-h" data-i18n="ab_tl_n"></div>
@@ -599,7 +710,17 @@ html.lenis,html.lenis body{height:auto}
     <div class="vals" id="featCards"></div>
   </section>
 
+  <!-- الباقات باختصار -->
+  <section class="sec wrap" id="homePacks" style="padding-top:0">
+    <div class="sec-head">
+      <h2 class="h-l rv" data-i18n="sec_packs_t"></h2>
+      <div class="rv d1"><p class="lead" data-i18n="sec_packs_d"></p><a class="btn btn-line" href="#/packs" id="hpAll" style="margin-top:22px"></a></div>
+    </div>
+    <div class="hp-grid" id="hpGrid"></div>
+  </section>
+
   <section class="cta wrap">
+    <div class="cta-av rv"><img src="karam.jpg" width="1200" height="1200" loading="lazy" decoding="async" alt=""><i aria-hidden="true"></i></div>
     <h2 class="h-xl rv" data-i18n="cta_t"></h2>
     <p class="lead rv d1" data-i18n="cta_p"></p>
     <a class="btn btn-solid rv d2" id="ctaWa" target="_blank" rel="noopener noreferrer"><span data-i18n="cta_wa"></span></a>
@@ -1175,7 +1296,19 @@ function t(k){ const v = STR[LANG] && STR[LANG][k]; return (v===undefined ? (STR
 Object.assign(STR.ar, {
   nav_wa:'كلّمني',
   hero_label:'متاح لمشاريع جديدة',
-  hb_title:'بصمّم البوست اللي صباعك بيقف عنده.',
+  hb_title:'بصمّم البوست اللي صباعك <em>بيقف</em> عنده.',
+  hv_role:'مصمم سوشيال ميديا وإعلانات', hv_designs:'تصميم', hv_brands:'لـ{n} براند في المعرض',
+  wall_t:'آخر شغلي، كله قدامك', wall_d:'{d} تصميم من {n} مشروع. اضغط على أي تصميم وافتح المشروع كامل.', wall_btn:'كل الأعمال',
+  mo_pause:'وقّف الحركة', mo_play:'شغّل الحركة',
+  brands_t:'براندات صمّمت لها في السعودية والخليج ومصر وأوروبا',
+  srv_t:'بصمّم إيه', srv_d:'خمس حاجات بعملها كل يوم، وجنب كل واحدة تصميم حقيقي منها.',
+  srv1t:'تصاميم سوشيال ميديا', srv1d:'بوستات وكاروسيل وستوريز بنظام شهري، تخلّي الحساب متسق ويوقّف السكرول.',
+  srv2t:'إعلانات', srv2d:'تصاميم إعلانات ممولة مبنية على عرض واحد وخطوة واحدة واضحة للعميل.',
+  srv3t:'كي فيجوال', srv3d:'الصورة الأساسية لحملة أو منتج جديد أو موسم زي رمضان والأعياد.',
+  srv4t:'مانيبوليشن', srv4d:'دمج صور بيحوّل الفكرة لصورة واحدة مكانتش موجودة قبل كده.',
+  srv5t:'الـAI في التصميم', srv5d:'أدوات زي Kling وRunway بستخدمها عشان أسرّع الشغل من غير ما الجودة تقل.',
+  sel_d:'تلات تصاميم من كل مشروع. افتح أي واحد وشوف المجموعة كاملة والقصة وراها.',
+  hp_more:'التفاصيل', hp_btn:'قارن الباقات',
   hb_sub:'كرم حراز، مصمم سوشيال ميديا وإعلانات من القاهرة. خمس سنين بعمل بوستات وحملات وكي فيجوال لبراندات في السعودية والخليج ومصر وأوروبا.',
   cta_work:'شوف أعمالي', cta_wa:'كلّمني واتساب',
   st1:'سنين خبرة', st2:'براند اشتغلت معاه', st3:'تصميم اتسلّم',
@@ -1212,7 +1345,19 @@ Object.assign(STR.ar, {
 Object.assign(STR.en, {
   nav_wa:'Let’s Talk',
   hero_label:'Available for New Projects',
-  hb_title:'I design the post your thumb stops at.',
+  hb_title:'I design the post your thumb <em>stops</em> at.',
+  hv_role:'Social Media &amp; Ad Designer', hv_designs:'Designs', hv_brands:'For {n} brands in this portfolio',
+  wall_t:'My Latest Work, All in View', wall_d:'{d} designs across {n} projects. Tap any design to open the full project.', wall_btn:'All Work',
+  mo_pause:'Pause Motion', mo_play:'Play Motion',
+  brands_t:'Brands I’ve designed for in Saudi Arabia, the Gulf, Egypt and Europe',
+  srv_t:'What I Design', srv_d:'Five things I do every day, each shown with a real design from a client project.',
+  srv1t:'Social Media Design', srv1d:'Monthly posts, carousels and stories that keep a feed consistent and stop the scroll.',
+  srv2t:'Advertising', srv2d:'Paid-ad creatives built around one offer and one clear next step.',
+  srv3t:'Key Visuals', srv3d:'The lead image for a campaign, a product launch or a season like Ramadan.',
+  srv4t:'Photo Manipulation', srv4d:'Composites that turn an idea into a single image that didn’t exist before.',
+  srv5t:'AI in Design', srv5d:'Tools like Kling and Runway, used to move faster without losing the craft.',
+  sel_d:'Three designs from each project. Open any one to see the full set and the story behind it.',
+  hp_more:'Details', hp_btn:'Compare Packages',
   hb_sub:'Karam Haraz, social media and advertising designer in Cairo. Five years of posts, campaigns and key visuals for brands in Saudi Arabia, the Gulf, Egypt and Europe.',
   cta_work:'See Selected Work', cta_wa:'Message Me on WhatsApp',
   st1:'Years of Experience', st2:'Brands Worked With', st3:'Designs Delivered',
@@ -1594,147 +1739,107 @@ function renderChrome(){
   });
 }
 
-/* ---------- العرض السينمائي ---------- */
+/* ---------- الرئيسية ---------- */
 const isHome = ()=>$('#pg-home').classList.contains('on');
 const SEL = PROJECTS.slice(0,6);
-/* تصاميم الافتتاحية: أول تصميم من كل مشروع، بتتبدّل لوحدها */
-const HERO_SET = PROJECTS.slice(0,9);
-const REEL = {scenes:[], cur:-1, hero:0, paused:false, timer:null};
+const HOME = {paused:false, hv:0, timer:null};
 const src = (p,n,full) => `${full?'projects':'thumb'}/${p.id}/${n}.jpg`;
-const shot = (p,n,cls,eager) =>
-  `<${IMG} class="${cls||''}" src="${src(p,n,true)}" alt="" width="${p.w}" height="${p.h}" decoding="async"${eager?' fetchpriority="high"':' loading="lazy"'} data-fb="${src(p,1,true)}">`;
-const pstStyle = p => `--ar:${p.w}/${p.h};--arn:${(p.w/p.h).toFixed(3)}`;
-
-function buildReel(){
-  const [a,b,c] = [HERO_SET[0],HERO_SET[1],HERO_SET[2]];
-  const hero = `<div class="scene s-hero" data-i="0" style="--pc:${b.color}">
-      <div class="sc-amb" aria-hidden="true"><${IMG} src="${src(b,1)}" alt="" data-k="amb"></div>
-      <div class="sc-posters" aria-hidden="true">
-        <div class="pst p-l" style="${pstStyle(a)}">${shot(a,1,'on',true)}</div>
-        <div class="pst p-c" style="${pstStyle(b)}">${shot(b,1,'on',true)}</div>
-        <div class="pst p-r" style="${pstStyle(c)}">${shot(c,1,'on',true)}</div>
-      </div>
-      <div class="sc-shade" aria-hidden="true"></div>
-      <div class="sc-credits wrap" id="main" tabindex="-1">
-        <div>
-          <p class="hb-status"><i aria-hidden="true"></i><span>${t('hero_label')}</span></p>
-          <h1 class="sc-title">${t('hb_title')}</h1>
-        </div>
-        <div class="sc-side">
-          <p class="lead">${t('hb_sub')}</p>
-          <div class="hb-actions">
-            <a class="btn btn-solid" href="#/work" id="heroWork">${t('cta_work')}</a>
-            <a class="btn btn-line" href="${WA}" target="_blank" rel="noopener noreferrer">${t('cta_wa')}</a>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  const scenes = SEL.map((p,i)=>{
-    const [ty,sec] = splitCat(p);
-    const l = Math.min(p.cnt,2), r = Math.min(p.cnt,3);
-    return `<article class="scene" data-i="${i+1}" style="--pc:${p.color}" aria-label="${esc(p.n)}">
-      <div class="sc-amb" aria-hidden="true"><${IMG} src="${src(p,1)}" alt="" loading="lazy"></div>
-      <a class="sc-posters" href="#/project/${p.id}" tabindex="-1" aria-hidden="true">
-        <div class="pst p-l" style="${pstStyle(p)}">${shot(p,l)}</div>
-        <div class="pst p-c" style="${pstStyle(p)}">${shot(p,1)}</div>
-        <div class="pst p-r" style="${pstStyle(p)}">${shot(p,r)}</div>
-      </a>
-      <div class="sc-shade" aria-hidden="true"></div>
-      <div class="sc-credits wrap">
-        <div>
-          <p class="pb-meta"><span>${esc(ty)}</span>${sec?`<i aria-hidden="true"></i><span>${esc(sec)}</span>`:''}</p>
-          <h2 class="sc-title" translate="no">${p.n}<sup>${num(p.yr)}</sup></h2>
-        </div>
-        <div class="sc-side">
-          <p class="lead">${esc(clean(LANG==='ar'?p.dAr:p.dEn))}</p>
-          <a class="pb-link" href="#/project/${p.id}"><span>${t('pb_open')}</span><small>${fmt('pb_n',{n:p.cnt})}</small><span class="arr" aria-hidden="true">${ARROW}</span></a>
-        </div>
-      </div>
-    </article>`;
-  }).join('');
-  $('#scenes').innerHTML = hero + scenes;
-  REEL.scenes = $$('#scenes .scene');
-  REEL.cur = -1;
-  $('#reel').style.height = `calc(var(--vh) * ${REEL.scenes.length})`;
-  $('#reel').setAttribute('aria-label', t('sel_t'));
-  $('#reelBar').innerHTML = REEL.scenes.map(()=>'<i></i>').join('');
-  $('#reelEnd').innerHTML = `<h2 class="h-l rv">${t('all_t')}</h2><a class="btn btn-line rv d1" href="#/work">${fmt('all_btn',{n:PROJECTS.length})}</a>`;
-  $('#heroWork').addEventListener('click',e=>{ e.preventDefault(); goTo($('#reel').offsetTop + innerHeight * 1.02); });
-  REEL.hero = 0;
-  pauseLabel();
-}
-
-/* الافتتاحية: كل ٥ ثواني الكروت بتلف: اللي على اليمين بييجي النص، واللي في النص بيروح الشمال،
-   واللي على الشمال بيختفي ويرجع على اليمين بتصميم جديد */
-function heroStep(){
-  if(REEL.paused || REEL.cur !== 0 || !isHome() || document.hidden) return;
-  const hero = $('.s-hero'); if(!hero || hero.classList.contains('swapping')) return;
-  const L = $('.p-l',hero), C = $('.p-c',hero), R = $('.p-r',hero);
-  REEL.hero = (REEL.hero + 1) % HERO_SET.length;
-  const next = HERO_SET[(REEL.hero + 2) % HERO_SET.length];
-  const mid  = HERO_SET[(REEL.hero + 1) % HERO_SET.length];
-  const im = new Image(); im.decoding = 'async'; im.alt = ''; im.src = src(next,1,true);
-  const go = ()=>{
-    hero.classList.add('swapping');
-    L.classList.add('gone');
-    C.classList.replace('p-c','p-l');
-    R.classList.replace('p-r','p-c');
-    const amb = $('.sc-amb img',hero); amb.style.opacity = 0;
-    setTimeout(()=>{ amb.src = src(mid,1); amb.onload = ()=>{ amb.style.opacity = ''; }; }, 450);
-    setTimeout(()=>{
-      L.style.transition = 'none';
-      L.classList.replace('p-l','p-r');
-      L.style.cssText = pstStyle(next) + ';transition:none';
-      L.replaceChildren(im);
-      void L.offsetWidth;
-      L.style.transition = '';
-      L.classList.remove('gone');
-    }, 620);
-    setTimeout(()=>hero.classList.remove('swapping'), 1900);
-  };
-  /* الصور لازم تكون جاهزة قبل الحركة، غير كده الكارت بيظهر فاضي لحظة */
-  Promise.all([im.decode(), $('img',R).decode()].map(x=>x.catch(()=>{}))).then(go);
-}
-REEL.timer = setInterval(heroStep, 5000);
-
+const thumb = (p,n,eager,extra) =>
+  `<${IMG} src="${src(p,n)}" alt="${extra===undefined?'':esc(extra)}" width="${p.w}" height="${p.h}" decoding="async"${eager?'':' loading="lazy"'} data-fb="${src(p,n,true)}">`;
+/* الخدمات: كل خدمة جنبها تصميم حقيقي منها */
+const SERVICES = [['sabiq',1,'srv1'],['baraa',2,'srv2'],['maalem',1,'srv3'],['rafeeq',3,'srv4'],['verno',1,'srv5']];
+const CHECK_I = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const PAUSE_I = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
 const PLAY_I  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>';
-function pauseLabel(){
-  const b = $('#reelPause');
-  b.innerHTML = (REEL.paused ? PLAY_I : PAUSE_I) + `<span>${t(REEL.paused ? 'hero_play' : 'hero_pause')}</span>`;
-  b.setAttribute('aria-pressed', String(REEL.paused));
-}
-$('#reelPause').addEventListener('click',()=>{ REEL.paused = !REEL.paused; pauseLabel(); });
+const TOTAL_DESIGNS = PROJECTS.reduce((s,p)=>s+p.cnt,0);
 
-/* السكرول بيحرّك المشاهد: كل مشهد بيقف شوية، وبعدين اللي بعده بيطلع من تحت */
-const smooth = (a,b,x)=>{ const k = clamp((x-a)/(b-a)); return k*k*(3-2*k); };
-function reelFrame(){
-  const n = REEL.scenes.length; if(!n) return;
-  const r = $('#reel').getBoundingClientRect(), vh = innerHeight;
-  if(r.bottom < 0 || r.top > vh) return;
-  const p = clamp(-r.top / vh, 0, n - 1);
-  const i = Math.min(n - 1, Math.floor(p));
-  const k = RM ? (p - i > .5 ? 1 : 0) : smooth(.28, .94, p - i);
-  REEL.scenes.forEach((s,j)=>{
-    const show = j === i || (j === i + 1 && k > 0);
-    s.hidden = !show;
-    if(!show) return;
-    s.style.zIndex = j;
-    if(j === i){
-      s.style.clipPath = ''; s.style.setProperty('--in', 0); s.style.setProperty('--out', (i < n - 1 ? k : 0).toFixed(4));
-    } else {
-      s.style.clipPath = `inset(${((1 - k) * 100).toFixed(3)}% 0 0 0)`;
-      s.style.setProperty('--in', (1 - k).toFixed(4)); s.style.setProperty('--out', 0);
-    }
-  });
-  const cur = k > .5 ? i + 1 : i;
-  if(cur !== REEL.cur){
-    REEL.cur = cur;
-    REEL.scenes.forEach((s,j)=>{ s.classList.toggle('on', j === cur); s.inert = j !== cur; });
-    $$('#reelBar i').forEach((b,j)=>b.classList.toggle('on', j === cur));
-    $('#reelPause').classList.toggle('off', cur !== 0);
-  }
+function buildHome(){
+  const P = id => PROJECTS.find(p=>p.id===id);
+  /* الهيرو: صورتك في النص وتلات تصاميم حواليها بتتبدّل */
+  const h = [PROJECTS[0],PROJECTS[1],PROJECTS[2]];
+  $('#heroVis').innerHTML = `
+    <div class="hv-card c3" aria-hidden="true">${thumb(h[2],1,true)}</div>
+    <figure class="hv-photo"><${IMG} src="karam.jpg" width="1200" height="1200" fetchpriority="high" decoding="async" alt="${esc(t('logo'))}"></figure>
+    <div class="hv-card c1" aria-hidden="true">${thumb(h[0],1,true)}</div>
+    <div class="hv-card c2" aria-hidden="true">${thumb(h[1],1,true)}</div>
+    <div class="hv-chip k1"><span class="ic" aria-hidden="true">K</span><span><b translate="no">${t('logo')}</b>${t('hv_role')}</span></div>
+    <div class="hv-chip k2"><span class="ic" aria-hidden="true">${CHECK_I}</span><span><b>${num(TOTAL_DESIGNS)} ${t('hv_designs')}</b>${fmt('hv_brands',{n:PROJECTS.length})}</span></div>`;
+  HOME.hv = 2;
+  $('#heroWa').href = WA;
+
+  /* جدار التصاميم: التلات تصاميم الأولى من كل مشروع، متقسّمين على صفّين */
+  const all = [];
+  [1,2,3].forEach(n=>PROJECTS.forEach(p=>{ if(p.cnt>=n) all.push([p,n]); }));
+  const rows = [all.filter((_,i)=>i%2===0), all.filter((_,i)=>i%2===1)];
+  $('#wallRows').innerHTML = rows.map((row,r)=>{
+    const items = copy => row.map(([p,n],i)=>`<a class="mq-item" href="#/project/${p.id}" style="--pc:${p.color}"${copy?' tabindex="-1" aria-hidden="true"':''}>
+        ${thumb(p,n,!copy && i<8,copy?'':`${p.n}, ${clean(LANG==='ar'?p.cAr:p.cEn)}`)}<span translate="no">${p.n}</span></a>`).join('');
+    return `<div class="mq${r?' rev':''}" style="--dur:${r?110:95}s"><div class="mq-track">${items(false)}${items(true)}</div></div>`;
+  }).join('');
+  $('#wallSub').textContent = fmt('wall_d',{d:TOTAL_DESIGNS,n:PROJECTS.length});
+  $('#wallAll').textContent = t('wall_btn');
+
+  /* شريط البراندات */
+  const names = PROJECTS.map(p=>`<a href="#/project/${p.id}" translate="no">${p.n}</a><i aria-hidden="true">✦</i>`).join('');
+  $('#tkTrack').innerHTML = names + names.replace(/<a /g,'<a tabindex="-1" aria-hidden="true" ');
+
+  /* الخدمات */
+  $('#srvGrid').innerHTML = SERVICES.map(([id,n,k],i)=>{ const p = P(id); return `
+    <a class="srv-c rv d${i%4+1}" href="#/project/${p.id}">
+      <div class="srv-img">${thumb(p,n,false,`${t(k+'t')}, ${p.n}`)}</div>
+      <div class="srv-b"><div class="srv-n">${num('0'+(i+1))}</div><h3 class="srv-t">${t(k+'t')}</h3><p class="srv-d">${t(k+'d')}</p></div>
+    </a>`; }).join('');
+
+  /* المشاريع المختارة */
+  $('#bento').innerHTML = SEL.map((p,i)=>{
+    const [ty,sec] = splitCat(p);
+    const imgs = (i===0||(i>0&&i<3)) ? [1,2,3] : [1,2];
+    return `<a class="bn rv${i%3?' d'+(i%3):''}" href="#/project/${p.id}" style="--pc:${p.color}">
+      <div class="clg" aria-hidden="true">${imgs.filter(n=>n<=p.cnt).map(n=>thumb(p,n)).join('')}</div>
+      <span class="bn-tag">${fmt('pb_n',{n:p.cnt})}</span>
+      <div class="bn-cap"><div><div class="bn-name" translate="no">${p.n}</div><div class="bn-cat">${esc(sec||ty)}</div></div><span class="arr" aria-hidden="true">${ARROW}</span></div>
+    </a>`;
+  }).join('');
+  $('#selAll').textContent = fmt('all_btn',{n:PROJECTS.length});
+
+  /* الباقات باختصار */
+  $('#hpGrid').innerHTML = PACKS.map((p,i)=>`
+    <div class="pack mini tier-${p.tier} ${p.tier==='gold'?'gold':''} rv d${i+1}">
+      ${p.flag?`<span class="pack-flag ${p.tier==='gold'?'goldf':''}">${t(p.flag)}</span>`:''}
+      <div class="pack-name">${t('pack'+p.n)}</div>
+      <div class="pack-count">${num(p.count)}<small>${t('posts_m')}</small></div>
+      <div class="pack-price">${num(p.price)} <span>${t('sar')}</span></div>
+      <a class="pack-order" href="#/packs" data-hpack="${p.n}">${t('hp_more')} ${ARROW}</a>
+    </div>`).join('');
+  $$('[data-hpack]').forEach(b=>b.addEventListener('click',()=>{ const s = $('#rqPack'); if(s) s.value = b.dataset.hpack; }));
+  $('#hpAll').textContent = t('hp_btn');
+
+  $('#heroWork').onclick = e=>{ e.preventDefault(); goTo($('#selected')); };
+  moLabel();
 }
+
+/* كروت الهيرو: كل ٤ ثواني كارت واحد بيبدّل تصميمه بهدوء */
+function heroStep(){
+  if(HOME.paused || !isHome() || document.hidden || scrollY > innerHeight) return;
+  const cards = $$('#heroVis .hv-card'); if(!cards.length) return;
+  HOME.hv = (HOME.hv + 1) % PROJECTS.length;
+  const p = PROJECTS[HOME.hv], card = cards[HOME.hv % cards.length], old = $('img',card);
+  const im = new Image(); im.decoding = 'async'; im.alt = ''; im.src = src(p,1); im.className = 'off';
+  im.dataset.fb = src(p,1,true);
+  im.decode().catch(()=>{}).then(()=>{
+    card.appendChild(im); void im.offsetWidth; im.classList.remove('off');
+    setTimeout(()=>{ if(old && old.parentNode) old.remove(); }, 1100);
+  });
+}
+HOME.timer = setInterval(heroStep, 4000);
+
+/* زرار إيقاف الحركة: بيوقف الصفوف وشريط البراندات وتبديل الكروت */
+function moLabel(){
+  const b = $('#moBtn'); if(!b) return;
+  b.innerHTML = (HOME.paused ? PLAY_I : PAUSE_I) + `<span>${t(HOME.paused ? 'mo_play' : 'mo_pause')}</span>`;
+  b.setAttribute('aria-pressed', String(HOME.paused));
+}
+$('#moBtn').addEventListener('click',()=>{ HOME.paused = !HOME.paused; document.body.classList.toggle('still', HOME.paused); moLabel(); });
 
 /* ---------- المحتوى ---------- */
 function workCard(p){
@@ -1746,7 +1851,7 @@ function workCard(p){
 }
 
 function buildDynamic(){
-  buildReel();
+  buildHome();
 
   const grid = $('#pjGrid');
   if(grid) grid.innerHTML = PROJECTS.map(workCard).join('');
@@ -1869,7 +1974,7 @@ function swapTo(r){
     if(on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
   });
   closeLb(); closePay();
-  CUR_KEY = r.key; REEL.cur = -1;
+  CUR_KEY = r.key;
   requestAnimationFrame(()=>{
     layout();
     if(r.anchor){ const s = document.getElementById(r.anchor); if(s) goTo(s, true); }
@@ -1929,7 +2034,7 @@ function bindCounters(){
 }
 
 /* ---------- المقاسات ---------- */
-function layout(){ if(lenis) lenis.resize(); REEL.cur = -1; }
+function layout(){ if(lenis) lenis.resize(); }
 let rsT = null;
 addEventListener('resize',()=>{ clearTimeout(rsT); rsT = setTimeout(layout,180); });
 
@@ -1940,7 +2045,6 @@ function frame(){
   const solid = scrollY > 20;
   if(solid!==navSolid){ navSolid = solid; navEl.classList.toggle('solid',solid); }
   if(isHome()){
-    reelFrame();
     const pg = $('#procGrid');
     const r = pg.getBoundingClientRect(), vh = innerHeight;
     if(r.top < vh && r.bottom > 0){
