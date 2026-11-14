@@ -226,14 +226,20 @@ html[lang="ar"] .ab-stat b{font-family:var(--f-ar)}
 
 /* الخدمات */
 .srv{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-.srv-c{display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:var(--bg2);border:1px solid var(--line);transition:border-color .3s ease,transform .45s var(--ease)}
-.srv-c:hover{border-color:var(--line2);transform:translateY(-4px)}
-.srv-img{aspect-ratio:4/4.4;overflow:hidden;background:var(--bg3)}
-.srv-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
-.srv-c:hover .srv-img img{transform:scale(1.05)}
-.srv-b{padding:18px 18px 22px}
+.srv-c{position:relative;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:var(--bg2);border:1px solid var(--line);padding:26px 22px 26px;
+  transition:border-color .3s ease,transform .45s var(--ease),background-color .3s ease}
+.srv-c::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s ease;
+  background:radial-gradient(80% 60% at 20% 0%,rgba(255,90,31,.14),transparent 70%)}
+.srv-c:hover{border-color:rgba(255,90,31,.4);transform:translateY(-4px)}
+.srv-c:hover::before{opacity:1}
+.srv-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:42px}
+.srv-ic{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;color:var(--accent);
+  background:rgba(255,90,31,.1);border:1px solid rgba(255,90,31,.28);transition:background-color .3s ease,color .3s ease,transform .45s var(--ease)}
+.srv-ic svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.srv-c:hover .srv-ic{background:var(--accent);color:#fff;transform:rotate(-6deg) scale(1.05)}
+.srv-b{}
 .srv-n{font-family:var(--f-lat);font-size:13px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
-.srv-t{font-size:18px;font-weight:500;letter-spacing:-.01em;margin:6px 0 6px;line-height:1.3}
+.srv-t{font-size:19px;font-weight:500;letter-spacing:-.01em;margin:0 0 8px;line-height:1.3}
 .srv-d{font-size:14px;color:var(--ink2);line-height:1.65;text-wrap:pretty}
 
 /* المشاريع المختارة: الغلاف كامل بمقاسه الحقيقي من غير قص، والتصميم التاني بيظهر مع الماوس */
@@ -555,9 +561,9 @@ html.lenis,html.lenis body{height:auto}
   .hv-chip.k2{inset-inline-end:0}
   .hv-chip{font-size:12px;padding:8px 14px 8px 8px}
   .hv-chip .ic{width:30px;height:30px}
-  .srv{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scrollbar-width:none;gap:12px}
+  .srv{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scrollbar-width:none;gap:12px}
   .srv::-webkit-scrollbar{display:none}
-  .srv-c{flex:0 0 68vw;scroll-snap-align:start}
+  .srv-c{flex:0 0 64vw;scroll-snap-align:start}
   .bento{grid-template-columns:1fr;gap:36px}
   .hp-grid{grid-template-columns:1fr}
   .mq-item{width:150px}
@@ -1295,7 +1301,7 @@ Object.assign(STR.ar, {
   wall_t:'آخر شغلي، كله قدامك', wall_d:'{d} تصميم من {n} مشروع. اضغط على أي تصميم وافتح المشروع كامل.', wall_btn:'كل الأعمال',
   mo_pause:'وقّف الحركة', mo_play:'شغّل الحركة',
   brands_t:'براندات صمّمت لها في السعودية والخليج ومصر وأوروبا',
-  srv_t:'بصمّم إيه', srv_d:'خمس حاجات بعملها كل يوم، وجنب كل واحدة تصميم حقيقي منها.',
+  srv_t:'بصمّم إيه', srv_d:'خمس حاجات بعملها كل يوم لبراندات في السعودية والخليج ومصر وأوروبا.',
   srv1t:'تصاميم سوشيال ميديا', srv1d:'بوستات وكاروسيل وستوريز بنظام شهري، تخلّي الحساب متسق ويوقّف السكرول.',
   srv2t:'إعلانات', srv2d:'تصاميم إعلانات ممولة مبنية على عرض واحد وخطوة واحدة واضحة للعميل.',
   srv3t:'كي فيجوال', srv3d:'الصورة الأساسية لحملة أو منتج جديد أو موسم زي رمضان والأعياد.',
@@ -1344,7 +1350,7 @@ Object.assign(STR.en, {
   wall_t:'My Latest Work, All in View', wall_d:'{d} designs across {n} projects. Tap any design to open the full project.', wall_btn:'All Work',
   mo_pause:'Pause Motion', mo_play:'Play Motion',
   brands_t:'Brands I’ve designed for in Saudi Arabia, the Gulf, Egypt and Europe',
-  srv_t:'What I Design', srv_d:'Five things I do every day, each shown with a real design from a client project.',
+  srv_t:'What I Design', srv_d:'Five things I do every day for brands in Saudi Arabia, the Gulf, Egypt and Europe.',
   srv1t:'Social Media Design', srv1d:'Monthly posts, carousels and stories that keep a feed consistent and stop the scroll.',
   srv2t:'Advertising', srv2d:'Paid-ad creatives built around one offer and one clear next step.',
   srv3t:'Key Visuals', srv3d:'The lead image for a campaign, a product launch or a season like Ramadan.',
@@ -1741,7 +1747,15 @@ const src = (p,n,full) => `${full?'projects':'thumb'}/${p.id}/${n}.jpg`;
 const thumb = (p,n,eager,extra) =>
   `<${IMG} src="${src(p,n)}" alt="${extra===undefined?'':esc(extra)}" width="${p.w}" height="${p.h}" decoding="async"${eager?'':' loading="lazy"'} data-fb="${src(p,n,true)}">`;
 /* الخدمات: كل خدمة جنبها تصميم حقيقي منها */
-const SERVICES = [['sabiq',1,'srv1'],['baraa',2,'srv2'],['maalem',1,'srv3'],['rafeeq',3,'srv4'],['verno',1,'srv5']];
+/* الخدمات: أيقونة لكل خدمة */
+const SRV_I = {
+  social:'<rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/><path d="M12 13.6s-3.2-1.9-3.2-4.1a1.8 1.8 0 0 1 3.2-1.1 1.8 1.8 0 0 1 3.2 1.1c0 2.2-3.2 4.1-3.2 4.1z"/>',
+  ads:'<path d="M3.5 10v4a1 1 0 0 0 1 1H7l6 4.5v-15L7 9H4.5a1 1 0 0 0-1 1z"/><path d="M7.5 15l1.2 5"/><path d="M17 9a4 4 0 0 1 0 6"/><path d="M19.5 6.5a7.5 7.5 0 0 1 0 11"/>',
+  kv:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="9.5" r="1.8"/><path d="M21 15.5l-5-5L5.5 20"/>',
+  manip:'<path d="M12 3 2.5 8 12 13l9.5-5L12 3z"/><path d="M2.5 12.5 12 17.5l9.5-5"/><path d="M2.5 16.5 12 21.5l9.5-5"/>',
+  ai:'<path d="M10 3.5l1.6 4.4a2 2 0 0 0 1.2 1.2l4.4 1.6-4.4 1.6a2 2 0 0 0-1.2 1.2L10 17.9l-1.6-4.4a2 2 0 0 0-1.2-1.2L2.8 10.7l4.4-1.6a2 2 0 0 0 1.2-1.2L10 3.5z"/><path d="M18.5 14.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8z"/><path d="M18 3v3M16.5 4.5h3"/>',
+};
+const SERVICES = [['social','srv1'],['ads','srv2'],['kv','srv3'],['manip','srv4'],['ai','srv5']];
 const CHECK_I = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const PAUSE_I = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
 const PLAY_I  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>';
@@ -1778,11 +1792,11 @@ function buildHome(){
   $('#tkTrack').innerHTML = names + names.replace(/<a /g,'<a tabindex="-1" aria-hidden="true" ');
 
   /* الخدمات */
-  $('#srvGrid').innerHTML = SERVICES.map(([id,n,k],i)=>{ const p = P(id); return `
-    <a class="srv-c rv d${i%4+1}" href="#/project/${p.id}">
-      <div class="srv-img">${thumb(p,n,false,`${t(k+'t')}, ${p.n}`)}</div>
-      <div class="srv-b"><div class="srv-n">${num('0'+(i+1))}</div><h3 class="srv-t">${t(k+'t')}</h3><p class="srv-d">${t(k+'d')}</p></div>
-    </a>`; }).join('');
+  $('#srvGrid').innerHTML = SERVICES.map(([ic,k],i)=>`
+    <div class="srv-c rv d${i%4+1}">
+      <div class="srv-top"><span class="srv-ic" aria-hidden="true"><svg viewBox="0 0 24 24">${SRV_I[ic]}</svg></span><span class="srv-n">${num('0'+(i+1))}</span></div>
+      <div class="srv-b"><h3 class="srv-t">${t(k+'t')}</h3><p class="srv-d">${t(k+'d')}</p></div>
+    </div>`).join('');
 
   /* المشاريع المختارة */
   $('#bento').innerHTML = SEL.map((p,i)=>{
