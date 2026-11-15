@@ -14,7 +14,10 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Karam Haraz | Social Media &amp; Advertising Designer">
 <meta property="og:description" content="Scroll-stopping social media and advertising design for brands across Egypt, the Gulf and Europe.">
-<meta property="og:image" content="https://karamharaz.online/karam.jpg">
+<meta property="og:image" content="https://karamharaz.online/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://karamharaz.online/og.jpg">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="ar_EG">
 <meta name="twitter:card" content="summary_large_image">
@@ -271,6 +274,51 @@ html[dir="rtl"] .bn-name{text-align:right}
 .cta-av{position:relative;width:96px;height:96px;margin:0 auto 30px}
 .cta-av img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 20%;box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent)}
 .cta-av i{position:absolute;bottom:4px;inset-inline-end:4px;width:16px;height:16px;border-radius:50%;background:#3ddc84;border:3px solid var(--bg)}
+
+
+/* ═════ زرار واتساب الثابت ═════ */
+.wa-float{position:fixed;z-index:115;inset-inline-end:max(20px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));
+  width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#25d366;color:#fff;
+  box-shadow:0 16px 34px -10px rgba(37,211,102,.55),0 0 0 1px rgba(255,255,255,.12) inset;
+  opacity:0;translate:0 20px;scale:.9;pointer-events:none;transition:opacity .35s ease,translate .45s var(--ease),scale .45s var(--ease)}
+.wa-float.show{opacity:1;translate:0 0;scale:1;pointer-events:auto}
+.wa-float:hover{scale:1.06}
+.wa-float svg{width:28px;height:28px;fill:currentColor}
+.wa-float::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(37,211,102,.5);animation:waPing 2.6s ease-out infinite}
+@keyframes waPing{to{box-shadow:0 0 0 14px rgba(37,211,102,0)}}
+body.lb-on .wa-float{display:none}
+
+/* ═════ فلتر صفحة الأعمال ═════ */
+.flt{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(34px,4vw,52px)}
+.flt button{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border-radius:999px;font-size:14px;color:var(--ink2);border:1px solid var(--line2);
+  transition:color .25s ease,background-color .25s ease,border-color .25s ease}
+.flt button small{font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.flt button:hover{color:var(--ink);border-color:var(--ink3)}
+.flt button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.flt button[aria-pressed="true"] small{color:rgba(15,15,18,.6)}
+.wk[hidden]{display:none!important}
+.wk.pop{animation:pop .6s var(--ease) both}
+@keyframes pop{from{opacity:0;translate:0 16px}}
+
+/* ═════ العملة ═════ */
+.cur-pick{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink3);margin-top:22px}
+.cur-pick select{appearance:none;cursor:pointer;min-height:40px;padding:0 34px 0 14px;border-radius:999px;border:1px solid var(--line2);background:var(--bg2);color:var(--ink);font-size:13.5px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f3f2ef' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-size:14px;background-position:right 12px center}
+html[dir="rtl"] .cur-pick select{padding:0 14px 0 34px;background-position:left 12px center}
+.cur-pick select option{background:var(--bg2)}
+.pack-price b{font-weight:600}
+.pack-usd{display:block;font-size:12.5px;color:var(--ink3);font-weight:400;margin-top:2px}
+
+/* ═════ آراء العملاء ═════ */
+.rvw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.rvw-c{display:flex;flex-direction:column;gap:22px;padding:28px 26px;border-radius:22px;background:var(--bg2);border:1px solid var(--line)}
+.rvw-q{font-size:16.5px;line-height:1.75;color:var(--ink);text-wrap:pretty}
+.rvw-q::before{content:"\201C";display:block;font-family:var(--f-lat);font-size:46px;line-height:.6;color:var(--accent);margin-bottom:12px}
+.rvw-by{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:18px;border-top:1px solid var(--line)}
+.rvw-av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-family:var(--f-lat);font-weight:700;color:#fff;background:var(--pc,var(--accent))}
+.rvw-by b{display:block;font-size:15px;font-weight:600}
+.rvw-by span{font-size:13px;color:var(--ink3)}
 
 /* ============ الأقسام العادية ============ */
 .sec{padding-block:clamp(90px,12vw,160px);scroll-margin-top:var(--navh)}
@@ -538,6 +586,7 @@ html.lenis,html.lenis body{height:auto}
   .srv{grid-template-columns:repeat(3,minmax(0,1fr))}
   .hp-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rvw{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ab-photo{position:relative;top:0;max-width:420px}
   .proc{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:44px}
   .pack-grid{grid-template-columns:1fr;max-width:540px;margin-inline:auto}
@@ -555,8 +604,13 @@ html.lenis,html.lenis body{height:auto}
   .mscrim{display:block}
   /* الموبايل: الكلام فوق والصورة تحته */
   .hero{min-height:0;padding-top:calc(var(--navh) + 28px)}
-  .hero-in{grid-template-columns:1fr;gap:44px}
-  .hero-vis{justify-self:center;max-width:430px}
+  .hero-in{grid-template-columns:1fr;gap:26px}
+  .hero-vis{order:-1;justify-self:center;max-width:min(300px,78vw)}
+  .hero-h{margin-top:16px}
+  .hero .ab-stats{margin-top:32px}
+  .wa-float{bottom:calc(max(12px,env(safe-area-inset-bottom)) + 66px);width:52px;height:52px}
+  .wa-float svg{width:25px;height:25px}
+  .rvw{grid-template-columns:1fr}
   .hb-actions .btn{flex:1 1 auto}
   .hv-chip.k2{inset-inline-end:0}
   .hv-chip{font-size:12px;padding:8px 14px 8px 8px}
@@ -593,6 +647,7 @@ html.lenis,html.lenis body{height:auto}
   .mq,.tk{overflow-x:auto;scrollbar-width:none}
   .mq-track,.tk-track{animation:none!important}
   .mo-btn{display:none}
+  .wa-float::after{animation:none}
   /* تبديل كروت الهيرو طلب صريح من كرم، فبيفضل شغال بالتلاشي الهادي */
   .hv-card img{transition-duration:1s!important}
 }
@@ -604,6 +659,7 @@ html.lenis,html.lenis body{height:auto}
 <nav class="nav" id="siteNav"><div class="wrap nav-in" id="navIn"></div></nav>
 <nav class="mnav" id="mNav" aria-label="Mobile"></nav>
 <div class="mscrim" aria-hidden="true"></div>
+<a class="wa-float" id="waFloat" target="_blank" rel="noopener noreferrer"></a>
 
 <!-- ═══════ الرئيسية ═══════ -->
 <main class="page on" id="pg-home" tabindex="-1">
@@ -710,11 +766,20 @@ html.lenis,html.lenis body{height:auto}
     <div class="vals" id="featCards"></div>
   </section>
 
+  <!-- آراء العملاء: السكشن بيظهر لوحده أول ما يتحط كلام في REVIEWS -->
+  <section class="sec wrap" id="reviews" style="padding-top:0" hidden>
+    <div class="sec-head">
+      <h2 class="h-l rv" data-i18n="rv_t"></h2>
+      <p class="lead rv d1" data-i18n="rv_d"></p>
+    </div>
+    <div class="rvw" id="rvwGrid"></div>
+  </section>
+
   <!-- الباقات باختصار -->
   <section class="sec wrap" id="homePacks" style="padding-top:0">
     <div class="sec-head">
       <h2 class="h-l rv" data-i18n="sec_packs_t"></h2>
-      <div class="rv d1"><p class="lead" data-i18n="sec_packs_d"></p><a class="btn btn-line" href="#/packs" id="hpAll" style="margin-top:22px"></a></div>
+      <div class="rv d1"><p class="lead" data-i18n="sec_packs_d"></p><div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px"><a class="btn btn-line" href="#/packs" id="hpAll" style="margin-top:22px"></a><span class="cur-slot"></span></div></div>
     </div>
     <div class="hp-grid" id="hpGrid"></div>
   </section>
@@ -735,6 +800,7 @@ html.lenis,html.lenis body{height:auto}
     <p class="lead rv d1" data-i18n="sec_work_d"></p>
   </section>
   <section class="wrap">
+    <div class="flt" id="wkFilter" role="group"></div>
     <div class="wk-grid" id="pjGrid"></div>
   </section>
 </main>
@@ -767,6 +833,7 @@ html.lenis,html.lenis body{height:auto}
   <section class="page-hero wrap">
     <h1 class="h-xl rv" data-i18n="sec_packs_t"></h1>
     <p class="lead rv d1" data-i18n="sec_packs_d"></p>
+    <div class="rv d2"><span class="cur-slot"></span></div>
   </section>
 
   <section class="wrap" style="padding-top:20px">
@@ -1309,6 +1376,8 @@ Object.assign(STR.ar, {
   srv5t:'الـAI في التصميم', srv5d:'أدوات زي Kling وRunway بستخدمها عشان أسرّع الشغل من غير ما الجودة تقل.',
   sel_d:'عدّي بالماوس على أي مشروع تشوف تصميم تاني منه، وافتحه تشوف المجموعة كاملة والقصة وراها.',
   hp_more:'التفاصيل', hp_btn:'قارن الباقات',
+  cur_l:'الأسعار بـ', per_m:'/ شهريًا', wa_float:'كلّمني واتساب',
+  rv_t:'العملاء بيقولوا إيه', rv_d:'كلام حقيقي من براندات اشتغلت معاها.',
   hb_sub:'كرم حراز، مصمم سوشيال ميديا وإعلانات من القاهرة. خمس سنين بعمل بوستات وحملات وكي فيجوال لبراندات في السعودية والخليج ومصر وأوروبا.',
   cta_work:'شوف أعمالي', cta_wa:'كلّمني واتساب',
   st1:'سنين خبرة', st2:'براند اشتغلت معاه', st3:'تصميم اتسلّم',
@@ -1358,6 +1427,8 @@ Object.assign(STR.en, {
   srv5t:'AI in Design', srv5d:'Tools like Kling and Runway, used to move faster without losing the craft.',
   sel_d:'Hover any project for a second design, or open it to see the full set and the story behind it.',
   hp_more:'Details', hp_btn:'Compare Packages',
+  cur_l:'Prices in', per_m:'/ month', wa_float:'Message me on WhatsApp',
+  rv_t:'What Clients Say', rv_d:'Real words from brands I’ve worked with.',
   hb_sub:'Karam Haraz, social media and advertising designer in Cairo. Five years of posts, campaigns and key visuals for brands in Saudi Arabia, the Gulf, Egypt and Europe.',
   cta_work:'See Selected Work', cta_wa:'Message Me on WhatsApp',
   st1:'Years of Experience', st2:'Brands Worked With', st3:'Designs Delivered',
@@ -1401,6 +1472,43 @@ Object.assign(STR.en, {
   fm_err:'Some fields are missing. Fill them in and send again.',
   fm_cap_err:'That answer isn’t right. Try the new question.',
 });
+
+/* ══════════ الأسعار حسب بلد الزائر ══════════
+   الموقع بيعرف البلد من التوقيت اللي على جهاز الزائر (من غير ما يبعت أي بيانات لحد)،
+   والزائر يقدر يغيّر العملة بنفسه من القايمة.
+   prices = سعر الباقات ١ و٢ و٣ بالعملة دي. غيّر الأرقام براحتك (أرقام صحيحة).
+   سعر الجنيه محسوب على ٥٠ جنيه للدولار، ولو السعر اتغيّر عدّل أرقام EGP بس. */
+const CURRENCIES = {
+  USD:{en:'USD', ar:'دولار',      prices:[110, 160, 400]},
+  EGP:{en:'EGP', ar:'جنيه',       prices:[5500, 8000, 20000]},
+  SAR:{en:'SAR', ar:'ريال سعودي', prices:[410, 600, 1500]},
+  AED:{en:'AED', ar:'درهم',       prices:[400, 590, 1470]},
+  KWD:{en:'KWD', ar:'دينار كويتي',prices:[35, 50, 125]},
+  QAR:{en:'QAR', ar:'ريال قطري',  prices:[400, 580, 1460]},
+};
+/* التوقيت ← العملة. أي بلد مش هنا بيشوف بالدولار */
+const TZ_CUR = {'Africa/Cairo':'EGP','Asia/Riyadh':'SAR','Asia/Dubai':'AED','Asia/Kuwait':'KWD','Asia/Qatar':'QAR'};
+
+/* ══════════ آراء العملاء ══════════
+   حط هنا كلام حقيقي من عملائك، والسكشن هيظهر في الرئيسية لوحده.
+   مثال:
+   {name:'أحمد', role:'صاحب براند PORATI', roleEn:'Founder, PORATI', q:'…', qEn:'…', color:'#e0a54e'},
+*/
+const REVIEWS = [];
+
+/* ══════════ تصنيف المشاريع لفلتر صفحة الأعمال ══════════ */
+const SECTORS = [
+  ['all',   'كل الأعمال',        'All Work'],
+  ['food',  'مأكولات',           'Food & Beverage'],
+  ['health','رعاية صحية',        'Healthcare'],
+  ['home',  'عقارات وبيوت',      'Real Estate & Home'],
+  ['biz',   'شركات وتعليم',      'Business & Education'],
+  ['retail','موضة وعطور ومجوهرات','Fashion & Retail'],
+  ['sport', 'رياضة',             'Sport'],
+];
+const SECTOR_OF = {porati:'food',tomor:'food',rafeeq:'health',skymed:'health',careoncall:'health',
+  tirawi:'home',yallabaytak:'home',furniture:'home',baraa:'home',sabiq:'biz',accounting:'biz',fcacourses:'biz',
+  adyar:'retail',verno:'retail',maalem:'retail',fcafitness:'sport',formula1:'sport'};
 const FEATS=[['zap','f1t','f1d'],['gem','f2t','f2d'],['target','f3t','f3d'],['hand','f4t','f4d']];
 const PACKS=[
   {n:1,lvl:1,tier:'bronze',count:6,price:110,feats:['f1_1','f1_2','f1_3','f1_4'],fit:'fit1',flag:''},
@@ -1620,7 +1728,7 @@ reqForm.addEventListener('submit',e=>{
 
   const v = id => document.getElementById(id).value.trim();
   const pack = document.getElementById('rqPack').value;
-  const packName = t('pack'+pack);
+  const packName = t('pack'+pack) + (pack ? ' ('+priceText(+pack)+')' : '');
   const text = (LANG==='ar'
       ? 'طلب باقة جديد 🚀\n———————\nالاسم: '+v('rqName')+'\nالبراند: '+v('rqBrand')+'\nالتواصل: '+v('rqContact')+'\nالباقة: '+packName+'\n———————\nتفاصيل المشروع:\n'+v('rqMsg')
       : 'New package request 🚀\n———————\nName: '+v('rqName')+'\nBrand: '+v('rqBrand')+'\nContact: '+v('rqContact')+'\nPackage: '+packName+'\n———————\nProject details:\n'+v('rqMsg'));
@@ -1705,7 +1813,7 @@ const IMG = 'img';
 
 /* صورة بمقاسين: الخفيفة من thumb/ والكاملة من projects/ — المتصفح بيختار */
 function pic(p,n,sizes,eager){
-  return `<${IMG} src="thumb/${p.id}/${n}.jpg" srcset="thumb/${p.id}/${n}.jpg 560w, projects/${p.id}/${n}.jpg 1080w" sizes="${sizes}"`
+  return `<${IMG} src="thumb/${p.id}/${n}.webp" srcset="thumb/${p.id}/${n}.webp 560w, projects/${p.id}/${n}.webp 1080w" sizes="${sizes}"`
     + ` width="${p.w}" height="${p.h}" ${eager?'':'loading="lazy" '}decoding="async" data-fb="projects/${p.id}/${n}.jpg"`
     + ` alt="${esc(p.n)}, ${esc(clean(LANG==='ar'?p.cAr:p.cEn))}">`;
 }
@@ -1732,6 +1840,7 @@ function renderChrome(){
     <div class="socials">${socHtml}</div>`;
   $('#heroSoc').innerHTML = socHtml;
   ['ctaWa','ctaWa2'].forEach(id=>{ const e=document.getElementById(id); if(e) e.href = WA; });
+  const wf = $('#waFloat'); wf.href = WA; wf.innerHTML = svgHide(ICONS.whatsapp); wf.setAttribute('aria-label', t('wa_float')); wf.title = t('wa_float');
   const m = $('#ctaMail'); m.href = 'mailto:'+EMAIL; m.textContent = EMAIL;
   $('#skipLink').textContent = t('skip');
   [['lbClose','lb_close'],['lbPrev','lb_prev'],['lbNext','lb_next'],['pmClose','lb_close']].forEach(([id,k])=>{
@@ -1743,9 +1852,10 @@ function renderChrome(){
 const isHome = ()=>$('#pg-home').classList.contains('on');
 const SEL = PROJECTS.slice(0,6);
 const HOME = {paused:false, hv:0, timer:null};
-const src = (p,n,full) => `${full?'projects':'thumb'}/${p.id}/${n}.jpg`;
+const src = (p,n,full) => `${full?'projects':'thumb'}/${p.id}/${n}.webp`;
+const jpg = (p,n) => `projects/${p.id}/${n}.jpg`;
 const thumb = (p,n,eager,extra) =>
-  `<${IMG} src="${src(p,n)}" alt="${extra===undefined?'':esc(extra)}" width="${p.w}" height="${p.h}" decoding="async"${eager?'':' loading="lazy"'} data-fb="${src(p,n,true)}">`;
+  `<${IMG} src="${src(p,n)}" alt="${extra===undefined?'':esc(extra)}" width="${p.w}" height="${p.h}" decoding="async"${eager?'':' loading="lazy"'} data-fb="${jpg(p,n)}">`;
 /* الخدمات: كل خدمة جنبها تصميم حقيقي منها */
 /* الخدمات: أيقونة لكل خدمة */
 const SRV_I = {
@@ -1814,7 +1924,7 @@ function buildHome(){
       ${p.flag?`<span class="pack-flag ${p.tier==='gold'?'goldf':''}">${t(p.flag)}</span>`:''}
       <div class="pack-name">${t('pack'+p.n)}</div>
       <div class="pack-count">${num(p.count)}<small>${t('posts_m')}</small></div>
-      <div class="pack-price">${num(p.price)} <span>${t('sar')}</span></div>
+      <div class="pack-price" data-pk="${p.n}">${priceInner(p.n)}</div>
       <a class="pack-order" href="#/packs" data-hpack="${p.n}">${t('hp_more')} ${ARROW}</a>
     </div>`).join('');
   $$('[data-hpack]').forEach(b=>b.addEventListener('click',()=>{ const s = $('#rqPack'); if(s) s.value = b.dataset.hpack; }));
@@ -1831,7 +1941,7 @@ function heroStep(){
   HOME.hv = (HOME.hv + 1) % PROJECTS.length;
   const p = PROJECTS[HOME.hv], card = cards[HOME.hv % cards.length], old = $('img',card);
   const im = new Image(); im.decoding = 'async'; im.alt = ''; im.src = src(p,1); im.className = 'off';
-  im.dataset.fb = src(p,1,true);
+  im.dataset.fb = jpg(p,1);
   im.decode().catch(()=>{}).then(()=>{
     card.appendChild(im); void im.offsetWidth; im.classList.remove('off');
     setTimeout(()=>{ if(old && old.parentNode) old.remove(); }, 1100);
@@ -1847,10 +1957,66 @@ function moLabel(){
 }
 $('#moBtn').addEventListener('click',()=>{ HOME.paused = !HOME.paused; document.body.classList.toggle('still', HOME.paused); moLabel(); });
 
+
+/* ---------- العملة ---------- */
+let CUR = 'USD';
+try{ const c = localStorage.getItem('kh_cur'); if(CURRENCIES[c]) CUR = c; else throw 0; }
+catch(_){ try{ CUR = TZ_CUR[Intl.DateTimeFormat().resolvedOptions().timeZone] || 'USD'; }catch(__){ CUR = 'USD'; } }
+const priceNum = n => new Intl.NumberFormat(LANG==='ar'?'ar-EG':'en-US').format(n);
+const curName = c => CURRENCIES[c][LANG==='ar'?'ar':'en'];
+function priceInner(pk){
+  const c = CURRENCIES[CUR], v = c.prices[pk-1];
+  const usd = CUR!=='USD' ? `<small class="pack-usd">≈ ${priceNum(CURRENCIES.USD.prices[pk-1])} ${curName('USD')}</small>` : '';
+  return `<b>${priceNum(v)}</b> <span>${curName(CUR)} ${t('per_m')}</span>${usd}`;
+}
+const priceText = pk => `${priceNum(CURRENCIES[CUR].prices[pk-1])} ${curName(CUR)} ${t('per_m')}`;
+function curPicker(){
+  return `<label class="cur-pick"><span>${t('cur_l')}</span><select>${Object.keys(CURRENCIES).map(c=>
+    `<option value="${c}"${c===CUR?' selected':''}>${curName(c)}</option>`).join('')}</select></label>`;
+}
+function renderCur(){
+  $$('.cur-slot').forEach(el=>{ el.innerHTML = curPicker(); $('select',el).addEventListener('change',e=>{
+    CUR = e.target.value; try{ localStorage.setItem('kh_cur',CUR); }catch(_){}
+    renderCur();
+  }); });
+  $$('[data-pk]').forEach(el=>{ el.innerHTML = priceInner(+el.dataset.pk); });
+}
+
+/* ---------- فلتر صفحة الأعمال ---------- */
+let SECTOR = 'all';
+function renderFilter(){
+  const cnt = k => k==='all' ? PROJECTS.length : PROJECTS.filter(p=>SECTOR_OF[p.id]===k).length;
+  $('#wkFilter').setAttribute('aria-label', t('nav_work'));
+  $('#wkFilter').innerHTML = SECTORS.filter(s=>cnt(s[0])).map(s=>
+    `<button type="button" data-sec="${s[0]}" aria-pressed="${s[0]===SECTOR}">${LANG==='ar'?s[1]:s[2]}<small>${num(cnt(s[0]))}</small></button>`).join('');
+  $$('#wkFilter button').forEach(b=>b.addEventListener('click',()=>{ SECTOR = b.dataset.sec; renderFilter(); applyFilter(true); }));
+}
+function applyFilter(anim){
+  $$('#pjGrid .wk').forEach(a=>{
+    const show = SECTOR==='all' || SECTOR_OF[a.dataset.id]===SECTOR;
+    a.hidden = !show;
+    if(show && anim && !RM){ a.classList.add('in'); a.classList.remove('pop'); void a.offsetWidth; a.classList.add('pop'); }
+  });
+  layout();
+}
+
+/* ---------- آراء العملاء ---------- */
+function renderReviews(){
+  const sec = $('#reviews'); if(!sec) return;
+  sec.hidden = !REVIEWS.length;
+  if(!REVIEWS.length) return;
+  $('#rvwGrid').innerHTML = REVIEWS.map((r,i)=>`
+    <figure class="rvw-c rv d${i%3+1}" style="--pc:${r.color||'var(--accent)'}">
+      <blockquote class="rvw-q">${esc(clean(LANG==='ar'?r.q:(r.qEn||r.q)))}</blockquote>
+      <figcaption class="rvw-by"><span class="rvw-av" aria-hidden="true">${esc((r.name||'?').trim().charAt(0))}</span>
+        <span><b>${esc(r.name)}</b><span>${esc(clean(LANG==='ar'?r.role:(r.roleEn||r.role)))}</span></span></figcaption>
+    </figure>`).join('');
+}
+
 /* ---------- المحتوى ---------- */
 function workCard(p){
   const [ty,sec] = splitCat(p);
-  return `<a class="wk rv" href="#/project/${p.id}" style="--pc:${p.color}">
+  return `<a class="wk rv" href="#/project/${p.id}" data-id="${p.id}" style="--pc:${p.color}">
     <div class="wk-card" style="--ar:${p.w}/${p.h}">${pic(p,1,'(max-width:860px) 92vw, (max-width:1100px) 46vw, 30vw')}</div>
     <div class="wk-meta"><div><div class="wk-name" translate="no">${p.n}</div><div class="wk-cat">${esc(sec||ty)}</div></div><span class="arr" aria-hidden="true">${ARROW}</span></div>
   </a>`;
@@ -1861,6 +2027,9 @@ function buildDynamic(){
 
   const grid = $('#pjGrid');
   if(grid) grid.innerHTML = PROJECTS.map(workCard).join('');
+  renderFilter(); applyFilter(false);
+  renderReviews();
+  renderCur();
 
   /* ليه أنا */
   $('#featCards').innerHTML = FEATS.map((f,i)=>`<div class="val rv d${i%2+1}"><div class="val-t">${t(f[1])}</div><p class="val-d">${t(f[2])}</p></div>`).join('');
@@ -1871,7 +2040,7 @@ function buildDynamic(){
       ${p.flag?`<span class="pack-flag ${p.tier==='gold'?'goldf':''}">${t(p.flag)}</span>`:''}
       <div class="pack-name">${t('pack'+p.n)}</div>
       <div class="pack-count">${num(p.count)}<small>${t('posts_m')}</small></div>
-      <div class="pack-price">${num(p.price)} <span>${t('sar')}</span></div>
+      <div class="pack-price" data-pk="${p.n}">${priceInner(p.n)}</div>
       <ul class="pack-feats">${p.feats.map(f=>`<li>${t(f)}</li>`).join('')}</ul>
       <div class="pack-fit"><b>${t('fit_l')}</b> ${t(p.fit)}</div>
       <a class="pack-order" href="#/packs" data-pack="${p.n}">${t('order')} ${ARROW}</a>
@@ -1938,12 +2107,12 @@ function renderProject(id){
   $('#prjStory').innerHTML = [['prj_brief',ar?p.bAr:p.bEn],['prj_app',ar?p.aAr:p.aEn],['prj_out',ar?p.oAr:p.oEn]]
     .map((b,k)=>`<div class="prj-blk rv d${k+1}"><span>${t(b[0])}</span><p>${esc(clean(b[1]))}</p></div>`).join('');
 
-  LB_SET = Array.from({length:p.cnt},(_,k)=>`projects/${p.id}/${k+1}.jpg`);
+  LB_SET = Array.from({length:p.cnt},(_,k)=>`projects/${p.id}/${k+1}.webp`);
   LB_NAME = p.n;
   $('#prjGrid').innerHTML = LB_SET.map((src,n)=>
     `<button type="button" class="rv${n%2?' d1':''}" data-lb="${n}" aria-label="${t('lb_open')}, ${esc(p.n)} ${num(n+1)}">
        <${IMG} src="${src}" ${n<2?'fetchpriority="high"':'loading="lazy"'} decoding="async" width="${p.w}" height="${p.h}"
-            alt="${esc(p.n)}, ${esc(clean(ar?p.cAr:p.cEn))} ${num(n+1)}" onerror="this.closest('button').style.display='none'">
+            alt="${esc(p.n)}, ${esc(clean(ar?p.cAr:p.cEn))} ${num(n+1)}" data-fb="${src.replace('.webp','.jpg')}">
      </button>`).join('');
   $$('#prjGrid [data-lb]').forEach(b=>b.addEventListener('click',()=>openLb(+b.dataset.lb)));
 
@@ -2050,6 +2219,8 @@ let navSolid = null;
 function frame(){
   const solid = scrollY > 20;
   if(solid!==navSolid){ navSolid = solid; navEl.classList.toggle('solid',solid); }
+  const wfShow = !isHome() || scrollY > innerHeight * .55;
+  if(wfShow !== frame.wf){ frame.wf = wfShow; $('#waFloat').classList.toggle('show', wfShow); }
   if(isHome()){
     const pg = $('#procGrid');
     const r = pg.getBoundingClientRect(), vh = innerHeight;
@@ -2067,6 +2238,7 @@ let LB_PREV_I = 0;
 function drawLb(){
   const dir = LB_I===LB_PREV_I ? 0 : ((LB_I>LB_PREV_I) !== (LB_I===0 && LB_PREV_I===LB_SET.length-1)) ? 1 : -1;
   LB_PREV_I = LB_I;
+  delete lbImg.dataset.f; lbImg.dataset.fb = LB_SET[LB_I].replace('.webp','.jpg');
   lbImg.src = LB_SET[LB_I];
   lbImg.alt = LB_NAME+', '+num(LB_I+1)+' / '+num(LB_SET.length);
   lbCount.textContent = String(LB_I+1).padStart(2,'0')+' / '+String(LB_SET.length).padStart(2,'0');
@@ -2120,6 +2292,7 @@ addEventListener('error', e=>{
   const img = e.target;
   if(!(img instanceof HTMLImageElement) || !img.dataset.fb || img.dataset.f) return;
   img.dataset.f = 1; img.removeAttribute('srcset'); img.src = img.dataset.fb;
+  img.onerror = ()=>{ const b = img.closest('#prjGrid button'); if(b) b.style.display = 'none'; };
 }, true);
 
 /* ---------- تشغيل ---------- */
