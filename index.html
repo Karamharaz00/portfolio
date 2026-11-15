@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Karam Haraz | Social Media &amp; Advertising Designer</title>
-<meta name="description" content="Karam Haraz, a social media and advertising designer in Cairo. Five years of posts and campaigns for brands in Saudi Arabia, the Gulf, Egypt and Europe.">
+<meta name="description" content="Karam Haraz, a graphic designer for social media and advertising, based in Egypt. More than five years of posts and campaigns for brands in Saudi Arabia, the Gulf, Egypt and Europe.">
 <meta name="theme-color" content="#0f0f12">
 <meta name="color-scheme" content="dark">
 <meta name="author" content="Karam Haraz">
@@ -26,7 +26,7 @@
 <link rel="preload" href="fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/plex-arabic-500.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Karam Haraz","jobTitle":"Senior Graphic Designer","email":"karammh112@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Cairo","addressCountry":"EG"},"knowsLanguage":["ar","en"],"sameAs":["https://www.behance.net/karamharaaz","https://www.linkedin.com/in/karamharaaz"]}
+{"@context":"https://schema.org","@type":"Person","name":"Karam Haraz","jobTitle":"Senior Graphic Designer","email":"karammh112@gmail.com","address":{"@type":"PostalAddress","addressCountry":"EG"},"knowsLanguage":["ar","en"],"sameAs":["https://www.behance.net/karamharaaz","https://www.linkedin.com/in/karamharaaz"]}
 </script>
 <style>
 /* ══════════════ الخطوط — خطوط براند كرم ══════════════ */
@@ -266,6 +266,8 @@ html[dir="rtl"] .bn-name{text-align:right}
 
 /* الباقات في الرئيسية */
 .hp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+.pay-all{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:26px;font-size:14.5px;color:var(--ink2)}
+.pay-all svg{width:17px;height:17px;fill:none;stroke:#3ddc84;stroke-width:2.4;flex-shrink:0}
 .pack.mini{padding:28px 26px}
 .pack.mini .pack-price{margin-bottom:20px}
 .pack.mini .pack-order{margin-top:auto}
@@ -344,7 +346,15 @@ html[dir="rtl"] .cur-pick select{padding:0 14px 0 34px;background-position:left 
 .soc:hover{color:var(--bg);background:var(--ink);border-color:var(--ink)}
 .tl-h{font-size:13px;color:var(--ink3);margin:52px 0 6px}
 .tl{list-style:none}
-.tl-item{display:grid;grid-template-columns:1fr auto;gap:2px 20px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.tl-item{position:relative;display:grid;grid-template-columns:1fr auto;gap:2px 20px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line);cursor:default;
+  transition:padding-inline .45s var(--ease),border-color .3s ease,background-color .3s ease}
+.tl-item::before{content:"";position:absolute;inset-inline-start:0;top:50%;width:3px;height:0;border-radius:3px;background:var(--accent);translate:0 -50%;transition:height .45s var(--ease)}
+.tl-item:hover{padding-inline:18px 10px;border-bottom-color:rgba(255,90,31,.45);background:linear-gradient(90deg,rgba(255,90,31,.07),transparent 70%)}
+html[dir="rtl"] .tl-item:hover{background:linear-gradient(270deg,rgba(255,90,31,.07),transparent 70%)}
+.tl-item:hover::before{height:58%}
+.tl-item:hover .tl-co{color:var(--accent)}
+.tl-item:hover .tl-yr,.tl-item:hover .tl-role{color:var(--ink)}
+.tl-co,.tl-yr,.tl-role{transition:color .3s ease}
 .tl-co{font-family:var(--f-lat);font-weight:600;font-size:17px;direction:ltr;text-align:start}
 html[dir="rtl"] .tl-co{text-align:right}
 .tl-yr{font-size:13.5px;color:var(--ink3);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -406,7 +416,7 @@ html[dir="rtl"] .prj-title{text-align:right}
 .be-btn{display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:0 22px;border-radius:999px;border:1px solid var(--line2);font-weight:600;font-size:14px;transition:background-color .25s ease,border-color .25s ease,color .25s ease}
 .be-btn:hover{background:#1769ff;border-color:#1769ff;color:#fff}
 .be-btn svg{width:17px;height:17px;fill:currentColor}
-.prj-desc{color:var(--ink2);max-width:62ch;font-size:clamp(16px,1.3vw,18.5px);margin-top:26px;text-wrap:pretty}
+.prj-desc{color:var(--ink2);max-width:62ch;font-size:clamp(16px,1.3vw,18.5px);margin-top:26px;margin-bottom:clamp(20px,3vw,36px);text-wrap:pretty}
 .prj-story{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);margin-block:clamp(24px,3vw,40px) clamp(44px,5vw,72px)}
 .prj-blk{padding-top:20px;border-top:1px solid var(--line)}
 .prj-blk span{display:block;font-size:13px;color:var(--ink3);margin-bottom:10px}
@@ -691,7 +701,6 @@ html.lenis,html.lenis body{height:auto}
     <div class="wrap wall-head">
       <div>
         <h2 class="h-l rv" data-i18n="wall_t"></h2>
-        <p class="rv d1" id="wallSub"></p>
       </div>
       <div class="wall-acts rv d1">
         <button class="mo-btn" id="moBtn" type="button" aria-pressed="false"></button>
@@ -782,6 +791,7 @@ html.lenis,html.lenis body{height:auto}
       <div class="rv d1"><p class="lead" data-i18n="sec_packs_d"></p><div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px"><a class="btn btn-line" href="#/packs" id="hpAll" style="margin-top:22px"></a><span class="cur-slot"></span></div></div>
     </div>
     <div class="hp-grid" id="hpGrid"></div>
+    <p class="pay-all rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="pay_all"></span></p>
   </section>
 
   <section class="cta wrap">
@@ -819,7 +829,6 @@ html.lenis,html.lenis body{height:auto}
     <p class="prj-desc rv d2" id="prjDesc"></p>
   </section>
   <section class="wrap">
-    <div class="prj-story" id="prjStory"></div>
     <div class="prj-grid" id="prjGrid"></div>
     <div class="prj-next">
       <small><a href="#/work" data-i18n="prj_back"></a><a id="prjPrev" href="#"></a></small>
@@ -838,6 +847,7 @@ html.lenis,html.lenis body{height:auto}
 
   <section class="wrap" style="padding-top:20px">
     <div class="pack-grid" id="packGrid"></div>
+    <p class="pay-all rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="pay_all"></span></p>
   </section>
 
   <!-- الفورم — تحت الباقات -->
@@ -1006,197 +1016,95 @@ const CAREER = [
   {co:'AISS — Dubai',          yr:'2020 — 2021',     roleAr:'مصمم جرافيك — عن بُعد',                roleEn:'Graphic Designer — Remote'},
   {co:'Emara Advertising',     yr:'2019 — 2020',     roleAr:'مصمم جرافيك مبتدئ',                    roleEn:'Junior Graphic Designer'},
 ];
-const TOOLS = ['Adobe Photoshop','Adobe Illustrator','Kling AI','Runway'];
+const TOOLS = ['Adobe Photoshop','Adobe Illustrator','Higgsfield','Magnific','Claude','ChatGPT','Flow'];
 
 /* ---------- المشاريع ----------
-   لكل مشروع: البريف (المطلوب) / الأسلوب (اللي عملته) / النتيجة (الخلاصة البصرية) */
+   لكل مشروع فقرة واحدة (dAr / dEn): الشغل كان لمين، وساعدت البراند في إيه */
 const PROJECTS = [
   {id:'porati',color:'#e0a54e',n:'PORATI',yr:'2025',cnt:6,w:1080,h:1350,
    cAr:'سوشيال ميديا — مأكولات',cEn:'Social Media — Food & Beverage',
-   dAr:'محتوى سوشيال ميديا لبراند برجر سعودي: منتجات جديدة وعروض ورمضان.',
-   dEn:'Social media content for a Saudi burger brand: new items, offers and Ramadan.',
-   bAr:'براند برجر جديد في سوق زحمة، ومحتاج شكل دافي يتعرف من أول بوست.',
-   bEn:'A new burger brand in a crowded market needed a warm look people would recognise from the first post.',
-   aAr:'أخدت الألوان من لون العلبة نفسها، وقرّبت الكادر على الأكل وملمسه، وخليت العنوان العربي هو اللي قايد التصميم.',
-   aEn:'I took the palette from the packaging, cropped in close on the food and its texture, and let the Arabic headline lead each design.',
-   oAr:'بوستات رمضان والعروض والمنتجات الجديدة كلها بنفس الشكل، ومفيش بوست شبه التاني.',
-   oEn:'Ramadan, offer and new-item posts all share one look, and no two posts are the same.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـPORATI، براند ساندويتشات سعودي. ساعدته يبني شكل دافي ثابت لحسابه، ويعرض منتجاته الجديدة وعروضه ومحتوى رمضان بنفس الروح.',
+   dEn:'My social media design work for PORATI, a Saudi sandwich brand. I helped it build a warm, consistent look for its account and present new items, offers and Ramadan content in the same style.'},
 
   {id:'sabiq',color:'#2ea9e0',n:'SABEQ',yr:'2026',cnt:13,w:1080,h:1350,
    cAr:'سوشيال ميديا — وكالة تسويق',cEn:'Social Media — Marketing Agency',
-   dAr:'محتوى لوكالة تسويق سعودية. كل بوست بيشرح فكرة تسويقية واحدة في صورة واحدة.',
-   dEn:'Content for a Saudi marketing agency. Each post explains one marketing idea in a single image.',
-   bAr:'الوكالة بتبيع خدمة مبتتشافش، فمحتواها هو اللي لازم يثبت شطارتها.',
-   bEn:'The agency sells a service you can’t see, so its own content has to prove its skill.',
-   aAr:'ثبّتّ الأزرق والبرتقالي على خلفية فاتحة، وبنيت كل بوست على تشبيه واحد زي الشطرنج أو المراية أو العدسة المكبّرة أو قناع البطل، والعنوان سطرين بخط عريض.',
-   aEn:'I fixed a blue and orange palette on a light background and built each post on one metaphor, such as chess, a mirror, a magnifier or a hero’s cape, with a bold two-line headline.',
-   oAr:'حساب شكله شغل وكالة محترفة من أول تصميم.',
-   oEn:'A feed that looks like professional agency work from the first design.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـSABEQ، وكالة تسويق سعودية. ساعدتها تشرح أفكارها التسويقية في صور بسيطة، وتبان قدام عملائها كوكالة محترفة.',
+   dEn:'My social media design work for SABEQ, a Saudi marketing agency. I helped it explain its marketing ideas in simple images and come across to clients as a professional agency.'},
 
   {id:'fcacourses',color:'#7a5cf0',n:'FCA COURSES',yr:'2026',cnt:12,w:1065,h:1400,
    cAr:'إعلانات — تعليم وتدريب',cEn:'Advertising — Education & Training',
-   dAr:'حملة لبرنامج تدريبي بريطاني في إدارة مبيعات مراكز اللياقة، موجّهة للسوق الخليجي.',
-   dEn:'A campaign for a British training programme in sales management for fitness centres, aimed at the Gulf market.',
-   bAr:'كورس غالي، لازم يبان معتمد وجاد، ولازم الأول يقنع صاحب المركز إن عنده مشكلة.',
-   bEn:'An expensive course had to look accredited and serious, and first had to convince gym owners that they had a problem.',
-   aAr:'بنيت الحملة على مواقف بتحصل فعلًا في المراكز: عميل بيمشي، أرقام مبيعات ضعيفة، فريق مش منظّم. كله بلون بنفسجي واحد، وشعارات الاعتماد ثابتة تحت كل تصميم.',
-   aEn:'I built the campaign on situations gym owners know: a client leaving, weak sales numbers, a disorganised team. Everything is in one purple, with the accreditation logos fixed at the bottom of every design.',
-   oAr:'سلسلة بوستات بتبدأ بالمشكلة وبتخلص بالتسجيل، وكل بوست فيها مختلف عن اللي قبله.',
-   oEn:'A series of posts that starts with the problem and ends with sign-up, with every post different from the one before.'},
+   dAr:'أعمالي في التصميم الإعلاني لـFCA COURSES، برنامج تدريبي بريطاني في إدارة مبيعات مراكز اللياقة موجّه للخليج. ساعدته يوصّل قيمة البرنامج لأصحاب المراكز، ويبان معتمد وجاد.',
+   dEn:'My advertising design work for FCA COURSES, a British training programme in sales management for fitness centres, aimed at the Gulf. I helped it show gym owners the value of the programme and look accredited and serious.'},
 
-  {id:'tomor',color:'#c07a2e',n:'TOMOR MAKKAH',yr:'2025',cnt:8,w:1080,h:1350,
+  {id:'tomor',color:'#c07a2e',n:'AL KREDA DATES',yr:'2025',cnt:8,w:1080,h:1350,
    cAr:'سوشيال ميديا — تمور ومنتجاتها',cEn:'Social Media — Dates & Confectionery',
-   dAr:'محتوى لبراند تمور من مكة المكرمة: معمول وحلويات ومنتجات تمر طبيعية.',
-   dEn:'Content for a dates brand from Makkah: maamoul, sweets and natural date products.',
-   bAr:'منتج تقليدي محتاج يبان عصري ويفضل فيه الإحساس التراثي.',
-   bEn:'A traditional product had to look modern and keep its heritage feel.',
-   aAr:'استخدمت إضاءة دافية وخلفيات نخيل مع خط عربي مرتّب، وشريط ثابت لبيانات التواصل تحت كل تصميم.',
-   aEn:'I used warm light and palm backgrounds with tidy Arabic type, and a fixed contact strip at the bottom of every design.',
-   oAr:'شكل واحد ماشي على كل المنتجات، وأي منتج جديد بيتضاف عليه بسهولة.',
-   oEn:'One look that works across every product and is easy to extend to new ones.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا للكريدا للتمور، براند تمور من مكة المكرمة. ساعدته يقدّم منتج تراثي بشكل عصري، ويوحّد شكل كل منتجاته من المعمول للحلويات.',
+   dEn:'My social media design work for Al Kreda Dates, a dates brand from Makkah. I helped it present a traditional product in a modern way and give all its products, from maamoul to sweets, one look.'},
 
   {id:'rafeeq',color:'#17a398',n:'RAFEEQ',yr:'2025',cnt:8,w:1050,h:1400,
    cAr:'سوشيال ميديا — سياحة علاجية',cEn:'Social Media — Medical Tourism',
-   dAr:'محتوى لخدمة مرافقة علاجية من السعودية للقاهرة.',
-   dEn:'Content for a medical travel companion service from Saudi Arabia to Cairo.',
-   bAr:'الخدمة جديدة على الناس، فكل بوست لازم يشرحها ويطمّن عليها في نفس الوقت.',
-   bEn:'The service was new to people, so each post had to explain it and reassure them at the same time.',
-   aAr:'استخدمت مشاهد من المطار ومعالم القاهرة، ولون أخضر هادي، وكلام قصير بيوصف الموقف اللي المسافر فيه.',
-   aEn:'I used scenes from the airport and Cairo landmarks, a calm green, and short copy describing the situation the traveller is in.',
-   oAr:'محتوى بيحسّس المسافر إن فيه حد معاه، وده كان هدف البراند.',
-   oEn:'Content that tells the traveller someone is with them, which was the brand’s goal.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـRAFEEQ، خدمة مرافقة علاجية من السعودية لمصر. ساعدتها تشرح خدمة جديدة على الناس، وتطمّن المسافر قبل رحلته.',
+   dEn:'My social media design work for RAFEEQ, a medical travel companion service from Saudi Arabia to Egypt. I helped it explain a service that was new to people and reassure travellers before their trip.'},
 
   {id:'tirawi',color:'#17b6c9',n:'TIRAWI',yr:'2026',cnt:8,w:1080,h:1440,
    cAr:'سوشيال ميديا — مطابخ وأثاث خشبي',cEn:'Social Media — Kitchens & Woodwork',
-   dAr:'محتوى لمصنع مطابخ وأثاث خشبي بيفصّل على المقاس.',
-   dEn:'Content for a workshop that builds kitchens and wooden furniture to measure.',
-   bAr:'السوق مليان ورش شبه بعض، والبراند عاوز يوصّل إن شغله بيتفصّل على مقاس البيت.',
-   bEn:'The market is full of similar workshops, and the brand wanted to show that its work is built to fit each home.',
-   aAr:'ثبّتّ لون تركوازي واحد، وبنيت كل تصميم على فكرة واحدة: مطبخ جوه طبق، شريط قياس لافف حوالين بيت، أوضة جوه زرار كيبورد. والكلام سطرين.',
-   aEn:'I fixed one turquoise and built each design on a single idea: a kitchen on a plate, a tape measure wrapped around a house, a room inside a keyboard key. The copy is two lines.',
-   oAr:'تصاميم الفكرة فيها هي اللي بتشد، وبراند بيتعرف من لونه قبل ما اسمه يتقرا.',
-   oEn:'Designs where the idea does the pulling, and a brand you recognise by its colour before you read its name.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـTIRAWI، مصنع مطابخ وأثاث خشبي. ساعدته يتميّز عن الورش الشبه بعض بأفكار بصرية مختلفة، ويثبّت لون واحد يتعرف بيه.',
+   dEn:'My social media design work for TIRAWI, a maker of kitchens and wooden furniture. I helped it stand apart from similar workshops with distinct visual ideas and settle on one colour it is known by.'},
 
   {id:'accounting',color:'#1f4f9c',n:'AL HAMLI & PARTNERS',yr:'2026',cnt:11,w:1080,h:1080,
    cAr:'سوشيال ميديا — محاسبة واستشارات مالية',cEn:'Social Media — Accounting & Advisory',
-   dAr:'محتوى لمكتب محاسبة ومراجعة سعودي عن الزكاة والضرائب والحوكمة والشركات العائلية.',
-   dEn:'Content for a Saudi accounting and audit firm, covering zakat, tax, governance and family businesses.',
-   bAr:'مواضيع جافة وتقنية، ولازم يفهمها صاحب الشركة وتفضل جادة.',
-   bEn:'Dry, technical subjects that a business owner has to understand, while staying serious.',
-   aAr:'كل تصميم بيبدأ بسؤال موجّه لصاحب الشركة، ومعاه مشهد ثلاثي الأبعاد بيشرح الفكرة زي عقار وعملات أو مفتاح أو بوصلة، بكحلي وأخضر ثابتين.',
-   aEn:'Each design opens with a question to the business owner, next to a 3D scene that explains the idea, such as property and coins, a key or a compass, in a fixed navy and green.',
-   oAr:'كل خدمة معقدة بتتشرح في صورة واحدة، والمكتب شكله شكل مؤسسة كبيرة.',
-   oEn:'Each complex service is explained in one image, and the firm looks like a large institution.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـAL HAMLI & PARTNERS، مكتب محاسبة ومراجعة سعودي. ساعدته يبسّط مواضيع زي الزكاة والضرائب لصاحب الشركة، ويحسّن صورته كمؤسسة كبيرة.',
+   dEn:'My social media design work for AL HAMLI & PARTNERS, a Saudi accounting and audit firm. I helped it simplify subjects like zakat and tax for business owners and strengthen its image as a large institution.'},
 
   {id:'skymed',color:'#2b8fd6',n:'SKYMED',yr:'2026',cnt:10,w:1080,h:1350,
    cAr:'سوشيال ميديا — رعاية سمعية ونطق',cEn:'Social Media — Hearing & Speech Care',
-   dAr:'محتوى لمركز سمعيات ونطق عن الفحص المبكر والسماعات الطبية.',
-   dEn:'Content for a hearing and speech centre about early screening and hearing aids.',
-   bAr:'الموضوع حساس. لازم يوصّل إن التأخير خطر، من غير ما يخوّف الأهل أو يحرج المريض.',
-   bEn:'A sensitive subject. It had to show that waiting is risky without frightening parents or embarrassing the patient.',
-   aAr:'أزرق طبي هادي وإضاءة ناعمة ومشاهد عيلة عادية، والتنبيه الوحيد علامة حمرا صغيرة على الودن.',
-   aEn:'A calm medical blue, soft light and ordinary family scenes. The only alert is a small red mark on the ear.',
-   oAr:'محتوى توعوي هادي بيخلّي حجز الفحص خطوة عادية.',
-   oEn:'Calm awareness content that makes booking a screening feel like an ordinary step.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـSKYMED، مركز سمعيات ونطق. ساعدته يوعّي الأهل بأهمية الفحص المبكر بهدوء ومن غير تخويف.',
+   dEn:'My social media design work for SKYMED, a hearing and speech centre. I helped it raise awareness of early screening among parents in a calm way, without scaring them.'},
 
   {id:'careoncall',color:'#8b5cf6',n:'CARE ON CALL',yr:'2026',cnt:9,w:1080,h:1350,
    cAr:'سوشيال ميديا — رعاية صحية منزلية',cEn:'Social Media — Home Healthcare',
-   dAr:'محتوى لخدمة رعاية طبية في البيت.',
-   dEn:'Content for a home healthcare service.',
-   bAr:'المحتوى الطبي لازم يبان موثوق ويتفهم بسهولة، ومن غير ما يخوّف.',
-   bEn:'Medical content has to look credible and be easy to understand, without frightening anyone.',
-   aAr:'شبكة مرتّبة، ولون بنفسجي أساسي واحد، وقوايم خدمات واضحة. كل معلومة ليها مكانها.',
-   aEn:'A tidy grid, one main purple and clear service lists. Every piece of information has its place.',
-   oAr:'حساب مرتّب، المريض بيلاقي فيه الخدمة اللي محتاجها بسرعة.',
-   oEn:'A tidy feed where a patient quickly finds the service they need.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـCARE ON CALL، خدمة رعاية طبية في البيت. ساعدتها تعرض خدماتها بشكل مرتّب وواضح يزوّد ثقة المريض فيها.',
+   dEn:'My social media design work for CARE ON CALL, a home healthcare service. I helped it present its services in a clear, organised way that builds patient trust.'},
 
   {id:'adyar',color:'#c9a05e',n:'ADYAR',yr:'2026',cnt:8,w:1080,h:1350,
    cAr:'سوشيال ميديا — مجوهرات',cEn:'Social Media — Fine Jewellery',
-   dAr:'محتوى هادي لمجوهرات أديار: سبائك ذهب وألماس وقطع يومية.',
-   dEn:'Quiet content for Adyar Jewellery: gold ingots, diamonds and everyday pieces.',
-   bAr:'المجوهرات دايمًا بتتصوّر بنفس الطريقة اللامعة، والبراند عاوز يبان راقي وهادي.',
-   bEn:'Jewellery is usually shot in the same shiny way, and this brand wanted to look refined and quiet.',
-   aAr:'اشتغلت بضوء طبيعي دافي وخلفيات حجر ترافرتين وقماش، وخليت الخط رفيع ومتباعد عشان القطعة تاخد العين.',
-   aEn:'I worked with warm natural light, travertine and fabric backgrounds, and thin, widely spaced type so the piece gets the attention.',
-   oAr:'شكل واحد للسبائك والألماس والقلوب، يخلّي البراند يتعرف من غير اللوجو.',
-   oEn:'One look across the ingots, diamonds and hearts, so the brand is recognisable without its logo.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـADYAR للمجوهرات. ساعدتها تبان براند راقي وهادي، بشكل واحد للسبائك والألماس والقطع اليومية.',
+   dEn:'My social media design work for ADYAR Jewellery. I helped it look refined and quiet, with one look across ingots, diamonds and everyday pieces.'},
 
   {id:'baraa',color:'#2a74cf',n:'AL-BARAA AC',yr:'2025',cnt:10,w:1050,h:1400,
    cAr:'إعلانات — تكييف وتبريد',cEn:'Advertising — Air Conditioning',
-   dAr:'حملة موسمية لوكيل تكييف في رام الله، للصيف والشتا بنفس الشكل.',
-   dEn:'A seasonal campaign for an air-conditioning dealer in Ramallah, with one look for summer and winter.',
-   bAr:'التكييف منتج إعلاناته مملة، فكان لازم يتباع بالإحساس اللي بيديه.',
-   bEn:'Air conditioning makes for dull ads, so it had to be sold through the feeling it gives.',
-   aAr:'حطيت الجهاز جوه مشاهد من الحياة: أوضة طفل، قعدة عيلة، جيم. بلون أزرق واحد وكلام عامي قصير.',
-   aEn:'I placed the unit in everyday scenes: a child’s room, a family evening, a gym. One blue, with short colloquial copy.',
-   oAr:'حملة تتكرر كل موسم بنفس النظام، وبيانات الفرع ثابتة تحت كل تصميم.',
-   oEn:'A campaign that can run every season on the same system, with branch details fixed under each design.'},
+   dAr:'أعمالي في التصميم الإعلاني لـAL-BARAA AC، وكيل تكييف في رام الله. ساعدته يبيع التكييف بالإحساس اللي بيديه في البيت، بحملة واحدة للصيف والشتا.',
+   dEn:'My advertising design work for AL-BARAA AC, an air-conditioning dealer in Ramallah. I helped it sell air conditioning through the feeling it gives at home, with one campaign for summer and winter.'},
 
   {id:'fcafitness',color:'#1b8fd6',n:'FCA FITNESS',yr:'2025',cnt:16,w:1080,h:1080,
    cAr:'سوشيال ميديا — استشارات رياضية',cEn:'Social Media — Sports Consulting',
-   dAr:'محتوى لأكاديمية استشارات لياقة، بالعربي والإنجليزي في نفس الحساب.',
-   dEn:'Content for a fitness consulting academy, in Arabic and English on the same account.',
-   bAr:'الأكاديمية بتكلّم مدربين وأصحاب مراكز في نفس الوقت، وكل واحد فيهم محتاج نبرة مختلفة.',
-   bEn:'The academy talks to trainers and gym owners at once, and each group needs a different tone.',
-   aAr:'عملت نظام أزرق غامق بإضاءة سينمائية: صور رياضية للمدربين، ومشاهد بدل وأرقام لأصحاب المراكز، بنفس الشبكة ونفس اللوجو في كل بوست.',
-   aEn:'I built a dark blue system with cinematic light: athletic images for trainers, suits and numbers for owners, on the same grid with the same logo in every post.',
-   oAr:'حساب واحد بيخدم الجمهورين وشكله واحد.',
-   oEn:'One account that serves both audiences and still looks like one.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـFCA FITNESS، أكاديمية استشارات لياقة. ساعدتها تكلّم المدربين وأصحاب المراكز من حساب واحد بالعربي والإنجليزي.',
+   dEn:'My social media design work for FCA FITNESS, a fitness consulting academy. I helped it speak to trainers and gym owners from one account, in Arabic and English.'},
 
   {id:'verno',color:'#7fa8c9',n:'VERNO',yr:'2025',cnt:6,w:1080,h:1350,
    cAr:'سوشيال ميديا — ملابس شتوية',cEn:'Social Media — Winterwear',
-   dAr:'حملة شتوية لبراند ملابس سعودي، مبنية على مقارنة بين البرد والدفا.',
-   dEn:'A winter campaign for a Saudi clothing brand, built on a contrast between cold and warm.',
-   bAr:'البراند عاوز يبيع الدفا نفسه، والرسالة لازم تتفهم من الصورة قبل الكلام.',
-   bEn:'The brand wanted to sell warmth itself, and the message had to be clear from the image before any text.',
-   aAr:'عملت مشهد بارد أزرق قصاد مشهد دافي بلون البراند، وكررت نفس التركيب في كل بوست.',
-   aEn:'I set a cold blue scene against a warm one in the brand colour, and repeated that layout in every post.',
-   oAr:'حملة رسالتها بتتفهم من أول نظرة، وينفع تتعمل لأي منتج جديد.',
-   oEn:'A campaign whose message is clear at a glance, and that can be reused for any new product.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـVERNO، براند ملابس شتوية سعودي. ساعدته يوصّل إحساس الدفا في صورة واحدة تتفهم من أول نظرة.',
+   dEn:'My social media design work for VERNO, a Saudi winterwear brand. I helped it get the feeling of warmth across in a single image that is clear at a glance.'},
 
-  {id:'maalem',color:'#17855f',n:'MAALEM',yr:'2025',cnt:6,w:1080,h:1350,
+  {id:'maalem',color:'#17855f',n:'MALDORA',yr:'2025',cnt:6,w:1080,h:1350,
    cAr:'سوشيال ميديا — عطور',cEn:'Social Media — Fragrance',
-   dAr:'محتوى لبراند عطور: إضاءة درامية وخلفيات طبيعية حوالين القزازة.',
-   dEn:'Content for a fragrance brand: dramatic light and natural backgrounds around the bottle.',
-   bAr:'العطر لازم يبان غالي، والتصوير لوحده مكانش كفاية، فكان لازم مشهد كامل يتبني حواليه.',
-   bEn:'A fragrance has to look expensive. Photography alone was not enough, so a full scene had to be built around it.',
-   aAr:'ركّبت القزازة بالمانيبوليشن في أماكن طبيعية زي الصخر والمية والضباب، مع أخضر غامق ثابت في الحملة كلها.',
-   aEn:'I composited the bottle into natural settings such as rock, water and mist, with one deep green across the whole campaign.',
-   oAr:'سلسلة صور بشكل واحد، تدي إحساس براند عالمي.',
-   oEn:'A series with one look that feels like an international brand.'},
+   dAr:'أعمالي في تصميم السوشيال ميديا لـMALDORA للعطور. ساعدته يبان براند فخم، بمشاهد Manipulation طبيعية حوالين القزازة.',
+   dEn:'My social media design work for MALDORA fragrances. I helped it look premium, with composited natural scenes around the bottle.'},
 
   {id:'yallabaytak',color:'#3ca06f',n:'YALLA BAYTAK',yr:'2025',cnt:6,w:1080,h:1350,
    cAr:'إعلانات — عقارات',cEn:'Advertising — Real Estate',
-   dAr:'حملة لمنصة عقارية إماراتية، بتشرح الخدمة قبل ما تعرض الوحدة.',
-   dEn:'A campaign for a UAE property platform that explains the service before showing a unit.',
-   bAr:'المنصة بتقدّم خدمة، وإعلانات العقارات المعتادة بتعرض وحدات وبس.',
-   bEn:'The platform offers a service, while typical property ads only show units.',
-   aAr:'عملت نظام معلومات بسيط: ميزة واحدة في كل تصميم، وخلفية فاتحة، ولون أخضر واحد للحملة كلها.',
-   aEn:'I built a simple information system: one benefit per design, a light background and one green for the whole campaign.',
-   oAr:'حملة عرضها بيتفهم في ثانيتين، وماشية بالعربي والإنجليزي.',
-   oEn:'A campaign whose offer is clear in two seconds, in both Arabic and English.'},
+   dAr:'أعمالي في التصميم الإعلاني لـYALLA BAYTAK، منصة عقارية إماراتية. ساعدتها تشرح خدمتها ببساطة، ميزة واحدة في كل تصميم، بالعربي والإنجليزي.',
+   dEn:'My advertising design work for YALLA BAYTAK, a UAE property platform. I helped it explain its service simply, one benefit per design, in Arabic and English.'},
 
   {id:'formula1',color:'#e14a3a',n:'FORMULA 1',yr:'2025',cnt:4,w:1080,h:1352,
-   cAr:'مانيبوليشن — بوسترات رياضية',cEn:'Manipulation — Sports Posters',
-   dAr:'سلسلة بوسترات لسواقين فورمولا 1: تركيب وريتاتش وإضاءة درامية.',
-   dEn:'A poster series of Formula 1 drivers: compositing, retouching and dramatic light.',
-   bAr:'البوستر الرياضي لازم يوصّل لحظة الفوز في صورة واحدة، من عناصر متصوّرة في أماكن وأوقات مختلفة.',
-   bEn:'A sports poster has to show a moment of victory in one image, using elements shot in different places and at different times.',
-   aAr:'وحّدت الإضاءة والألوان بين كل العناصر، وعملت عمق من تلات طبقات: السواق قدام، والعربية في النص، والحلبة ورا، مع خط رياضي تقيل.',
-   aEn:'I matched the light and colour across all the elements and built depth in three layers: the driver in front, the car in the middle and the circuit behind, with heavy sports type.',
-   oAr:'بوسترات شكلها كأنها متصوّرة مرة واحدة.',
-   oEn:'Posters that look as if they were shot in one take.'},
+   cAr:'Manipulation — بوسترات رياضية',cEn:'Manipulation — Sports Posters',
+   dAr:'أعمالي في الـManipulation: سلسلة بوسترات لسواقين فورمولا 1، بتركيب وريتاتش وإضاءة درامية.',
+   dEn:'My manipulation work: a poster series of Formula 1 drivers, with compositing, retouching and dramatic light.'},
 
   {id:'furniture',color:'#a08b6d',n:'ONE HOUSE',yr:'2025',cnt:6,w:1080,h:1350,
    cAr:'إعلانات — أثاث وديكور',cEn:'Advertising — Furniture & Decor',
-   dAr:'إعلانات لمعرض أثاث، بتبيّن الخامة وبتدعو لزيارة المعرض.',
-   dEn:'Ads for a furniture showroom that show the material and invite people to visit.',
-   bAr:'إعلانات المعرض القديمة كانت بتعرض القطعة والخامة مش باينة فيها.',
-   bEn:'The showroom’s earlier ads showed each piece, but the material was not visible.',
-   aAr:'ظبطت الإضاءة والريتاتش عشان القماش والخشب يبانوا، وحطيت العنوان في مساحة فاضية.',
-   aEn:'I adjusted the lighting and retouching so the fabric and wood show, and placed the headline in empty space.',
-   oAr:'حملة لكل قطعة تصميمها، ماشية على كل المقاسات، والمنتج باين فيها يستاهل سعره.',
-   oEn:'A campaign with one design per piece that works at every size and makes the product look worth its price.'},
+   dAr:'أعمالي في التصميم الإعلاني لـONE HOUSE، معرض أثاث. ساعدته يبيّن خامة كل قطعة، ويشجّع الناس تزور المعرض.',
+   dEn:'My advertising design work for ONE HOUSE, a furniture showroom. I helped it show the material of each piece and encourage people to visit.'},
 ];
 
 /* ---------- الترجمات ---------- */
@@ -1214,10 +1122,10 @@ const STR = {
     sec_work_n:'أعمالي', sec_work_t:'مشاريع مختارة', sec_work_d:'كل مشروع هنا وراءه قصة — اضغط على أي مشروع لتشاهد التصاميم كاملة.',
     view_all:'عرض كل الأعمال',
     ab_n:'من أنا', ab_t:'خمس سنوات جنب البراندات', ab_d:'من أول كونسبت لآخر ريتاتش — وكالات وبراندات مباشرة في أربع أسواق.',
-    ab_lede:'أنا كرم — مصمم جرافيك من القاهرة، بشتغل عن بُعد مع <b>وكالات وبراندات</b> في مصر والخليج وشمال أفريقيا وأوروبا.',
+    ab_lede:'أنا كرم — مصمم جرافيك من مصر، بشتغل عن بُعد مع <b>وكالات وبراندات</b> في مصر والخليج وشمال أفريقيا وأوروبا.',
     ab_body:'تخصصي الأساسي: تصميم السوشيال ميديا، الإعلانات، الهوية البصرية، وشغل المانيبوليشن. اشتغلت في المأكولات والمشروبات، الرعاية الصحية، العقارات، الريتيل، والسياحة — وكل قطاع فيهم علّمني إن التصميم الشغّال هو اللي بيفهم جمهوره الأول.',
     ab_tl_n:'الخبرات',
-    am_loc:'المكان', am_loc_v:'القاهرة، مصر · متاح ريموت',
+    am_loc:'المكان', am_loc_v:'مصر · متاح ريموت',
     am_lang:'اللغات', am_lang_v:'عربي (لغة أم) · إنجليزي (احترافي)',
     am_sect:'القطاعات', am_sect_v:'مأكولات ومشروبات · رعاية صحية · عقارات · ريتيل · سياحة · رياضة',
     am_focus:'التخصص', am_focus_v:'سوشيال ميديا · إعلانات · هوية بصرية · مانيبوليشن',
@@ -1284,10 +1192,10 @@ const STR = {
     sec_work_n:'Work', sec_work_t:'Selected Projects', sec_work_d:'Every project here has a story behind it — open any one to see the full set of designs.',
     view_all:'View All Work',
     ab_n:'About', ab_t:'Five Years Beside Brands', ab_d:'From the first concept to the final retouch — agencies and direct brands across four markets.',
-    ab_lede:'I’m Karam — a graphic designer based in Cairo, working remotely with <b>agencies and direct brands</b> across Egypt, the Gulf, North Africa and Europe.',
+    ab_lede:'I’m Karam — a graphic designer based in Egypt, working remotely with <b>agencies and direct brands</b> across Egypt, the Gulf, North Africa and Europe.',
     ab_body:'My focus is social media design, advertising, visual identity and manipulation work. I’ve worked across food &amp; beverage, healthcare, real estate, retail and travel — and each one taught me the same thing: the design that works is the one that understands its audience first.',
     ab_tl_n:'Experience',
-    am_loc:'Based In', am_loc_v:'Cairo, Egypt · Open to Remote',
+    am_loc:'Based In', am_loc_v:'Egypt · Open to Remote',
     am_lang:'Languages', am_lang_v:'Arabic (Native) · English (Professional)',
     am_sect:'Sectors', am_sect_v:'F&amp;B · Healthcare · Real Estate · Retail · Travel · Sport',
     am_focus:'Focus', am_focus_v:'Social Media · Advertising · Visual Identity · Manipulation',
@@ -1363,38 +1271,38 @@ function t(k){ const v = STR[LANG] && STR[LANG][k]; return (v===undefined ? (STR
 Object.assign(STR.ar, {
   nav_wa:'كلّمني',
   hero_label:'متاح لمشاريع جديدة',
-  hb_title:'بصمّم البوست اللي صباعك <em>بيقف</em> عنده.',
+  hb_title:'مصمم جرافيك للسوشيال&nbsp;ميديا <em>والإعلانات</em>',
   hv_role:'مصمم سوشيال ميديا وإعلانات', hv_designs:'تصميم', hv_brands:'لـ{n} براند في المعرض',
-  wall_t:'آخر شغلي', wall_d:'{d} تصميم من {n} مشروع. اضغط على أي تصميم وافتح المشروع كامل.', wall_btn:'كل الأعمال',
+  wall_t:'آخر شغلي', wall_btn:'كل الأعمال',
   mo_pause:'وقّف الحركة', mo_play:'شغّل الحركة',
   brands_t:'براندات صمّمت لها في السعودية والخليج ومصر وأوروبا',
   srv_t:'بصمّم إيه', srv_d:'ده اللي بشتغل فيه كل يوم.',
   srv1t:'تصاميم سوشيال ميديا', srv1d:'بوستات وكاروسيل وستوريز كل شهر، بشكل واحد ثابت للحساب كله.',
-  srv2t:'إعلانات', srv2d:'إعلانات ممولة، كل إعلان فيه عرض واحد وزرار واحد.',
-  srv3t:'كي فيجوال', srv3d:'الصورة الرئيسية لحملة أو منتج جديد أو موسم زي رمضان.',
-  srv4t:'مانيبوليشن', srv4d:'بركّب كذا صورة في مشهد واحد يبان كأنه متصوّر مرة واحدة.',
-  srv5t:'الـAI في التصميم', srv5d:'بستخدم أدوات زي Kling وRunway جنب فوتوشوب في شغلي.',
+  srv2t:'Advertising Design', srv2d:'تصاميم إعلانية، كل تصميم فيه عرض واحد ورسالة واحدة.',
+  srv3t:'Key Visual', srv3d:'الصورة الرئيسية لحملة أو منتج جديد أو موسم زي رمضان.',
+  srv4t:'Manipulation', srv4d:'بركّب كذا صورة في مشهد واحد يبان كأنه متصوّر مرة واحدة.',
+  srv5t:'الـAI في التصميم', srv5d:'بستخدم Higgsfield وMagnific، وأدوات زي Claude وChatGPT وFlow.',
   sel_d:'افتح أي مشروع وشوف كل تصاميمه والبريف بتاعه.',
   hp_more:'التفاصيل', hp_btn:'قارن الباقات',
   cur_l:'الأسعار بـ', per_m:'/ شهريًا', wa_float:'كلّمني واتساب',
   rv_t:'العملاء بيقولوا إيه', rv_d:'كلام حقيقي من براندات اشتغلت معاها.',
-  hb_sub:'أنا كرم حراز، مصمم سوشيال ميديا وإعلانات من القاهرة. بقالي خمس سنين بصمّم بوستات وحملات لبراندات في السعودية والخليج ومصر وأوروبا.',
+  hb_sub:'أنا كرم حراز من مصر. بقالي أكتر من خمس سنين بصمّم بوستات وحملات لبراندات في السعودية والخليج ومصر وأوروبا.',
   cta_work:'شوف أعمالي', cta_wa:'كلّمني واتساب',
   st1:'سنين خبرة', st2:'براند اشتغلت معاه', st3:'تصميم اتسلّم',
   sel_t:'أعمال مختارة',
   pb_open:'افتح المشروع', pb_n:'{n} تصميم',
   all_t:'باقي المشاريع في صفحة الأعمال.', all_btn:'شوف الـ{n} مشروع كلهم',
   hero_pause:'وقّف العرض', hero_play:'شغّل العرض',
-  ab_t:'خمس سنين في تصميم السوشيال ميديا',
-  ab_place:'القاهرة، مصر',
-  ab_lede:'أنا كرم، مصمم جرافيك من القاهرة، بشتغل عن بُعد مع <b>وكالات وبراندات</b> في مصر والخليج وشمال أفريقيا وأوروبا.',
-  ab_body:'بشتغل في السوشيال ميديا والإعلانات والكي فيجوال والمانيبوليشن، وبستخدم الـAI في التصميم. عملائي كانوا في المأكولات والمشروبات، والرعاية الصحية، والعقارات، والريتيل، والسياحة. اشتغلت مع وكالات زي FP7 McCann وBRIXEL، وحاليًا مع Mentad.',
-  am_focus_v:'سوشيال ميديا، إعلانات، كي فيجوال، مانيبوليشن، والـAI في التصميم',
-  am_loc_v:'القاهرة، مصر، ومتاح عن بُعد',
+  ab_t:'أكتر من خمس سنين في تصميم الجرافيك',
+  ab_place:'مصر',
+  ab_lede:'أنا كرم، مصمم جرافيك من مصر، بشتغل عن بُعد مع <b>وكالات وبراندات</b> في مصر والخليج وشمال أفريقيا وأوروبا.',
+  ab_body:'بشتغل في السوشيال ميديا والإعلانات والـKey Visual والـManipulation والشغل الـCommercial، وبستخدم الـAI في التصميم. عملائي كانوا في المأكولات والمشروبات، والرعاية الصحية، والعقارات، والريتيل، والسياحة. اشتغلت مع وكالات زي FP7 McCann وBRIXEL، وحاليًا مع Mentad.',
+  am_focus_v:'سوشيال ميديا، إعلانات، Key Visual، Manipulation، Commercial، والـAI في التصميم',
+  am_loc_v:'مصر، ومتاح عن بُعد',
   am_lang_v:'العربي (لغتي الأم) والإنجليزي (احترافي)',
   am_sect_v:'مأكولات ومشروبات، رعاية صحية، عقارات، ريتيل، سياحة، ورياضة',
   pr_d:'أربع خطوات، من أول مكالمة لحد الملفات النهائية.',
-  feat_d:'خمس سنين، وأكتر من 45 براند، وأكتر من 850 تصميم.',
+  feat_d:'أكتر من خمس سنين، وأكتر من 45 براند، وأكتر من 850 تصميم.',
   sec_work_t2:'كل الأعمال',
   sec_work_d:'افتح أي مشروع وشوف كل تصاميمه.',
   sec_packs_d:'عدد تصاميم ثابت كل شهر بسعر ثابت.',
@@ -1428,44 +1336,45 @@ Object.assign(STR.ar, {
   fit3:'براند بينشر كل يوم ومحتاج مصمم كأنه من الفريق.',
   f3_1:'30 تصميم، يعني تصميم كل يوم',
   f3_3:'آرت دايركشن للحساب كله',
+  pay_all:'يتوفر جميع طرق الدفع',
 });
 Object.assign(STR.en, {
   nav_wa:'Let’s Talk',
   hero_label:'Available for New Projects',
-  hb_title:'I design the post your thumb <em>stops</em> at.',
+  hb_title:'Graphic Designer for Social Media <em>&amp; Advertising</em>',
   hv_role:'Social Media &amp; Ad Designer', hv_designs:'Designs', hv_brands:'For {n} brands in this portfolio',
-  wall_t:'Recent Work', wall_d:'{d} designs across {n} projects. Tap any design to open the full project.', wall_btn:'All Work',
+  wall_t:'Recent Work', wall_btn:'All Work',
   mo_pause:'Pause Motion', mo_play:'Play Motion',
   brands_t:'Brands I’ve designed for in Saudi Arabia, the Gulf, Egypt and Europe',
   srv_t:'What I Design', srv_d:'This is what I work on every day.',
   srv1t:'Social Media Design', srv1d:'Posts, carousels and stories every month, in one consistent look for the whole account.',
-  srv2t:'Advertising', srv2d:'Paid ads. Each one carries one offer and one call to action.',
-  srv3t:'Key Visuals', srv3d:'The main image for a campaign, a new product or a season like Ramadan.',
-  srv4t:'Photo Manipulation', srv4d:'I combine several photos into one scene that looks like it was shot in one take.',
-  srv5t:'AI in Design', srv5d:'I use tools like Kling and Runway alongside Photoshop.',
+  srv2t:'Advertising Design', srv2d:'Ad designs. Each one carries one offer and one message.',
+  srv3t:'Key Visual', srv3d:'The main image for a campaign, a new product or a season like Ramadan.',
+  srv4t:'Manipulation', srv4d:'I combine several photos into one scene that looks like it was shot in one take.',
+  srv5t:'AI in Design', srv5d:'I use Higgsfield and Magnific, and tools like Claude, ChatGPT and Flow.',
   sel_d:'Open any project to see all its designs and the brief behind it.',
   hp_more:'Details', hp_btn:'Compare Packages',
   cur_l:'Prices in', per_m:'/ month', wa_float:'Message me on WhatsApp',
   rv_t:'What Clients Say', rv_d:'Real words from brands I’ve worked with.',
-  hb_sub:'I’m Karam Haraz, a social media and advertising designer in Cairo. For five years I’ve designed posts and campaigns for brands in Saudi Arabia, the Gulf, Egypt and Europe.',
+  hb_sub:'I’m Karam Haraz, based in Egypt. For more than five years I’ve designed posts and campaigns for brands in Saudi Arabia, the Gulf, Egypt and Europe.',
   cta_work:'See Selected Work', cta_wa:'Message Me on WhatsApp',
   st1:'Years of Experience', st2:'Brands Worked With', st3:'Designs Delivered',
   sel_t:'Selected Work',
   pb_open:'View Project', pb_n:'{n} Designs',
   all_t:'The rest is on the work page.', all_btn:'See All {n} Projects',
   hero_pause:'Pause Slideshow', hero_play:'Play Slideshow',
-  ab_t:'Five Years in Social Media Design',
-  ab_place:'Cairo, Egypt',
-  ab_lede:'I’m Karam, a graphic designer in Cairo working remotely with <b>agencies and direct brands</b> across Egypt, the Gulf, North Africa and Europe.',
-  ab_body:'I work on social media, advertising, key visuals and photo manipulation, and I use AI tools in my design work. My clients have been in food and beverage, healthcare, real estate, retail and travel. I’ve worked with agencies including FP7 McCann and BRIXEL, and I’m currently with Mentad.',
-  am_focus_v:'Social media, advertising, key visuals, manipulation and AI in design',
-  am_loc_v:'Cairo, Egypt, and available remotely',
+  ab_t:'More Than Five Years in Graphic Design',
+  ab_place:'Egypt',
+  ab_lede:'I’m Karam, a graphic designer in Egypt working remotely with <b>agencies and direct brands</b> across Egypt, the Gulf, North Africa and Europe.',
+  ab_body:'I work on social media, advertising, key visuals, manipulation and commercial work, and I use AI tools in my design work. My clients have been in food and beverage, healthcare, real estate, retail and travel. I’ve worked with agencies including FP7 McCann and BRIXEL, and I’m currently with Mentad.',
+  am_focus_v:'Social media, advertising, key visuals, manipulation, commercial work and AI in design',
+  am_loc_v:'Egypt, and available remotely',
   am_lang_v:'Arabic (native) and English (professional)',
   am_sect_v:'Food &amp; beverage, healthcare, real estate, retail, travel and sport',
   pr_t:'How We Work Together',
   pr_d:'Four steps, from the first call to the final files.',
   feat_t:'Why Work With Me',
-  feat_d:'Five years, more than 45 brands and more than 850 designs.',
+  feat_d:'More than five years, more than 45 brands and more than 850 designs.',
   f1t:'Agency Experience', f2t:'I Know the Gulf Market', f3t:'Agreed Deadlines and Revisions', f4t:'You Talk to Me Directly',
   f1d:'I’ve worked with agencies such as FP7 McCann, BRIXEL and First Media, so briefs and deadlines are routine for me.',
   f2d:'A large part of my work is for brands in Saudi Arabia, Kuwait and the UAE, and I design in both Arabic and English.',
@@ -1498,6 +1407,7 @@ Object.assign(STR.en, {
   fit3:'A brand that posts daily and wants a designer who works as part of the team.',
   f3_1:'30 designs, one for every day',
   f3_3:'Art direction for the whole account',
+  pay_all:'All payment methods are available',
 });
 
 /* ══════════ الأسعار حسب بلد الزائر ══════════
@@ -1922,7 +1832,6 @@ function buildHome(){
         ${thumb(p,n,!copy && i<8,copy?'':`${p.n}, ${clean(LANG==='ar'?p.cAr:p.cEn)}`)}<span translate="no">${p.n}</span></a>`).join('');
     return `<div class="mq${r?' rev':''}" style="--dur:${r?110:95}s"><div class="mq-track">${items(false)}${items(true)}</div></div>`;
   }).join('');
-  $('#wallSub').textContent = fmt('wall_d',{d:TOTAL_DESIGNS,n:PROJECTS.length});
   $('#wallAll').textContent = t('wall_btn');
 
   /* شريط البراندات */
@@ -2132,8 +2041,6 @@ function renderProject(id){
   $('#prjDesc').textContent = clean(ar?p.dAr:p.dEn);
   const be = $('#beBtn');
   be.href = BE; be.innerHTML = svgHide(ICONS.behance)+' '+t('prj_be');
-  $('#prjStory').innerHTML = [['prj_brief',ar?p.bAr:p.bEn],['prj_app',ar?p.aAr:p.aEn],['prj_out',ar?p.oAr:p.oEn]]
-    .map((b,k)=>`<div class="prj-blk rv d${k+1}"><span>${t(b[0])}</span><p>${esc(clean(b[1]))}</p></div>`).join('');
 
   LB_SET = Array.from({length:p.cnt},(_,k)=>`projects/${p.id}/${k+1}.webp`);
   LB_NAME = p.n;
@@ -2298,8 +2205,8 @@ function applyLang(){
     : 'Karam Haraz | Social Media & Advertising Designer';
   const md = $('meta[name="description"]');
   if(md) md.content = LANG==='ar'
-    ? 'كرم حراز، مصمم سوشيال ميديا وإعلانات من القاهرة. خمس سنين بصمّم بوستات وحملات لبراندات في السعودية والخليج ومصر وأوروبا.'
-    : 'Karam Haraz, a social media and advertising designer in Cairo. Five years of posts and campaigns for brands in Saudi Arabia, the Gulf, Egypt and Europe.';
+    ? 'كرم حراز، مصمم جرافيك للسوشيال ميديا والإعلانات من مصر. أكتر من خمس سنين بصمّم بوستات وحملات لبراندات في السعودية والخليج ومصر وأوروبا.'
+    : 'Karam Haraz, a graphic designer for social media and advertising, based in Egypt. More than five years of posts and campaigns for brands in Saudi Arabia, the Gulf, Egypt and Europe.';
   renderChrome();
   buildDynamic();
   newCaptcha();

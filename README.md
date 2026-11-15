@@ -184,10 +184,7 @@ const REVIEWS = [
  cnt:8,          // عدد الصور في projects/
  w:1080, h:1350, // مقاس الصورة الأصلي
  cAr:'التصنيف بالعربي', cEn:'Category in English',
- dAr:'…', dEn:'…',   // الوصف تحت العنوان
- bAr:'…', bEn:'…',   // البريف
- aAr:'…', aEn:'…',   // الأسلوب
- oAr:'…', oEn:'…'},  // النتيجة
+ dAr:'…', dEn:'…'},  // فقرة واحدة: الشغل كان لمين، وساعدت البراند في إيه
 ```
 
 **ترتيب المشاريع في الصفحة = ترتيبهم في المصفوفة. أول 6 مشاريع هم اللي بيظهروا في الرئيسية.**
@@ -202,10 +199,10 @@ const REVIEWS = [
 
 | # | المشروع | الفولدر | عدد الصور | |
 |---|---|---|---|---|
-| 1 | PORATI — مأكولات | `porati` | 6 | ★ مختار |
+| 1 | PORATI — ساندويتشات | `porati` | 6 | ★ مختار |
 | 2 | SABEQ — وكالة تسويق | `sabiq` | 13 | ★ مختار |
 | 3 | FCA COURSES — تعليم وتدريب | `fcacourses` | 12 | ★ مختار |
-| 4 | TOMOR MAKKAH — تمور | `tomor` | 8 | ★ مختار |
+| 4 | AL KREDA DATES — الكريدا للتمور | `tomor` | 8 | ★ مختار |
 | 5 | RAFEEQ — سياحة علاجية | `rafeeq` | 8 | ★ مختار |
 | 6 | TIRAWI — مطابخ وأثاث خشبي | `tirawi` | 8 | ★ مختار |
 | 7 | AL HAMLI & PARTNERS — محاسبة | `accounting` | 11 | |
@@ -215,7 +212,7 @@ const REVIEWS = [
 | 11 | AL-BARAA AC — تكييف | `baraa` | 10 | |
 | 12 | FCA FITNESS — استشارات رياضية | `fcafitness` | 16 | |
 | 13 | VERNO — ملابس شتوية | `verno` | 6 | |
-| 14 | MAALEM — عطور | `maalem` | 6 | |
+| 14 | MALDORA — عطور | `maalem` | 6 | |
 | 15 | YALLA BAYTAK — عقارات | `yallabaytak` | 6 | |
 | 16 | FORMULA 1 — مانيبوليشن | `formula1` | 4 | |
 | 17 | ONE HOUSE — أثاث | `furniture` | 6 | |
