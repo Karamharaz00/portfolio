@@ -102,6 +102,18 @@ input[type=date]{color-scheme:dark}
 .sw code{font:500 13px "Space Grotesk";color:var(--muted)}
 .hint{color:var(--dim);font-size:13px}
 
+
+/* add items */
+.extras{display:grid;gap:10px}
+.extras:empty{display:none}
+.xrow{display:flex;gap:8px;align-items:center}
+.xrow input{flex:1}
+.xdel{flex:0 0 46px;height:46px;border-radius:10px;background:var(--panel);border:1px solid var(--line);color:var(--muted);display:grid;place-items:center;transition:.15s}
+.xdel:hover{border-color:#ff8a65;color:#ff8a65}
+.add{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px dashed var(--line2);color:var(--text);font-size:14px;font-weight:500;padding:11px 16px;border-radius:10px;transition:.15s}
+.add:hover{border-color:var(--accent);color:var(--accent)}
+.add i{width:20px;height:20px;border-radius:6px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-style:normal;font-size:16px;line-height:1}
+
 /* submit */
 .submit{padding:50px 0 20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .submit p{color:var(--dim);font-size:14px;max-width:420px}
@@ -238,6 +250,8 @@ body.done form,body.done .hero,body.done .progress{display:none}
         <label class="card"><input type="checkbox" value="فلاير A4"><i class="box"><svg viewBox="0 0 12 12" fill="none" stroke="#0f0f12" stroke-width="2"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></i><div><b>فلاير A4</b><small>للتعليق أو التوزيع</small></div></label>
         <label class="card"><input type="checkbox" value="كارت شخصي / كارت النشاط"><i class="box"><svg viewBox="0 0 12 12" fill="none" stroke="#0f0f12" stroke-width="2"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></i><div><b>كارت النشاط</b><small>وجه واحد أو وجهان</small></div></label>
       </div>
+      <div class="extras" data-extras="h-print" data-ph="اكتب اسم المطبوع — مثال: منيو، ستاند، شنطة، روشتة مطبوعة"></div>
+      <button type="button" class="add" data-add="h-print"><i>+</i>إضافة مطبوع آخر</button>
       <label class="f"><span>المقاسات والتفاصيل <small>(مقاس الزجاج، مقاس البنر، عدد الأوجه...)</small></span><textarea name="تفاصيل المطبوعات" rows="3" style="min-height:80px" placeholder="مثال: زجاج الواجهة ١٢٠×٢٠٠ سم، بنر ٣×١ متر..."></textarea></label>
     </div>
   </section>
@@ -255,7 +269,9 @@ body.done form,body.done .hero,body.done .progress{display:none}
         <label class="card"><input type="checkbox" value="أرسل روشتتك واتساب"><i class="box"><svg viewBox="0 0 12 12" fill="none" stroke="#0f0f12" stroke-width="2"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></i><div><b>أرسل روشتتك واتساب</b></div></label>
         <label class="card wide"><input type="checkbox" value="قالب ثابت للعروض"><i class="box"><svg viewBox="0 0 12 12" fill="none" stroke="#0f0f12" stroke-width="2"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></i><div><b>قالب ثابت للعروض</b><small>تصميم واحد يتغير فيه المنتج والسعر كل مرة</small></div></label>
       </div>
-      <label class="f"><span>تصميمات أخرى أو أفكار تريد إضافتها</span><textarea name="تصميمات إضافية" rows="3" style="min-height:80px" placeholder="أي فكرة في ذهنك، حتى لو لم تكتمل بعد."></textarea></label>
+      <div class="extras" data-extras="h-social" data-ph="اكتب اسم التصميم — مثال: بوست تهنئة، ستوري، ريلز"></div>
+      <button type="button" class="add" data-add="h-social"><i>+</i>إضافة تصميم آخر</button>
+      <label class="f"><span>أفكار أو ملاحظات على التصميمات</span><textarea name="تصميمات إضافية" rows="3" style="min-height:80px" placeholder="أي فكرة في ذهنك، حتى لو لم تكتمل بعد."></textarea></label>
       <div class="row">
         <label class="f"><span>رابط صفحة الفيسبوك</span><input type="url" name="فيسبوك" class="ltr" placeholder="facebook.com/..."></label>
         <label class="f"><span>حسابات أخرى <small>(إنستجرام، تيك توك...)</small></span><input type="text" name="حسابات أخرى" class="ltr" placeholder="@..."></label>
@@ -270,6 +286,8 @@ body.done form,body.done .hero,body.done .progress{display:none}
       <label class="f"><span>منافس ١</span><input type="text" name="منافس 1" placeholder="الاسم أو رابط الصفحة"></label>
       <label class="f"><span>منافس ٢</span><input type="text" name="منافس 2" placeholder="الاسم أو رابط الصفحة"></label>
       <label class="f"><span>منافس ٣</span><input type="text" name="منافس 3" placeholder="الاسم أو رابط الصفحة"></label>
+      <div class="extras" data-extras="comp" data-ph="الاسم أو رابط الصفحة"></div>
+      <button type="button" class="add" data-add="comp"><i>+</i>إضافة منافس آخر</button>
       <label class="f"><span>ما الذي يعجبك أو لا يعجبك في شكلهم؟</span><textarea name="رأي في المنافسين" rows="3" style="min-height:80px"></textarea></label>
     </div>
   </section>
@@ -289,7 +307,9 @@ body.done form,body.done .hero,body.done .progress{display:none}
           <label class="chip"><input type="checkbox" value="أترك الاختيار للمصمم"><span>أترك الاختيار لك</span></label>
         </div>
       </div>
-      <label class="f"><span>روابط مراجع أعجبتك <small>(بيهانس، إنستجرام، بنترست...)</small></span><textarea name="روابط المراجع" class="ltr" rows="3" style="min-height:80px" placeholder="https://"></textarea></label>
+      <label class="f"><span>روابط مراجع أعجبتك <small>(بيهانس، إنستجرام، بنترست...)</small></span><input type="url" name="مرجع 1" class="ltr" placeholder="https://"></label>
+      <div class="extras" data-extras="ref" data-ph="https://"></div>
+      <button type="button" class="add" data-add="ref"><i>+</i>إضافة رابط مرجع آخر</button>
       <div>
         <div class="group-title">صور مراجع <small class="hint">— سكرين شوت أو صور لتصميمات أعجبتك</small></div>
         <label class="drop" data-drop>
@@ -407,6 +427,22 @@ body.done form,body.done .hero,body.done .progress{display:none}
     c.addEventListener('input',()=>{code.textContent=c.value.toUpperCase();nocol.checked=false});
   });
 
+
+  // add items
+  let n={comp:3,ref:1};
+  document.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.add,box=document.querySelector('[data-extras="'+k+'"]');
+    const row=document.createElement('div');row.className='xrow';
+    const inp=document.createElement('input');inp.type='text';inp.placeholder=box.dataset.ph;
+    if(k==='comp'){n.comp++;inp.name='منافس '+n.comp}
+    else if(k==='ref'){n.ref++;inp.name='مرجع '+n.ref;inp.className='ltr'}
+    else inp.dataset.extra=k;
+    const del=document.createElement('button');del.type='button';del.className='xdel';del.setAttribute('aria-label','حذف');
+    del.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    del.onclick=()=>row.remove();
+    row.append(inp,del);box.appendChild(row);inp.focus();
+  }));
+
   form.addEventListener('submit',e=>{
     const err=document.getElementById('err');err.classList.remove('on');
     // required
@@ -417,7 +453,8 @@ body.done form,body.done .hero,body.done .progress{display:none}
     if(total>10*1024*1024){e.preventDefault();err.textContent='حجم الملفات أكبر من ١٠ ميجا — ارفعها على Drive وضع الرابط.';err.classList.add('on');return}
     // groups -> hidden
     document.querySelectorAll('[data-group]').forEach(g=>{
-      document.getElementById(g.dataset.group).value=[...g.querySelectorAll('input:checked')].map(i=>i.value).join('، ')||'—';
+      const k=g.dataset.group,extra=[...document.querySelectorAll('[data-extra="'+k+'"]')].map(i=>i.value.trim()).filter(Boolean);
+      document.getElementById(k).value=[...g.querySelectorAll('input:checked')].map(i=>i.value).concat(extra).join('، ')||'—';
     });
     document.getElementById('h-colors').value=nocol.checked?'لا توجد ألوان محددة':[...document.querySelectorAll('[data-c]')].map(c=>c.value.toUpperCase()).join('  ');
     document.getElementById('subj').value='بريف جديد — '+document.getElementById('bizname').value.trim();
